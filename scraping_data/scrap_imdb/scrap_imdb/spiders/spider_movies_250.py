@@ -1,31 +1,22 @@
 import scrapy
 from ..items import ScrapImdbItem
 
-# class SpiderMovies250Spider(scrapy.Spider):
-#     name = 'spider_movies_250'
-#     allowed_domains = ['https://www.imdb.com/chart/top/?ref_=nv_mv_250']
-#     start_urls = ['http://https://www.imdb.com/chart/top/?ref_=nv_mv_250/']
-
-#     def parse(self, response):
-#         pass
-
-
 
 class ImdbSpiderSpider(scrapy.Spider):
 
-    # custom_settings = {
-    #     'ITEM_PIPELINES': {
-    #         'scrap_imdb.pipelines.ScrapImdbPipeline': 400,
-    #         'scrap_imdb.pipelines.CsvPipeline': 301,
-    #     }
-    # }
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'scrap_imdb.pipelines.ScrapImdbPipeline': 400,
+            'scrap_imdb.pipelines.CsvPipeline': 301,
+        }
+    }
 
     name = "spider_movies_250"
     allowed_domains = ["imdb.com"]
     user_agent = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/111.0'
 
     def start_requests(self):
-        yield scrapy.Request(url='https://www.imdb.com/chart/top/?ref_=nv_mv_250', headers={
+        yield scrapy.Request(url='https://www.imdb.com/chart/moviemeter/?ref_=nv_mv_mpm', headers={
             'User-Agent': self.user_agent
         })
 
@@ -84,3 +75,7 @@ class ImdbSpiderSpider(scrapy.Spider):
 
         yield items
 
+
+        
+
+    

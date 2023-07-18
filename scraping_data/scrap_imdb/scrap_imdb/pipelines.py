@@ -1,11 +1,3 @@
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-
-
-# useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
 from scrapy.exporters import CsvItemExporter
 from pymongo import MongoClient
 from dotenv import load_dotenv
@@ -36,7 +28,7 @@ class CsvPipeline(object):
         self.exporter = None
 
     def open_spider(self, spider):
-        self.file = open('movies.csv', 'wb')
+        self.file = open('../movies.csv', 'wb')
         self.exporter = CsvItemExporter(self.file)
         self.exporter.start_exporting()
 
