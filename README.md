@@ -47,6 +47,6 @@ Go to the project directory :
 
 - [@noura-ou](https://github.com/Noura-ou)
 - [@RolaMmss](https://github.com/RolaMmss)
-- [@noura-ou](https://github.com/Noura-ou)
-- [@noura-ou](https://github.com/Noura-ou)
+- [@MyriamLbhn](https://github.com/MyriamLbhn)
+- [@namineelbb ](https://github.com/amineelbb)
 
