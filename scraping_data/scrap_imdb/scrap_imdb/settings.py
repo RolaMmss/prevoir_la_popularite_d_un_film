@@ -27,7 +27,9 @@ FEED_URI = '../movies.csv'
 FEED_EXPORTERS = {
     'csv': 'scrapy.exporters.CsvItemExporter',
 }
-FEED_EXPORT_FIELDS = ['titre_original', 'durée', 'date','score','nbr_votants', 'desciption', 'genre','acteurs' , 'pays' , 'langue_d_origine', 'budget', 'Sociétés_de_production']
+FEED_EXPORT_FIELDS = ['titre_original']
+                      
+# 'durée', 'date','score','nbr_votants', 'desciption', 'genre','acteurs' , 'pays' , 'langue_d_origine', 'budget', 'Sociétés_de_production']
 
 
 
