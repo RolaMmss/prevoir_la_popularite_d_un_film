@@ -24,12 +24,15 @@ ROBOTSTXT_OBEY = True
 
 FEED_FORMAT = 'csv'
 FEED_URI = '../movies.csv'
-FEED_EXPORTERS = {
-    'csv': 'scrapy.exporters.CsvItemExporter',
-}
-FEED_EXPORT_FIELDS = ['titre_original']
+# FEED_EXPORTERS = {
+#     'csv': 'scrapy.expoFEED_EXPORTERS = {
+#     'csv': 'scrapy.exporters.CsvItemExporter',
+# }rters.CsvItemExporter',
+# }
+FEED_EXPORT_FIELDS = ['titre' , 'titre_original', 'date' , 'réalisateur' , 'acteurs', 'durée' , 'genre' , 'nationnalités' ,'type_film' ,
+                       'langue_d_origine' , 'box_office_fr' , 'desciption']
                       
-# 'durée', 'date','score','nbr_votants', 'desciption', 'genre','acteurs' , 'pays' , 'langue_d_origine', 'budget', 'Sociétés_de_production']
+
 
 
 
@@ -83,7 +86,12 @@ DOWNLOADER_MIDDLEWARES = {
 #     "scrap_imdb.pipelines_series.ScrapSeriesPipeline": 400,
 # }
 
- 
+custom_settings = {
+        'ITEM_PIPELINES': {
+          #  'scrap_imdb.pipelines.ScrapImdbPipeline': 300,
+             'scrap_imdb.pipelines.CsvPipeline': 301,
+        }
+    }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
