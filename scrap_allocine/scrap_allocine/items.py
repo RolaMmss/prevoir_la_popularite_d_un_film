@@ -6,7 +6,12 @@
 import scrapy
 
 
+# class AllocineMovieItem(scrapy.Item):
+#     title = scrapy.Field()
+#     boxoffice = scrapy.Field()
+
+import scrapy
+
 class AllocineMovieItem(scrapy.Item):
     title = scrapy.Field()
-    date = scrapy.Field()
     boxoffice = scrapy.Field()

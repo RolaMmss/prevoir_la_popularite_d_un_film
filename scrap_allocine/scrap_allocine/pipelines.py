@@ -7,6 +7,7 @@
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
 import csv
+import csv
 
 class CsvWriterPipeline:
     def __init__(self, csv_output_file):
@@ -29,3 +30,5 @@ class CsvWriterPipeline:
     def process_item(self, item, spider):
         self.csv_writer.writerow(item)
         return item
+
+
