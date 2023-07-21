@@ -30,7 +30,7 @@ FEED_URI = '../movies.csv'
 # }rters.CsvItemExporter',
 # }
 FEED_EXPORT_FIELDS = ['titre' , 'titre_original', 'date' , 'réalisateur' , 'acteurs', 'durée' , 'genre' , 'nationnalités' ,'type_film' ,
-                       'langue_d_origine' , 'box_office_fr' , 'desciption' , 'note_presse' , 'note_spectateurs' , 'nombre_article']
+                       'langue_d_origine' , 'annee_production' , 'desciption' , 'note_presse' , 'note_spectateurs' , 'nombre_article']
                       
 
 

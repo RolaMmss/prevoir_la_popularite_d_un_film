@@ -15,8 +15,8 @@ class ScrapImdbItem(scrapy.Item):
     desciption = scrapy.Field()
     genre = scrapy.Field()
     acteurs = scrapy.Field()
-    box_office_fr = scrapy.Field()
+    annee_production = scrapy.Field()
     langue_d_origine = scrapy.Field()
     nationnalités = scrapy.Field()
     nombre_article = scrapy.Field()
-    # Sociétés_de_production = scrapy.Field()
+ 
