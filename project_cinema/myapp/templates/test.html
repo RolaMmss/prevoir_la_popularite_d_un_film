@@ -1,0 +1,18 @@
+<nav>
+    {% comment %} <figure>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpLyZXymauqZJ-CA2pfQ6jkvnLkMXkyBROFA&usqp=CAU" alt="logo de notre site">
+    </figure>  {% endcomment %}
+    <ul>
+        <li><a href="{% url 'homepage' %}">Homepage</a></li>
+        
+
+
+        {% if user.is_authenticated%}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'signup' %}">Sign up</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+    </ul>
+     
+</nav>

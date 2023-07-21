@@ -1,0 +1,21 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<style>
+  .resized-figure img {
+    width: 300px; 
+    height: 200px;  
+    {% comment %} /* You can also use 'max-width' and 'max-height' for responsive resizing */ {% endcomment %}
+    {% comment %} max-width: 50%;
+    max-height: 50%;
+    */ {% endcomment %}
+  }
+</style>
+
+  <h2>Welcome to the Homepage</h2>
+  <p>This is the homepage of your application.</p>
+  <p>Feel free to customize this template based on your project's requirements.</p>
+  <figure class="resized-figure">
+    <img src="static/logo_slogan.png">
+  </figure> 
+{% endblock %}
