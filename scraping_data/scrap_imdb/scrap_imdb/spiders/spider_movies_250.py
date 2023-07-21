@@ -33,9 +33,7 @@ class ImdbSpiderSpider(scrapy.Spider):
         titre_original = response.xpath('//span[@class="light" and contains(text(), "Titre original")]/following-sibling::text()').get()
         nationnalités = response.xpath('//span[@class="what light" and contains(text(), "Nationalités")]/following-sibling::span[@class="that"]//following-sibling::span/text()').getall()
         type_film = response.xpath('//span[@class="what light" and contains(text(), "Type de film")]/following-sibling::span[@class="that"]/text()').get()
-
-        langue_d_origine = response.xpath('(//div[@class="item"]//span[@class="that"])[8]//text()').get() # à vérifier
-
+        langue_d_origine = response.xpath('//span[@class="what light" and contains(text(), "Langues")]/following-sibling::span[@class="that"]/text()').get()
         budget = response.xpath('//span[@class="what light" and contains(text(), "Budget")]/following-sibling::span[@class="that"]/text()').get()
         recompenses = response.xpath('//span[@class="what light" and contains(text(), "Récompenses")]/following-sibling::span/text()').get()
         annee_production = response.xpath('//span[@class="what light" and contains(text(), "Année de production")]/following-sibling::span[@class="that"]/text()').get()
@@ -85,7 +83,10 @@ class ImdbSpiderSpider(scrapy.Spider):
         else:
             items['annee_production'] = None 
 
-        items['langue_d_origine'] = langue_d_origine.strip()
+        if langue_d_origine :
+            items['langue_d_origine'] = langue_d_origine.strip()
+        else:
+            items['langue_d_origine'] = None
 
         if nationnalités:
             items['nationnalités'] = [nat.strip() for nat in nationnalités]
