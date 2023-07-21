@@ -31,18 +31,22 @@ class ImdbSpiderSpider(scrapy.Spider):
         durée =  response.xpath('//div[@class="meta-body-item meta-body-info"]/span[@class="spacer"]/following-sibling::text()[1]').get()
         genre = response.css('div.meta-body-item.meta-body-info span::text').getall()
         titre_original = response.xpath('//span[@class="light" and contains(text(), "Titre original")]/following-sibling::text()').get()
+
         nationnalités = response.xpath('(//div[@class="item"]//span[@class="that"])[1]//text()').getall()  # à vérifier
         type_film = response.xpath('(//div[@class="item"]//span[@class="that"])[6]//text()').get()  # à vérifier
         langue_d_origine = response.xpath('(//div[@class="item"]//span[@class="that"])[8]//text()').get() # à vérifier
+
         budget = response.xpath('//span[@class="what light" and contains(text(), "Budget")]/following-sibling::span[@class="that"]/text()').get()
+        recompenses = response.xpath('//span[@class="what light" and contains(text(), "Récompenses")]/following-sibling::span/text()').get()
+
 
 
         annee_production = response.xpath('//span[@class="what light" and contains(text(), "Année de production")]/following-sibling::span[@class="that"]/text()').get()
 
-        desciption = response.xpath('//div[@class="content-txt "]//text()').get()
         note_presse = response.xpath('(//div[@class="rating-item-content"]//div[@class="stareval stareval-medium stareval-theme-default"]//span[@class="stareval-note"])[1]//text()').get()
         note_spectateurs = response.xpath('(//div[@class="rating-item-content"]//div[@class="stareval stareval-medium stareval-theme-default"]//span[@class="stareval-note"])[2]//text()').get()
         nombre_article = response.xpath('(//section[@class="section ovw"]//a[@class="end-section-link "])[2]//text()').get()
+        desciption = response.xpath('//div[@class="content-txt "]//text()').get()
 
         def convertir_time(durée):
             if 'h' in durée and 'm' in durée:
@@ -72,7 +76,7 @@ class ImdbSpiderSpider(scrapy.Spider):
         items['durée'] = durée.strip()
         items['type_film'] = type_film
         items['réalisateur'] = réalisateur
-        items['desciption'] = desciption.replace('\n', '').strip()
+        
         items['genre'] = [genre.strip() for genre in genre[4:]]
         items['acteurs'] = acteurs
         if annee_production is not None:
@@ -93,6 +97,13 @@ class ImdbSpiderSpider(scrapy.Spider):
             items['budget'] = budget.strip()
         else:
             items['budget'] = None 
+        
+        if recompenses is not None:
+            items['recompenses'] = recompenses.strip()
+        else:
+            items['recompenses'] = None  # Ou une valeur par défaut si nécessaire
+
+        items['desciption'] = desciption.replace('\n', '').strip()
 
         yield items
 
