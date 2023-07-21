@@ -31,8 +31,10 @@ class ImdbSpiderSpider(scrapy.Spider):
         durée =  response.xpath('//div[@class="meta-body-item meta-body-info"]/span[@class="spacer"]/following-sibling::text()[1]').get()
         genre = response.css('div.meta-body-item.meta-body-info span::text').getall()
         titre_original = response.xpath('//span[@class="light" and contains(text(), "Titre original")]/following-sibling::text()').get()
+        nationnalités = response.xpath('//span[@class="what light" and contains(text(), "Nationalités")]/following-sibling::span[@class="that"]//following-sibling::span/text()').getall()
 
-        nationnalités = response.xpath('(//div[@class="item"]//span[@class="that"])[1]//text()').getall()  # à vérifier
+
+
         type_film = response.xpath('(//div[@class="item"]//span[@class="that"])[6]//text()').get()  # à vérifier
         langue_d_origine = response.xpath('(//div[@class="item"]//span[@class="that"])[8]//text()').get() # à vérifier
 
@@ -86,8 +88,10 @@ class ImdbSpiderSpider(scrapy.Spider):
 
         items['langue_d_origine'] = langue_d_origine.strip()
 
-        cleaned_nationnalites = [nat.strip() for nat in nationnalités if nat.strip()]
-        items['nationnalités'] = cleaned_nationnalites
+        if nationnalités:
+            items['nationnalités'] = [nat.strip() for nat in nationnalités]
+        else:
+            items['nationnalités'] = None
 
         items['note_presse'] = note_presse 
         items['note_spectateurs'] = note_spectateurs
