@@ -12,7 +12,7 @@ class ScrapImdbItem(scrapy.Item):
     type_film = scrapy.Field()
     note_presse = scrapy.Field()
     note_spectateurs = scrapy.Field()
-    desciption = scrapy.Field()
+    description = scrapy.Field()
     genre = scrapy.Field()
     acteurs = scrapy.Field()
     annee_production = scrapy.Field()

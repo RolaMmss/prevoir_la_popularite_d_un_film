@@ -40,7 +40,7 @@ class ImdbSpiderSpider(scrapy.Spider):
         note_presse = response.xpath('(//div[@class="rating-item-content"]//div[@class="stareval stareval-medium stareval-theme-default"]//span[@class="stareval-note"])[1]//text()').get()
         note_spectateurs = response.xpath('(//div[@class="rating-item-content"]//div[@class="stareval stareval-medium stareval-theme-default"]//span[@class="stareval-note"])[2]//text()').get()
         nombre_article = response.xpath('(//section[@class="section ovw"]//a[@class="end-section-link "])[2]//text()').get()
-        desciption = response.xpath('//div[@class="content-txt "]//text()').get()
+        description = response.xpath('//div[@class="content-txt "]//text()').get()
 
         def convertir_time(durée):
             if 'h' in durée and 'm' in durée:
@@ -107,7 +107,7 @@ class ImdbSpiderSpider(scrapy.Spider):
         else:
             items['recompenses'] = None  
 
-        items['desciption'] = desciption.replace('\n', '').strip()
+        items['description'] = description.replace('\n', '').strip()
 
         yield items
 
