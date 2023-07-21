@@ -45,7 +45,9 @@ class ImdbSpiderSpider(scrapy.Spider):
         langue_d_origine = response.xpath('(//div[@class="item"]//span[@class="that"])[8]//text()').get()
         box_office_fr = response.css('div.item span.that.blue-link::text').get()
         desciption = response.xpath('//div[@class="content-txt "]//text()').get()
-       
+        note_presse = response.xpath('(//div[@class="rating-item-content"]//div[@class="stareval stareval-medium stareval-theme-default"]//span[@class="stareval-note"])[1]//text()').get()
+        note_spectateurs = response.xpath('(//div[@class="rating-item-content"]//div[@class="stareval stareval-medium stareval-theme-default"]//span[@class="stareval-note"])[2]//text()').get()
+        nombre_article = response.xpath('(//section[@class="section ovw"]//a[@class="end-section-link "])[2]//text()').get()
 
 
 
@@ -102,6 +104,9 @@ class ImdbSpiderSpider(scrapy.Spider):
 
         cleaned_nationnalites = [nat.strip() for nat in nationnalités if nat.strip()]
         items['nationnalités'] = cleaned_nationnalites
+        items['note_presse'] = note_presse 
+        items['note_spectateurs'] = note_spectateurs
+        items['nombre_article'] = nombre_article
 
         yield items
 
