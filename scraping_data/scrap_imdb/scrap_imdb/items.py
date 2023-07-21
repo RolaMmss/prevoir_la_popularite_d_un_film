@@ -19,4 +19,5 @@ class ScrapImdbItem(scrapy.Item):
     langue_d_origine = scrapy.Field()
     nationnalités = scrapy.Field()
     nombre_article = scrapy.Field()
+    budget = scrapy.Field()
  

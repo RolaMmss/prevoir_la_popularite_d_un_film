@@ -34,6 +34,8 @@ class ImdbSpiderSpider(scrapy.Spider):
         nationnalités = response.xpath('(//div[@class="item"]//span[@class="that"])[1]//text()').getall()  # à vérifier
         type_film = response.xpath('(//div[@class="item"]//span[@class="that"])[6]//text()').get()  # à vérifier
         langue_d_origine = response.xpath('(//div[@class="item"]//span[@class="that"])[8]//text()').get() # à vérifier
+        budget = response.xpath('//span[@class="what light" and contains(text(), "Budget")]/following-sibling::span[@class="that"]/text()').get()
+
 
         annee_production = response.xpath('//span[@class="what light" and contains(text(), "Année de production")]/following-sibling::span[@class="that"]/text()').get()
 
@@ -77,7 +79,7 @@ class ImdbSpiderSpider(scrapy.Spider):
             items['annee_production'] = annee_production.strip()
         else:
             items['annee_production'] = None 
-            
+
         items['langue_d_origine'] = langue_d_origine.strip()
 
         cleaned_nationnalites = [nat.strip() for nat in nationnalités if nat.strip()]
@@ -86,6 +88,11 @@ class ImdbSpiderSpider(scrapy.Spider):
         items['note_presse'] = note_presse 
         items['note_spectateurs'] = note_spectateurs
         items['nombre_article'] = nombre_article
+
+        if budget is not None:
+            items['budget'] = budget.strip()
+        else:
+            items['budget'] = None 
 
         yield items
 
