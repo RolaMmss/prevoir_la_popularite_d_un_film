@@ -24,11 +24,12 @@ SCRAPEOPS_NUM_RESULTS = 50
 ROBOTSTXT_OBEY = False
 
 ITEM_PIPELINES = {
-    'scrap_allocine.pipelines.CsvWriterPipeline': 1,
+    'scrap_allocine.pipelines.ScrapAllocinePipeline': 400,
+    'scrap_allocine.pipelines.CsvPipeline': 301,
 }
 
-# Spécifier le nom du fichier CSV de sortie
-CSV_OUTPUT_FILE = 'allocine_box_office.csv'
+# # Spécifier le nom du fichier CSV de sortie
+# CSV_OUTPUT_FILE = 'allocine_box_office.csv'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
