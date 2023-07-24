@@ -27,3 +27,4 @@ class AllocineFilmsItem(scrapy.Item):
     budget = scrapy.Field()
     recompenses = scrapy.Field()
     distributeur = scrapy.Field()
+    box_office_total = scrapy.Field()

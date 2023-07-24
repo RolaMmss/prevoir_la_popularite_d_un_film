@@ -5,11 +5,11 @@ from scrapy.settings import Settings
 
 # Set the CSV file name and column order
 CUSTOM_SETTINGS = {
-    'CSV_OUTPUT_FILE': 'movies_2020.csv',
+    'CSV_OUTPUT_FILE': 'movies_tous.csv',
     'CSV_FIELDS_TO_EXPORT': ['titre', 'date', 'genre', 'durée', 'réalisateur', 'distributeur', 'acteurs', 'titre_original', 
-                             'nationalités', 'langue_d_origine', 'type_film', 'annee_production', 'budget', 'note_presse', 
+                             'nationalités', 'langue_d_origine', 'type_film', 'annee_production', 'budget', 'box_office_total', 'note_presse', 
                              'note_spectateurs', 'nombre_article', 'recompenses', 'description' ],  
-    'MONGODB_COLLECTION': 'movies_2020',
+    'MONGODB_COLLECTION': 'movies_tous',
 
     }
 
@@ -20,8 +20,8 @@ class FilmsSpider(scrapy.Spider):
     allowed_domains = ["allocine.fr"]
 
     # URL de la première page
-    base_url = 'https://www.allocine.fr/films/decennie-2020/annee-2020'
-    num_pages = 200
+    base_url = 'https://www.allocine.fr/films'
+    num_pages = 550
 
     def start_requests(self):
         # Générer les URL de pagination
@@ -67,8 +67,14 @@ class FilmsSpider(scrapy.Spider):
         note_spectateurs = response.xpath('(//div[@class="rating-item-content"]//div[@class="stareval stareval-medium stareval-theme-default"]//span[@class="stareval-note"])[2]//text()').get()
         nombre_article = response.xpath('(//section[@class="section ovw"]//a[@class="end-section-link "])[2]//text()').get()
         description = response.xpath('//div[@class="content-txt "]//text()').get()
-    
-     
+        box_office_total = response.xpath('//span[@class="what light" and contains(text(), "Box Office France")]/following-sibling::span/text()').get()
+        
+        
+        if box_office_total:
+            items['box_office_total'] = box_office_total.strip()
+        else:
+            items['box_office_total'] = None  # Ou une valeur par défaut si nécessaire
+            
         items['titre'] = titre
         items['date'] = date if date else None
 
@@ -108,6 +114,9 @@ class FilmsSpider(scrapy.Spider):
         items['nombre_article'] = nombre_article
         items['distributeur'] = distributeur
 
+        # if boxofficefrtotal:
+        #     items['boxofficefrtotal'] = boxofficefrtotal
+        # else: items['boxofficefrtotal'] = None
 
         if budget is not None:
             items['budget'] = budget.strip()
