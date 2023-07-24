@@ -1,3 +1,6 @@
 scrapy
 pymongo
 python-dotenv
+seaborn
+matplotlib
+scikit-learn
