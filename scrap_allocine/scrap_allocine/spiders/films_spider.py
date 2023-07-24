@@ -21,7 +21,7 @@ class FilmsSpider(scrapy.Spider):
 
     # URL de la première page
     base_url = 'https://www.allocine.fr/films'
-    num_pages = 550
+    num_pages = 600
 
     def start_requests(self):
         # Générer les URL de pagination
