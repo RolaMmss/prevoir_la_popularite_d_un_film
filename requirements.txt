@@ -4,3 +4,4 @@ python-dotenv
 seaborn
 matplotlib
 scikit-learn
+ydata_profiling
