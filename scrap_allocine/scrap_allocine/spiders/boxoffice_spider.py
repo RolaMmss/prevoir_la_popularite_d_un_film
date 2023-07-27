@@ -9,7 +9,7 @@ CUSTOM_SETTINGS = {
     'FEED_FORMAT': 'csv',
     'FEED_URI': 'top_acteurs.csv',
     'FEED_EXPORT_FIELDS': ['acteur'],
-    # 'MONGODB_COLLECTION': 'top_acteurs',
+    'MONGODB_COLLECTION': 'top_acteurs',
 }
 
 
