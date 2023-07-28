@@ -1,0 +1,6 @@
+scrapy
+pymongo
+python-dotenv
+pandas
+matplotlib
+seaborn
