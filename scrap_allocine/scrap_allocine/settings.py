@@ -24,7 +24,7 @@ SCRAPEOPS_NUM_RESULTS = 50
 ROBOTSTXT_OBEY = False
 
 ITEM_PIPELINES = {
-    'scrap_allocine.pipelines.ScrapAllocinePipeline': 400,
+    # 'scrap_allocine.pipelines.ScrapAllocinePipeline': 400,
     'scrap_allocine.pipelines.CsvPipeline': 301,
 }
 
