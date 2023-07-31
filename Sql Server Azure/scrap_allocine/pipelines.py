@@ -8,7 +8,14 @@
 from itemadapter import ItemAdapter
 from scrapy.exporters import CsvItemExporter
 import csv
-import csv
+from dotenv import load_dotenv
+import os
+import pypyodbc as odbc
+
+
+load_dotenv()
+
+
 
 class CsvWriterPipeline:
     def __init__(self, csv_output_file):
@@ -98,3 +105,30 @@ class CsvPipeline(object):
     def process_item(self, item, spider):
         self.exporter.export_item(item)
         return item
+
+
+
+####################################################### SQL AZURE SERVER ###############################################################
+
+username = os.getenv('DB_USER')
+password = os.getenv('DB_PASSWORD')
+server = os.getenv('DB_SERVER')
+
+database = 'BDD_Cinéma_ IA'
+connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:'+server+',1433;Database='+database+';Uid='+username+';Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+
+
+conn = odbc.connect(connection_string)
+
+cursor = conn.cursor()
+
+
+def delete_table(table_name):
+    drop_table_query = f'DROP TABLE IF EXISTS {table_name};'
+    cursor.execute(drop_table_query)
+    cursor.commit()
+
+
+
+
+
