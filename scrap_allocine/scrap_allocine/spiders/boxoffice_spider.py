@@ -6,10 +6,13 @@ from scrapy.settings import Settings
 
 # Set the CSV file name and column order
 CUSTOM_SETTINGS = {
-    'CSV_OUTPUT_FILE': 'boxoffice_tous_bis.csv',
-    'CSV_FIELDS_TO_EXPORT': ['titre','semaine_1', 'boxoffice_1', 'boxoffice_2'  ],  
-    'MONGODB_COLLECTION': 'boxoffice_tous_bis',
-    }
+    'CSV_OUTPUT_FILE': 'boxoffice_test.csv',
+    'CSV_FIELDS_TO_EXPORT': ['titre','fin_semaine_1', 'boxoffice_1', 'boxoffice_2'  ],  
+    'ITEM_PIPELINES': {
+            'scrap_allocine.pipelines.BoxOfficePipeline': 100,
+            'scrap_allocine.pipelines.ProcessPipeline': None, # Mettez None pour désactiver la pipeline
+            'scrap_allocine.pipelines.CsvPipeline': 301,
+        }}
 
 class BoxofficeSpider(CrawlSpider):
     name = "boxoffice_spider"
@@ -21,7 +24,7 @@ class BoxofficeSpider(CrawlSpider):
 
     # URL de la première page
     base_url = 'https://www.allocine.fr/films'
-    num_pages = 4000
+    num_pages = 5
 
     def start_requests(self):
         # Générer les URL de pagination
@@ -57,7 +60,7 @@ class BoxofficeSpider(CrawlSpider):
 
         semaine_selector = response.css("td[data-heading='Semaine']")
         semaines = semaine_selector.css("::text").getall()
-        semaine_1 = semaines[1]
+        fin_semaine_1 = semaines[1]
 
         # Extract the first two lines of the "Entrées" column
         entrees_selector = response.css("td[data-heading='Entrées']")
@@ -66,7 +69,7 @@ class BoxofficeSpider(CrawlSpider):
 
         allocine_movies_items = AllocineBoxofficeItem()
         allocine_movies_items['titre'] = response.meta['titre']
-        allocine_movies_items['semaine_1'] = semaine_1
+        allocine_movies_items['fin_semaine_1'] = fin_semaine_1
         allocine_movies_items['boxoffice_1'] = boxoffice_1
         allocine_movies_items['boxoffice_2'] = boxoffice_2
 

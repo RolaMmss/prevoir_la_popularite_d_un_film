@@ -8,60 +8,10 @@
 from itemadapter import ItemAdapter
 from scrapy.exporters import CsvItemExporter
 import csv
-import csv
-
-class CsvWriterPipeline:
-    def __init__(self, csv_output_file):
-        self.csv_output_file = csv_output_file
-
-    @classmethod
-    def from_crawler(cls, crawler):
-        settings = crawler.settings
-        csv_output_file = settings.get('CSV_OUTPUT_FILE', 'items.csv')
-        return cls(csv_output_file)
-
-    def open_spider(self, spider):
-        self.csv_file = open(self.csv_output_file, 'w', newline='', encoding='utf-8')
-        self.csv_writer = csv.DictWriter(self.csv_file, fieldnames=spider.fields)
-        self.csv_writer.writeheader()
-
-    def close_spider(self, spider):
-        self.csv_file.close()
-
-    def process_item(self, item, spider):
-        self.csv_writer.writerow(item)
-        return item
-
-from scrapy.exporters import CsvItemExporter
-from pymongo import MongoClient
-from dotenv import load_dotenv
 import os
-
-
-class ScrapAllocinePipeline:
-
-    def __init__(self, collection_name):
-        load_dotenv()
-        ATLAS_KEY = os.getenv('ATLAS_KEY')
-        client = MongoClient(ATLAS_KEY, socketTimeoutMS=5000)
-        db = client.allocine
-        self.collection = db[collection_name]
-
-    @classmethod
-    def from_crawler(cls, crawler):
-        settings = crawler.settings
-        collection_name = settings.get('MONGODB_COLLECTION', 'collection')
-        return cls(collection_name)
-
-    def process_item(self, item, spider):
-        self.collection.insert_one(dict(item))
-        return item
-
-
-
-
-import os
-from scrapy.exporters import CsvItemExporter
+from .utils import convert_to_dd_mm_aaaa, convert_to_minutes
+import re 
+from .items import AllocineFilmsItem
 
 class CsvPipeline(object):
     def __init__(self, csv_file, fields_to_export):
@@ -97,4 +47,81 @@ class CsvPipeline(object):
 
     def process_item(self, item, spider):
         self.exporter.export_item(item)
+        return item
+
+
+class ProcessPipeline:
+    def process_item(self, item, spider):
+    
+        adapter = ItemAdapter(item)
+        
+        field_names = ['titre', 'date', 'genre', 'duree', 'realisateur', 'distributeur', 'acteurs',
+                             'nationalites', 'langue_d_origine', 'type_film', 'annee_production','nombre_article', 
+                             'recompenses', 'description']
+                  
+        ## Strip all whitspaces from strings and handle lists
+        for field_name in field_names:
+            value = adapter.get(field_name)
+            if field_name is not isinstance(value, list):
+                # Convert the value to a string if it's not already
+                adapter[field_name] = str(value).strip()
+        
+        ## Process the date field
+        date_value = adapter.get('date')
+        adapter['date'] = convert_to_dd_mm_aaaa(date_value)
+        
+        ## Process the duree field
+        duree_value = adapter.get('duree')
+        adapter['duree'] = convert_to_minutes(duree_value)
+        
+        ## Process the genre field
+        genre_value = adapter.get('genre')
+        if genre_value is not None and isinstance(genre_value, str):
+            # Split the genres by comma and strip whitespace
+            genres = [genre.strip() for genre in genre_value.split(',')]
+            # Filter out genres containing '/' or digits
+            genres = [genre for genre in genres if not re.search(r'[/\d]', genre)]
+            # Join the genres back into a single string separated by underscores
+            genres_str = "_".join(genres)
+            # Remove quotes and brackets
+            genres_str = re.sub(r"['\"\[\]]", "", genres_str)
+            adapter['genre'] = genres_str
+
+
+
+        ## Process the nombre_article field
+        nombre_article_value = adapter.get('nombre_article')
+        if nombre_article_value is not None and isinstance(nombre_article_value, str):
+            # Use regular expression to extract the number from the text
+            number_match = re.search(r'\d+', nombre_article_value)
+            if number_match:
+                # Convert the extracted number to an integer
+                extracted_number = int(number_match.group())
+                adapter['nombre_article'] = extracted_number
+            
+            
+        ## Process the acteurs field
+        acteurs_value = adapter.get('acteurs')
+        if acteurs_value is not None and isinstance(acteurs_value, str):
+            acteurs = [acteurs.strip() for acteurs in acteurs_value.split(',')]
+            # Join the acteurs list into a single string separated by underscores
+            acteurs_str = "_".join(acteurs)
+            # Remove quotes and brackets
+            acteurs_str = re.sub(r"['\"\[\]]", "", acteurs_str)
+            adapter['acteurs'] = acteurs_str
+            
+            
+        return item
+
+    
+    
+
+class BoxOfficePipeline:
+    def process_item(self, item, spider):
+        if 'fin_semaine_1' in item:
+            fin_semaine_1 = item['fin_semaine_1']
+            if 'au' in fin_semaine_1:
+                _, date = fin_semaine_1.split('au')
+                item['fin_semaine_1'] = convert_to_dd_mm_aaaa(date.strip())
+
         return item
