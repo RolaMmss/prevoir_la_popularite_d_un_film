@@ -70,7 +70,7 @@ class FilmsSpider(scrapy.Spider):
         duree = convert_to_minutes(duree_dflt)
         genre = response.css('div.meta-body-item.meta-body-info span::text').getall()
         titre_original = response.xpath('//span[@class="light" and contains(text(), "Titre original")]/following-sibling::text()').get()
-        nationalités = ''.join(response.xpath('//span[contains(@class, "nationality")]/text()').get())
+        nationalités = ''.join(response.xpath('//span[contains(@class, "nationality")]/text()').getall())
 
         type_film = response.xpath('//span[@class="what light" and contains(text(), "Type de film")]/following-sibling::span[@class="that"]/text()').get()
         langue_d_origine = response.xpath('//span[@class="what light" and contains(text(), "Langues")]/following-sibling::span[@class="that"]/text()').get()
