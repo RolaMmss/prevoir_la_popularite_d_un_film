@@ -1,6 +1,5 @@
 import scrapy
 from ..items import AllocineFilmsItem
-from urllib.parse import urlparse, parse_qs
 import re 
 
 # Set the CSV file name and column order
@@ -64,16 +63,14 @@ class FilmsSpider(scrapy.Spider):
         acteurs = response.css('div.meta-body-item.meta-body-actor span:not(.light)::text').getall()
         duree =  response.xpath('//div[@class="meta-body-item meta-body-info"]/span[@class="spacer"]/following-sibling::text()[1]').get()
         genre = response.css('div.meta-body-item.meta-body-info span::text').getall()
-        nationalites = ''.join(response.xpath('//span[contains(@class, "nationality")]/text()').get())
+        nationalites = response.xpath('//span[contains(@class, "nationality")]/text()').get()
         type_film = response.xpath('//span[@class="what light" and contains(text(), "Type de film")]/following-sibling::span[@class="that"]/text()').get()
         langue_d_origine = response.xpath('//span[@class="what light" and contains(text(), "Langues")]/following-sibling::span[@class="that"]/text()').get()
-        budget = response.xpath('//span[@class="what light" and contains(text(), "Budget")]/following-sibling::span[@class="that"]/text()').get()
         recompenses = response.xpath('//span[@class="what light" and contains(text(), "Récompenses")]/following-sibling::span/text()').get()
         annee_production = response.xpath('//span[@class="what light" and contains(text(), "Année de production")]/following-sibling::span[@class="that"]/text()').get()
         nombre_article = response.xpath('(//section[@class="section ovw"]//a[@class="end-section-link "])[2]//text()').get()
         description = response.xpath('//div[@class="content-txt "]//text()').get()
  
-         # Extraire le "film_id" à partir de l'URL
         # Extraire le "film_id" à partir de l'URL en utilisant une expression régulière
         film_id = None
         film_id_match = re.search(r'cfilm=(\d+)', response.url)
