@@ -123,8 +123,20 @@ class AzureSQLPipeline:
         self.cursor = self.conn.cursor()
 
 
-        # Delete la table s'il existe
+        # Delete les table s'il existent
+        self.delete_table('acteurs_films')
         self.delete_table('films')
+
+        # Créer la table "acteurs_films"
+        create_acteurs_films_table_query = '''
+        CREATE TABLE acteurs_films (
+            id INT IDENTITY(1,1) PRIMARY KEY,
+            film_id INT,
+            acteurs VARCHAR(500)
+        );
+        '''
+        self.cursor.execute(create_acteurs_films_table_query)
+        self.conn.commit()
 
         
         # Créer la table "films"
@@ -136,7 +148,6 @@ class AzureSQLPipeline:
             durée VARCHAR(500),
             réalisateur VARCHAR(500),
             distributeur VARCHAR(500),
-            acteurs VARCHAR(500),
             titre_original VARCHAR(500),
             nationalités VARCHAR(500),
             langue_d_origine VARCHAR(500),
@@ -164,16 +175,42 @@ class AzureSQLPipeline:
         self.conn.close()
        
 
+
+
     def process_item(self, item, spider):
         try:
-            table_name = 'films'
-            columns = ', '.join(item.keys())
-            values = ', '.join(['?' for _ in range(len(item))])
-            query = f'INSERT INTO {table_name} ({columns}) VALUES ({values});'
-            self.cursor.execute(query, list(item.values()))
+            query = '''
+            INSERT INTO films (titre, date, durée, réalisateur, distributeur, titre_original, nationalités, langue_d_origine, type_film, annee_production, budget, note_presse, note_spectateurs, nombre_article, recompenses, description)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+            '''
+            self.cursor.execute(query, (
+                item['titre'], item['date'], item['durée'], item['réalisateur'], item['distributeur'],
+                item['titre_original'], item['nationalités'], item['langue_d_origine'], item['type_film'],
+                item['annee_production'], item['budget'], item['note_presse'], item['note_spectateurs'],
+                item['nombre_article'], item['recompenses'], item['description']
+            ))
             self.conn.commit()
+            film_id = self.cursor.execute("SELECT @@IDENTITY").fetchone()[0]
+
+
         except Exception as e:
             # En cas d'erreur lors de l'insertion, vous pouvez choisir de supprimer l'item ou de le logger
-            raise DropItem(f'Erreur lors de l\'insertion des données dans la base de données : {e}')
+            raise DropItem(f'Erreur lors de l\'insertion des données dans la base de données films : {e}')
+        
+        try:
+
+                # Insérer les acteurs dans la table "acteurs_films" en les associant avec l'ID du film
+            for acteurs in item['acteurs']:
+                acteur_query = '''
+                INSERT INTO acteurs_films (film_id, acteurs)
+                VALUES (?, ?);
+                '''
+                self.cursor.execute(acteur_query, (film_id, acteurs))
+                self.conn.commit()
+    
+        except Exception as e:
+            # En cas d'erreur lors de l'insertion, vous pouvez choisir de supprimer l'item ou de le logger
+            raise DropItem(f'Erreur lors de l\'insertion des données dans la base de données acteurs : {e}')
+
         return item
 

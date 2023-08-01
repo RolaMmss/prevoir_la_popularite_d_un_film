@@ -65,7 +65,7 @@ class FilmsSpider(scrapy.Spider):
         date = convert_to_dd_mm_aaaa(date_dflt)
         réalisateur = response.css('span.light + span.blue-link::text').get()
         distributeur = response.xpath('//span[contains(text(), "Distributeur")]/following-sibling::span/text()').get()
-        acteurs = response.css('div.meta-body-item.meta-body-actor span:not(.light)::text').get()
+        acteurs = response.css('div.meta-body-item.meta-body-actor span:not(.light)::text').getall()
         duree_dflt =  response.xpath('//div[@class="meta-body-item meta-body-info"]/span[@class="spacer"]/following-sibling::text()[1]').get()
         duree = convert_to_minutes(duree_dflt)
       #  genre = response.css('div.meta-body-item.meta-body-info span::text').getall()
