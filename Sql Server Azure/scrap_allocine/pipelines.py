@@ -119,6 +119,7 @@ class AzureSQLPipeline:
     def open_spider(self, spider):
         # Établir la connexion
         connection_string = f'Driver={self.DB_Driver};Server=tcp:{self.server},1433;Database={self.database};Uid={self.username};Pwd={self.password};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+        
         self.conn = pyodbc.connect(connection_string)
         self.cursor = self.conn.cursor()
 
