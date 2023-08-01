@@ -4,3 +4,4 @@ python-dotenv
 pandas
 matplotlib
 seaborn
+pypyodbc
