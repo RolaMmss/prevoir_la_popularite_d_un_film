@@ -7,7 +7,7 @@ from scrapy.settings import Settings
 CUSTOM_SETTINGS = {
     'CSV_OUTPUT_FILE': 'movies_tous.csv',
     'CSV_FIELDS_TO_EXPORT': ['titre', 'date', 'durée', 'réalisateur', 'distributeur', 'acteurs', 'titre_original', 
-                             'nationalités', 'langue_d_origine', 'type_film', 'annee_production', 'budget', 'box_office_total', 'note_presse', 
+                             'nationalités', 'langue_d_origine', 'type_film', 'annee_production', 'budget',  'note_presse', 
                              'note_spectateurs', 'nombre_article', 'recompenses', 'description' ],  
     'MONGODB_COLLECTION': 'movies_tous',
 
@@ -21,7 +21,7 @@ class FilmsSpider(scrapy.Spider):
 
     # URL de la première page
     base_url = 'https://www.allocine.fr/films'
-    num_pages = 6
+    num_pages = 3
 
     def start_requests(self):
         # Générer les URL de pagination
@@ -65,7 +65,7 @@ class FilmsSpider(scrapy.Spider):
         date = convert_to_dd_mm_aaaa(date_dflt)
         réalisateur = response.css('span.light + span.blue-link::text').get()
         distributeur = response.xpath('//span[contains(text(), "Distributeur")]/following-sibling::span/text()').get()
-        acteurs = response.css('div.meta-body-item.meta-body-actor span:not(.light)::text').getall()
+        acteurs = response.css('div.meta-body-item.meta-body-actor span:not(.light)::text').get()
         duree_dflt =  response.xpath('//div[@class="meta-body-item meta-body-info"]/span[@class="spacer"]/following-sibling::text()[1]').get()
         duree = convert_to_minutes(duree_dflt)
       #  genre = response.css('div.meta-body-item.meta-body-info span::text').getall()
@@ -81,14 +81,10 @@ class FilmsSpider(scrapy.Spider):
         note_spectateurs = response.xpath('(//div[@class="rating-item-content"]//div[@class="stareval stareval-medium stareval-theme-default"]//span[@class="stareval-note"])[2]//text()').get()
         nombre_article = response.xpath('(//section[@class="section ovw"]//a[@class="end-section-link "])[2]//text()').get()
         description = response.xpath('//div[@class="content-txt "]//text()').get()
-        box_office_total = response.xpath('//span[@class="what light" and contains(text(), "Box Office France")]/following-sibling::span/text()').get()
+       # box_office_total = response.xpath('//span[@class="what light" and contains(text(), "Box Office France")]/following-sibling::span/text()').get()
         
         
-        if box_office_total:
-            items['box_office_total'] = box_office_total.strip()
-        else:
-            items['box_office_total'] = None  # Ou une valeur par défaut si nécessaire
-            
+      
         items['titre'] = titre
         items['date'] = date if date else None
 
@@ -119,15 +115,12 @@ class FilmsSpider(scrapy.Spider):
         else:
             items['langue_d_origine'] = None
 
-        if nationalités:
-            items['nationalités'] = [nat.strip() for nat in nationalités.split(',') if nat.strip()]
-        else:
-            items['nationalités'] = None
-
+    
         items['note_presse'] = note_presse 
         items['note_spectateurs'] = note_spectateurs
         items['nombre_article'] = nombre_article
         items['distributeur'] = distributeur
+        items['nationalités'] = nationalités 
 
         if budget is not None:
             items['budget'] = budget.strip()
