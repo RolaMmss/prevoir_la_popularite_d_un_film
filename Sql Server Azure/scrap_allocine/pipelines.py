@@ -11,6 +11,7 @@ import csv
 from dotenv import load_dotenv
 import os
 import pypyodbc as odbc
+import pyodbc
 from scrapy.exceptions import DropItem
 
 
@@ -106,59 +107,82 @@ class CsvPipeline(object):
 
 
 
-class AzureSQLPipeline:
-    def __init__(self):
-        load_dotenv()
-        self.username = os.getenv('DB_USER')
-        self.password = os.getenv('DB_PASSWORD')
-        self.server = os.getenv('DB_SERVER')
-        self.database = os.getenv('DB_name')
+# class AzureSQLPipeline:
+#     def __init__(self):
+#         load_dotenv()
+#         self.username = os.getenv('DB_USER')
+#         self.password = os.getenv('DB_PASSWORD')
+#         self.server = os.getenv('DB_SERVER')
+#         self.database = os.getenv('DB_name')
+#         self.DB_Driver = os.getenv('DB_Driver')
 
+#     def open_spider(self, spider):
+#         # Établir la connexion
+#       #  conn_str = f'DRIVER={self.DB_Driver};SERVER={self.server};DATABASE={self.database};UID={self.username};PWD={self.password}'
+#        # conn = pyodbc.connect(conn_str)
 
+#         connection_string = f'Driver=ODBC Driver 18 for SQL Server;Server=tcp:{self.server},1433;Database={self.database};Uid={self.username};Pwd={self.password};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+#        # connection_string = f'Driver=ODBC Driver 17 for SQL Server;Server=tcp:{self.server},1433;Database={self.database};Uid={self.username};Pwd={self.password};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+#         self.conn = pyodbc.connect(connection_string)
+#         self.cursor = self.conn.cursor()
 
+#     def close_spider(self, spider):
+#         self.conn.close()
 
-    def open_spider(self, spider):
-        connection_string = f'Driver=ODBC Driver 18 for SQL Server;Server=tcp:{self.server},1433;Database={self.database};Uid={self.username};Pwd={self.password};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
-       # connection_string = f'Driver=ODBC Driver 17 for SQL Server;Server=tcp:{self.server},1433;Database={self.database};Uid={self.username};Pwd={self.password};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
-        self.conn = odbc.connect(connection_string)
-        self.cursor = self.conn.cursor()
-
-    def close_spider(self, spider):
-        self.conn.close()
-
-    def process_item(self, item, spider):
-        try:
-            # Ici, vous pouvez ajuster le nom de la table dans laquelle vous souhaitez insérer les données
-            table_name = 'films'
-            columns = ', '.join(item.keys())
-            values = ', '.join(['?' for _ in range(len(item))])
-            query = f'INSERT INTO {table_name} ({columns}) VALUES ({values});'
-            self.cursor.execute(query, list(item.values()))
-            self.conn.commit()
-        except Exception as e:
-            # En cas d'erreur lors de l'insertion, vous pouvez choisir de supprimer l'item ou de le logger
-            raise DropItem(f'Erreur lors de l\'insertion des données dans la base de données : {e}')
-        return item
+#     def process_item(self, item, spider):
+#         try:
+#             # Ici, vous pouvez ajuster le nom de la table dans laquelle vous souhaitez insérer les données
+#             table_name = 'films'
+#             columns = ', '.join(item.keys())
+#             values = ', '.join(['?' for _ in range(len(item))])
+#             query = f'INSERT INTO {table_name} ({columns}) VALUES ({values});'
+#             self.cursor.execute(query, list(item.values()))
+#             self.conn.commit()
+#         except Exception as e:
+#             # En cas d'erreur lors de l'insertion, vous pouvez choisir de supprimer l'item ou de le logger
+#             raise DropItem(f'Erreur lors de l\'insertion des données dans la base de données : {e}')
+#         return item
 
 # username = os.getenv('DB_USER')
 # password = os.getenv('DB_PASSWORD')
 # server = os.getenv('DB_SERVER')
 
-# database = 'BDD_Cinéma_ IA'
-# connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:'+server+',1433;Database='+database+';Uid='+username+';Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+
+load_dotenv()
+username = os.getenv('DB_USER')
+password = os.getenv('DB_PASSWORD')
+server = os.getenv('DB_SERVER')
+database = os.getenv('DB_name')
+DB_Driver = os.getenv('DB_Driver')
+
+database = 'BDD_Cinéma_ IA'
+connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:'+server+',1433;Database='+database+';Uid='+username+';Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
 
 
-# conn = odbc.connect(connection_string)
+conn = pyodbc.connect(connection_string)
+cursor = conn.cursor()
 
-# cursor = conn.cursor()
+def delete_table(table_name):
+    drop_table_query = f'DROP TABLE IF EXISTS {table_name};'
+    cursor.execute(drop_table_query)
+    conn.commit()
 
+# Requête SQL pour créer la table "films"
+create_table_query = '''
+CREATE TABLE films (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    titre NVARCHAR(255) NOT NULL,
+    annee_sortie INT NOT NULL,
+    realisateur NVARCHAR(255) NOT NULL,
+    note FLOAT
+);
+'''
 
-# def delete_table(table_name):
-#     drop_table_query = f'DROP TABLE IF EXISTS {table_name};'
-#     cursor.execute(drop_table_query)
-#     cursor.commit()
+# Exécutez la requête pour créer la table
+cursor.execute(create_table_query)
+conn.commit()
 
-
-
+# Fermez la connexion
+conn.close()
 
 
