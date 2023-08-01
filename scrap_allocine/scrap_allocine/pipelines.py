@@ -82,7 +82,7 @@ class ProcessPipeline:
             # Filter out genres containing '/' or digits
             genres = [genre for genre in genres if not re.search(r'[/\d]', genre)]
             # Join the genres back into a single string separated by underscores
-            genres_str = "_".join(genres)
+            genres_str = "_".join(sorted(genres))
             # Remove quotes and brackets
             genres_str = re.sub(r"['\"\[\]]", "", genres_str)
             adapter['genre'] = genres_str
@@ -123,5 +123,16 @@ class BoxOfficePipeline:
             if 'au' in fin_semaine_1:
                 _, date = fin_semaine_1.split('au')
                 item['fin_semaine_1'] = convert_to_dd_mm_aaaa(date.strip())
+        # Vérifier si les champs 'boxoffice_1' et 'boxoffice_2' existent dans l'item et les convertir en int
+        if 'boxoffice_1' in item:
+            boxoffice_1 = item['boxoffice_1']
+            if boxoffice_1 is not None:
+                item['boxoffice_1'] = int(boxoffice_1.replace(' ', ''))
+
+        if 'boxoffice_2' in item:
+            boxoffice_2 = item['boxoffice_2']
+            if boxoffice_2 is not None:
+                item['boxoffice_2'] = int(boxoffice_2.replace(' ', ''))
 
         return item
+

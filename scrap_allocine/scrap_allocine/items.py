@@ -9,6 +9,7 @@ class AllocineBoxofficeItem(scrapy.Item):
     boxoffice_1 = scrapy.Field()
     boxoffice_2 = scrapy.Field()
     fin_semaine_1 = scrapy.Field()
+    film_id = scrapy.Field()
     
 class AllocineFilmsItem(scrapy.Item):
     titre = scrapy.Field()
@@ -25,4 +26,4 @@ class AllocineFilmsItem(scrapy.Item):
     nombre_article = scrapy.Field()
     recompenses = scrapy.Field()
     distributeur = scrapy.Field()
-    
+    film_id = scrapy.Field()

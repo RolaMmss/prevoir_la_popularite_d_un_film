@@ -1,13 +1,14 @@
 import scrapy
 from ..items import AllocineFilmsItem
-from scrapy.settings import Settings
+from urllib.parse import urlparse, parse_qs
+import re 
 
 # Set the CSV file name and column order
 CUSTOM_SETTINGS = {
     'CSV_OUTPUT_FILE': 'movies_test.csv',
     'CSV_FIELDS_TO_EXPORT': ['titre', 'date', 'genre', 'duree', 'realisateur', 'distributeur', 'acteurs',
                              'nationalites', 'langue_d_origine', 'type_film', 'annee_production','nombre_article', 
-                             'recompenses', 'description' ],  
+                             'recompenses', 'description', 'film_id' ],  
 
     }
 
@@ -19,7 +20,7 @@ class FilmsSpider(scrapy.Spider):
 
     # URL de la première page
     base_url = 'https://www.allocine.fr/films'
-    num_pages = 1
+    num_pages = 8000
 
     def start_requests(self):
         # Générer les URL de pagination
@@ -72,6 +73,16 @@ class FilmsSpider(scrapy.Spider):
         nombre_article = response.xpath('(//section[@class="section ovw"]//a[@class="end-section-link "])[2]//text()').get()
         description = response.xpath('//div[@class="content-txt "]//text()').get()
  
+         # Extraire le "film_id" à partir de l'URL
+        # Extraire le "film_id" à partir de l'URL en utilisant une expression régulière
+        film_id = None
+        film_id_match = re.search(r'cfilm=(\d+)', response.url)
+        if film_id_match:
+            film_id = film_id_match.group(1)
+
+        # Ajouter le "film_id" à l'item
+        items['film_id'] = film_id if film_id else None
+
             
         items['titre'] = titre if titre else None
         items['date'] = date if date else None
