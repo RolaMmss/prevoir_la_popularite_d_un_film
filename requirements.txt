@@ -4,4 +4,11 @@ python-dotenv
 pandas
 matplotlib
 seaborn
+<<<<<<< HEAD
 pypyodbc
+=======
+seaborn
+matplotlib
+scikit-learn
+ydata_profiling
+>>>>>>> a3da891fde505bd4065eb912733e031c83a23cac
