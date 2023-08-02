@@ -6,7 +6,7 @@ from scrapy.settings import Settings
 
 # Set the CSV file name and column order
 CUSTOM_SETTINGS = {
-    'CSV_OUTPUT_FILE': 'boxoffice_test2.csv',
+    'CSV_OUTPUT_FILE': 'boxoffice.csv',
     'CSV_FIELDS_TO_EXPORT': ['titre','fin_semaine_1', 'boxoffice_1', 'boxoffice_2', 'film_id' ],  
     'ITEM_PIPELINES': {
             'scrap_allocine.pipelines.BoxOfficePipeline': 100,

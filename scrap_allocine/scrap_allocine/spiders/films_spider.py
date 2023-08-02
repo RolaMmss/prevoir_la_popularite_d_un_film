@@ -1,13 +1,14 @@
 import scrapy
 from ..items import AllocineFilmsItem
 import re 
-
+from datetime import datetime
+from ..utils import convert_to_dd_mm_aaaa
 # Set the CSV file name and column order
 CUSTOM_SETTINGS = {
-    'CSV_OUTPUT_FILE': 'movies_test.csv',
+    'CSV_OUTPUT_FILE': 'movies.csv',
     'CSV_FIELDS_TO_EXPORT': ['titre', 'date', 'genre', 'duree', 'realisateur', 'distributeur', 'acteurs',
                              'nationalites', 'langue_d_origine', 'type_film', 'annee_production','nombre_article', 
-                             'recompenses', 'description', 'film_id' ],  
+                              'description', 'film_id',  'prochainement', 'image']
 
     }
 
@@ -19,7 +20,7 @@ class FilmsSpider(scrapy.Spider):
 
     # URL de la première page
     base_url = 'https://www.allocine.fr/films'
-    num_pages = 8000
+    num_pages = 1
 
     def start_requests(self):
         # Générer les URL de pagination
@@ -57,7 +58,10 @@ class FilmsSpider(scrapy.Spider):
         items = AllocineFilmsItem()
         
         titre = response.xpath('(//div[@class="titlebar titlebar-page"]//div[@class="titlebar-title titlebar-title-lg"]//text())').get() 
-        date  = self.extract_date(response)
+        date_dflt  = self.extract_date(response)
+        if date_dflt is not None:
+            date_dflt = date_dflt.strip()
+            date = convert_to_dd_mm_aaaa(date_dflt)
         realisateur = response.css('span.light + span.blue-link::text').get()
         distributeur = response.xpath('//span[contains(text(), "Distributeur")]/following-sibling::span/text()').get()
         acteurs = response.css('div.meta-body-item.meta-body-actor span:not(.light)::text').getall()
@@ -66,20 +70,34 @@ class FilmsSpider(scrapy.Spider):
         nationalites = response.xpath('//span[contains(@class, "nationality")]/text()').get()
         type_film = response.xpath('//span[@class="what light" and contains(text(), "Type de film")]/following-sibling::span[@class="that"]/text()').get()
         langue_d_origine = response.xpath('//span[@class="what light" and contains(text(), "Langues")]/following-sibling::span[@class="that"]/text()').get()
-        recompenses = response.xpath('//span[@class="what light" and contains(text(), "Récompenses")]/following-sibling::span/text()').get()
         annee_production = response.xpath('//span[@class="what light" and contains(text(), "Année de production")]/following-sibling::span[@class="that"]/text()').get()
         nombre_article = response.xpath('(//section[@class="section ovw"]//a[@class="end-section-link "])[2]//text()').get()
         description = response.xpath('//div[@class="content-txt "]//text()').get()
+        image_url = response.css('img.thumbnail-img::attr(src)').get()
  
-        # Extraire le "film_id" à partir de l'URL en utilisant une expression régulière
-        film_id = None
+         # Calculate the current date
+        current_date = datetime.now()
+
+        # Compare the release date with the current date
+        if date:
+            realase_date = datetime.strptime(date, '%d/%m/%Y')
+            if realase_date > current_date:
+                items['prochainement'] = 1  # Movie is upcoming
+            else:
+                items['prochainement'] = 0  # Movie has been released
+        else:
+            items['prochainement'] = None
+
+        
+        #Extraire le "film_id" à partir de l'URL en utilisant une expression régulière
+        film_id_allocine = None
         film_id_match = re.search(r'cfilm=(\d+)', response.url)
         if film_id_match:
             film_id = film_id_match.group(1)
 
-        # Ajouter le "film_id" à l'item
-        items['film_id'] = film_id if film_id else None
-
+        items['film_id_allocine'] = film_id if film_id else None
+    
+        items['image'] = image_url if image_url else None
             
         items['titre'] = titre if titre else None
         items['date'] = date if date else None
@@ -93,11 +111,11 @@ class FilmsSpider(scrapy.Spider):
         items['nationalites'] = nationalites if nationalites else None
         items['nombre_article'] = nombre_article if nombre_article else None
         items['distributeur'] = distributeur if distributeur else None
-        items['recompenses'] = recompenses if recompenses else None
         items['description'] = description if description else None
 
 
         yield items
+
 
 
         

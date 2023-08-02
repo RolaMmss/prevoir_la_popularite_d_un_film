@@ -24,6 +24,11 @@ class AllocineFilmsItem(scrapy.Item):
     langue_d_origine = scrapy.Field()
     nationalites = scrapy.Field()
     nombre_article = scrapy.Field()
-    recompenses = scrapy.Field()
     distributeur = scrapy.Field()
-    film_id = scrapy.Field()
+    film_id_allocine = scrapy.Field()
+    prochainement = scrapy.Field()
+    image = scrapy.Field()
+    
+    
+class ActorItem(scrapy.Item):
+    acteur = scrapy.Field()
