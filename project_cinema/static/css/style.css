@@ -92,6 +92,7 @@ h1 {
     padding: 20px;
 }
 
+/*
 h2 {
     color: #d01c73;
     font-size: 1.5em;
@@ -99,7 +100,14 @@ h2 {
     font-weight: 600;
     padding: 20px;
 }
-
+*/
+h2 {
+    /* Centre le titre horizontalement */
+    text-align: center;
+    /* Met en couleur jaune */
+    color: yellow;
+  }
+  
 p {
     padding: 10px; 
 }
