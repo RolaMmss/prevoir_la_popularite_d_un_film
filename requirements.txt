@@ -5,10 +5,19 @@ pandas
 matplotlib
 seaborn
 <<<<<<< HEAD
+<<<<<<< HEAD
 pypyodbc
 =======
+=======
+>>>>>>> ee5e67d30c90a80aef0afff5d132dd8369c361bb
 seaborn
 matplotlib
 scikit-learn
 ydata_profiling
+<<<<<<< HEAD
 >>>>>>> a3da891fde505bd4065eb912733e031c83a23cac
+=======
+=======
+pypyodbc
+>>>>>>> 3a03d162bdaa0b376a7ddf78e84fbdee06ac5d5c
+>>>>>>> ee5e67d30c90a80aef0afff5d132dd8369c361bb
