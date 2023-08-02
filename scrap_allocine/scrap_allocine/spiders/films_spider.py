@@ -8,7 +8,7 @@ CUSTOM_SETTINGS = {
     'CSV_OUTPUT_FILE': 'movies.csv',
     'CSV_FIELDS_TO_EXPORT': ['titre', 'date', 'genre', 'duree', 'realisateur', 'distributeur', 'acteurs',
                              'nationalites', 'langue_d_origine', 'type_film', 'annee_production','nombre_article', 
-                              'description', 'film_id',  'prochainement', 'image']
+                              'description', 'film_id', 'image']
 
     }
 
@@ -75,22 +75,9 @@ class FilmsSpider(scrapy.Spider):
         description = response.xpath('//div[@class="content-txt "]//text()').get()
         image_url = response.css('img.thumbnail-img::attr(src)').get()
  
-         # Calculate the current date
-        current_date = datetime.now()
-
-        # Compare the release date with the current date
-        if date:
-            realase_date = datetime.strptime(date, '%d/%m/%Y')
-            if realase_date > current_date:
-                items['prochainement'] = 1  # Movie is upcoming
-            else:
-                items['prochainement'] = 0  # Movie has been released
-        else:
-            items['prochainement'] = None
 
         
         #Extraire le "film_id" à partir de l'URL en utilisant une expression régulière
-        film_id_allocine = None
         film_id_match = re.search(r'cfilm=(\d+)', response.url)
         if film_id_match:
             film_id = film_id_match.group(1)

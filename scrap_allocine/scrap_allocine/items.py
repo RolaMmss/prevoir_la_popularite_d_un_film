@@ -26,7 +26,6 @@ class AllocineFilmsItem(scrapy.Item):
     nombre_article = scrapy.Field()
     distributeur = scrapy.Field()
     film_id_allocine = scrapy.Field()
-    prochainement = scrapy.Field()
     image = scrapy.Field()
     
     

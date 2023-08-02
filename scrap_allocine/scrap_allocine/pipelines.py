@@ -186,16 +186,6 @@ class AzureSQLPipeline:
             self.delete_table('acteurs_films')
             self.delete_table('films')
 
-            # Créer la table "acteurs_films"
-            create_acteurs_films_table_query = '''
-            CREATE TABLE acteurs_films (
-                id INT IDENTITY(1,1) PRIMARY KEY,
-                film_id INT,
-                acteurs VARCHAR(500)
-            );
-            '''
-            self.cursor.execute(create_acteurs_films_table_query)
-            self.conn.commit()
 
             # Créer la table "films"
             create_table_query = '''
@@ -213,12 +203,26 @@ class AzureSQLPipeline:
                 nombre_article VARCHAR(500),
                 description VARCHAR(2000),
                 film_id_allocine VARCHAR(10),
-                prochainement VARCHAR(10),
                 image VARCHAR(1000)
             );
             '''
             self.cursor.execute(create_table_query)
             self.conn.commit()
+            
+            
+            # Créer la table "acteurs_films"
+            create_acteurs_films_table_query = '''
+            CREATE TABLE acteurs_films (
+                id_acteurs_films INT IDENTITY(1,1) PRIMARY KEY,
+                film_id INT,
+                acteurs VARCHAR(500),
+                FOREIGN KEY (film_id) REFERENCES films(id)
+                    );
+                '''
+            self.cursor.execute(create_acteurs_films_table_query)
+            self.conn.commit()
+
+
 
     def delete_table(self, table_name):
         drop_table_query = f'DROP TABLE IF EXISTS {table_name};'
@@ -233,14 +237,14 @@ class AzureSQLPipeline:
         if self.spider_name == 'films_spider':
             try:
                 query = '''
-                INSERT INTO films (titre, date, duree, realisateur, distributeur, nationalites, langue_d_origine, type_film, annee_production, nombre_article, description, film_id_allocine, image, prochainement)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                INSERT INTO films (titre, date, duree, realisateur, distributeur, nationalites, langue_d_origine, type_film, annee_production, nombre_article, description, film_id_allocine, image)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
                 '''
                 self.cursor.execute(query, (
                     item['titre'], item['date'], item['duree'], item['realisateur'], item['distributeur'],
                     item['nationalites'], item['langue_d_origine'], item['type_film'],
                     item['annee_production'], 
-                    item['nombre_article'], item['description'], item['film_id_allocine'], item['image'], item['prochainement']
+                    item['nombre_article'], item['description'], item['film_id_allocine'], item['image']
                 ))
                 self.conn.commit()
                 film_id = self.cursor.execute("SELECT @@IDENTITY").fetchone()[0]

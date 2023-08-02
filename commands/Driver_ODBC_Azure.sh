@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo apt-get install odbcinst
 
 sudo curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
