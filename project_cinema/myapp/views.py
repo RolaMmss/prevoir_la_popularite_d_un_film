@@ -10,10 +10,7 @@ from . import forms
 
 
 def hello(request):
-
-    return HttpResponse(f"""
-        <h1>Hello Django from container!</h1>
-""")
+    return render(request, 'pages_main/Box_off_forecast.html')
 
 
 def homepage(request):
