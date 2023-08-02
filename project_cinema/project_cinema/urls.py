@@ -26,14 +26,17 @@ Including another URLconf
 # ]
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from myapp import views
+from django.conf.urls.static import static
+
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/',views.hello),
+    path('hello/',views.hello,name='hello'),
     path('',views.homepage,name='homepage'),
-    path('signup/',views.signup, name='signup'),
-    path('login/',views.login_user, name='login'),
-    path('logout/',views.logout_user, name='logout'),
+    path('accounts/', include('django.contrib.auth.urls')),   
+    path('signup/', views.SignupPage.as_view(), name='signup'),
 ]

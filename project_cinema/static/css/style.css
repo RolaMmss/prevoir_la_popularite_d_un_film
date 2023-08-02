@@ -5,26 +5,53 @@ body {
 }
 
 body > * {
-    max-width: 1100px;
-    width: 95%;
+    width: 100%;
+    margin: auto;
 }
 
- /* Nav bar */
 
-nav {
+
+.resized-figure img {
+    display: block;
+    margin: 0 auto;
+    width: 500px; 
+    height: 400px;  
+}
+
+
+/* Styles pour le conteneur de la page */
+.page-container {
     display: flex;
-    height: 200px;
+    flex-direction: column;
+    align-items: center;
+    min-height: 80vh; /* Cela assure que le conteneur occupe au moins la hauteur de la fenêtre */
+    margin: 0; /* Supprime les marges par défaut du body */
+    width: 100%; /* Ajoutez cette ligne pour occuper toute la largeur */
+}
+
+/* Appliquer une largeur maximale et une largeur de 95% à tous les éléments enfants de page-container */
+.page-container > * {
+    max-width: 2000px;
+    width: 100%;
+}
+
+/* Styles pour la barre de navigation */
+.navbar-expand-lg.bg-light {
+    display: flex;
+    height: 75px;
     justify-content: space-between;
     align-items: center;
-
-    background-color: #333; /* Replace #333 with the desired background color */
-    padding: 10px; /* Add padding to create spacing around the navigation links */
+    background-color:rgb(241, 196, 15) !important;
+    padding: 10px;
+    margin: auto;
 }
 
 nav figure {
-    width: 80px; 
-   
+    width: 100px; 
+    
 }
+
+
 
 nav ul {
     display: flex;
@@ -32,8 +59,20 @@ nav ul {
     gap: 20px; 
     list-style: none; 
     font-weight: bold;
+    margin: auto;
 }
 
+
+.id_log{  position: absolute;
+    top: 45%;
+    left: 81%;
+}
+
+.id1{
+    position: absolute;
+    top: 43%;
+    left: 90%;
+}
 
 img {
     width: 100%;
@@ -46,15 +85,16 @@ img {
 } */
 
 nav ul li a {
-    color: #999;
+    color: rgb(241, 79, 15);
     font-size: large;
     text-decoration: none;
     font-family: Helvetica, Arial, sans-serif;
     transition: color 0.3s;
+    margin: auto;
 }
 
 nav ul li a:hover {
-    color: rgb(241, 101, 218);
+    color: rgb(45, 193, 176);
     transition: color 0.3s;
 }
 
@@ -92,16 +132,19 @@ h1 {
     padding: 20px;
 }
 
-h2 {
-    color: #d01c73;
-    font-size: 1.5em;
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: 600;
-    padding: 20px;
-}
 
-p {
-    padding: 10px; 
+h2 {
+    /* Centre le titre horizontalement */
+    text-align: center;
+    margin-top: 50px;
+    /* Met en couleur jaune */
+    color: rgb(241, 196, 15);
+  }
+  
+  p {
+    padding: 10px;
+    text-align: center;
+    margin-top: 40px; /* Ajoute une marge supérieure de 20 pixels pour faire descendre les paragraphes */
 }
 
 footer {
