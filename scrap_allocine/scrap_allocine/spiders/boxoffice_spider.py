@@ -6,7 +6,7 @@ from scrapy.settings import Settings
 
 # Set the CSV file name and column order
 CUSTOM_SETTINGS = {
-    'CSV_OUTPUT_FILE': 'boxoffice_tous_bis.csv',
+    'CSV_OUTPUT_FILE': 'boxoffice_tous_4.csv',
     'CSV_FIELDS_TO_EXPORT': ['titre','semaine_1', 'boxoffice_1', 'boxoffice_2'  ],  
     'MONGODB_COLLECTION': 'boxoffice_tous_bis',
     }
@@ -21,7 +21,8 @@ class BoxofficeSpider(CrawlSpider):
 
     # URL de la première page
     base_url = 'https://www.allocine.fr/films'
-    num_pages = 4000
+    num_pages = 8000
+    
 
     def start_requests(self):
         # Générer les URL de pagination
