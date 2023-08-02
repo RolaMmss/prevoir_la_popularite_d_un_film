@@ -9,22 +9,37 @@ body > * {
     width: 95%;
 }
 
- /* Nav bar */
 
+/* Styles pour le conteneur de la page */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh; /* Cela assure que le conteneur occupe au moins la hauteur de la fenêtre */
+    margin: 0; /* Supprime les marges par défaut du body */
+}
+
+/* Appliquer une largeur maximale et une largeur de 95% à tous les éléments enfants de page-container */
+.page-container > * {
+    max-width: 1100px;
+    width: 95%;
+}
+
+/* Styles pour la barre de navigation */
 nav {
     display: flex;
     height: 200px;
     justify-content: space-between;
     align-items: center;
-
-    background-color: #333; /* Replace #333 with the desired background color */
-    padding: 10px; /* Add padding to create spacing around the navigation links */
+    background-color: #333;
+    padding: 10px;
 }
 
 nav figure {
     width: 80px; 
-   
 }
+
+
 
 nav ul {
     display: flex;
@@ -92,20 +107,12 @@ h1 {
     padding: 20px;
 }
 
-/*
-h2 {
-    color: #d01c73;
-    font-size: 1.5em;
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: 600;
-    padding: 20px;
-}
-*/
+
 h2 {
     /* Centre le titre horizontalement */
     text-align: center;
     /* Met en couleur jaune */
-    color: yellow;
+    color: rgb(241, 196, 15);
   }
   
 p {
