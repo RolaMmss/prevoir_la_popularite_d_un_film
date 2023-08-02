@@ -1,4 +1,5 @@
 {% extends 'myapp/base.html' %}
+{% load static %}
 
 {% block content %}
 <style>
@@ -16,6 +17,7 @@
   <p>This is the homepage of your application.</p>
   <p>Feel free to customize this template based on your project's requirements.</p>
   <figure class="resized-figure">
-    <img src="static/logo_slogan.png">
+    <img src="{% static 'myapp/logo_slogan.png' %}">
+
   </figure> 
 {% endblock %}
