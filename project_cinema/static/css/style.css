@@ -59,6 +59,7 @@ nav ul {
     list-style: none; 
     font-weight: bold;
     margin: auto;
+    
 }
 .id1{
     position: absolute;
@@ -77,7 +78,7 @@ img {
 } */
 
 nav ul li a {
-    color: rgb(241, 196, 15);
+    color: rgb(241, 124, 15);
     font-size: large;
     text-decoration: none;
     font-family: Helvetica, Arial, sans-serif;
