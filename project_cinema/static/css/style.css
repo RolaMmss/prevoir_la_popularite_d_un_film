@@ -24,7 +24,7 @@ body > * {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh; /* Cela assure que le conteneur occupe au moins la hauteur de la fenêtre */
+    min-height: 80vh; /* Cela assure que le conteneur occupe au moins la hauteur de la fenêtre */
     margin: 0; /* Supprime les marges par défaut du body */
     width: 100%; /* Ajoutez cette ligne pour occuper toute la largeur */
 }
@@ -36,18 +36,19 @@ body > * {
 }
 
 /* Styles pour la barre de navigation */
-nav {
+.navbar-expand-lg.bg-light {
     display: flex;
-    height: 100px;
+    height: 75px;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
+    background-color:rgb(241, 196, 15) !important;
     padding: 10px;
     margin: auto;
 }
 
 nav figure {
-    width: 80px; 
+    width: 100px; 
+    
 }
 
 
@@ -59,8 +60,14 @@ nav ul {
     list-style: none; 
     font-weight: bold;
     margin: auto;
-    
 }
+
+
+.id_log{  position: absolute;
+    top: 45%;
+    left: 81%;
+}
+
 .id1{
     position: absolute;
     top: 43%;
@@ -78,7 +85,7 @@ img {
 } */
 
 nav ul li a {
-    color: rgb(241, 124, 15);
+    color: rgb(241, 79, 15);
     font-size: large;
     text-decoration: none;
     font-family: Helvetica, Arial, sans-serif;
@@ -87,7 +94,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: rgb(193, 45, 45);
+    color: rgb(45, 193, 176);
     transition: color 0.3s;
 }
 
@@ -129,15 +136,16 @@ h1 {
 h2 {
     /* Centre le titre horizontalement */
     text-align: center;
+    margin-top: 50px;
     /* Met en couleur jaune */
     color: rgb(241, 196, 15);
   }
   
-p {
+  p {
     padding: 10px;
     text-align: center;
+    margin-top: 40px; /* Ajoute une marge supérieure de 20 pixels pour faire descendre les paragraphes */
 }
-
 
 footer {
     display: flex;
