@@ -21,3 +21,4 @@ ydata_profiling
 pypyodbc
 >>>>>>> 3a03d162bdaa0b376a7ddf78e84fbdee06ac5d5c
 >>>>>>> ee5e67d30c90a80aef0afff5d132dd8369c361bb
+category_encoders
