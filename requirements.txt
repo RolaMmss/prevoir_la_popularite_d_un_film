@@ -4,4 +4,4 @@ python-dotenv
 pandas
 matplotlib
 seaborn
-pypyodbc
+Django==4.1.2
