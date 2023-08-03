@@ -10,13 +10,13 @@
 <h1>Box Office Forecast</h1>
 
 {% for film in films %}
+<h3>Box Office Forecast</h3>
     <div>
-        <h2>{{ film.titre }}</h2>
-        <p>Date: {{ film.date }}</p>
+        <p>{{ film.titre }}</p>
+        <p>{{ film.distributeur }}</p>
       
         <!-- Ajoutez d'autres informations que vous souhaitez afficher -->
     </div>
-    <hr> <!-- Ajoutez une ligne horizontale pour séparer les films -->
 {% endfor %}
   
 </div>

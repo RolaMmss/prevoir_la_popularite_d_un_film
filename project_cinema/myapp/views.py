@@ -3,7 +3,7 @@ from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from . import forms
-from .models import films
+from .models import Film
 
 
 def dashboard(request):
@@ -22,7 +22,7 @@ class SignupPage(CreateView):
 
 def box_office(request):
     # Récupérer les 4 premiers films depuis la base de données
-    film = films.objects.all()[:4]
+    film = Film.objects.all()[:4]
 
     return render(request, 'pages_main/Box_off_forecast.html', {'films': film})
 
