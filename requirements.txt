@@ -1,7 +1,12 @@
 scrapy
 pymongo
 python-dotenv
-pandas
-matplotlib
+pmatplotlib
 seaborn
+pypyodbc
+seaborn
+matplotlib
+scikit-learn
+ydata_profilingandas
+category_encoders
 Django==4.1.2
