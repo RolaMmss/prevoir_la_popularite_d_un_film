@@ -13,7 +13,7 @@
         <select id="date_filter" name="date_filter">
             <option value="">All Dates</option>
             {% for date in distinct_dates %}
-                <option value="{{ date|date:'Y-m-d' }}" {% if date == selected_date %}selected{% endif %}>{{ date }}</option>
+                <option value="{{ date }}" {% if date == selected_date %}selected{% endif %}>{{ date }}</option>
             {% endfor %}
         </select>
         <button type="submit">Filter</button>
@@ -24,8 +24,7 @@
         {% if films %}
             <ul>
                 {% for film in films %}
-                    <li>{{ film.titre }} 
-                        {{ film.distributeur }} </li>
+                    <li>{{ film.titre }} - {{ film.distributeur }}</li>
                 {% endfor %}
             </ul>
         {% else %}
@@ -34,5 +33,6 @@
     {% endif %}
 
 </div>
+
 
 {% endblock %}
