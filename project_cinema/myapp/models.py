@@ -15,3 +15,14 @@ class Film(models.Model):
 
     class Meta:
         db_table = 'films'
+
+
+
+class Acteurs_films(models.Model):
+  #  id_acteurs_films = models.AutoField(primary_key=True)
+    film_id = models.ForeignKey(Film, on_delete=models.CASCADE)
+    acteurs = models.CharField(max_length=500)
+
+    class Meta:
+        db_table = 'acteurs_films'
+
