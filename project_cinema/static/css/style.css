@@ -1,0 +1,219 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body > * {
+    width: 100%;
+    margin: auto;
+}
+
+
+
+.resized-figure img {
+    display: block;
+    margin: 0 auto;
+    width: 500px; 
+    height: 400px;  
+}
+
+
+/* Styles pour le conteneur de la page */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 80vh; /* Cela assure que le conteneur occupe au moins la hauteur de la fenêtre */
+    margin: 0; /* Supprime les marges par défaut du body */
+    width: 100%; /* Ajoutez cette ligne pour occuper toute la largeur */
+}
+
+/* Appliquer une largeur maximale et une largeur de 95% à tous les éléments enfants de page-container */
+.page-container > * {
+    max-width: 2000px;
+    width: 100%;
+}
+
+/* Styles pour la barre de navigation */
+.navbar-expand-lg.bg-light {
+    display: flex;
+    height: 75px;
+    justify-content: space-between;
+    align-items: center;
+    background-color:rgb(241, 196, 15) !important;
+    padding: 10px;
+    margin: auto;
+}
+
+nav figure {
+    width: 100px; 
+    
+}
+
+
+
+nav ul {
+    display: flex;
+    justify-content:center;    
+    gap: 20px; 
+    list-style: none; 
+    font-weight: bold;
+    margin: auto;
+}
+
+
+.id_log{  position: absolute;
+    top: 45%;
+    left: 81%;
+}
+
+.id1{
+    position: absolute;
+    top: 43%;
+    left: 90%;
+}
+
+img {
+    width: 100%;
+    object-fit: cover;
+}
+
+/* figure {
+    width: 100%;
+    object-fit: cover;
+} */
+
+nav ul li a {
+    color: rgb(241, 79, 15);
+    font-size: large;
+    text-decoration: none;
+    font-family: Helvetica, Arial, sans-serif;
+    transition: color 0.3s;
+    margin: auto;
+}
+
+nav ul li a:hover {
+    color: rgb(45, 193, 176);
+    transition: color 0.3s;
+}
+
+/*header {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    align-items: center;
+    gap: 50px;
+ } */
+ 
+  
+.right-section {
+    /* float: right;  */
+    margin-left: 400px;
+}
+
+/* header figure {
+    width: 500px;
+} */
+
+table {
+    border-collapse: collapse;
+    border: 1px solid black;
+  }
+  
+  th, td {
+    border: 1px solid black;
+  }
+
+h1 {
+    color: #d01c73;
+    font-size: 2em;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    padding: 20px;
+}
+
+
+h2 {
+    /* Centre le titre horizontalement */
+    text-align: center;
+    margin-top: 50px;
+    /* Met en couleur jaune */
+    color: rgb(241, 196, 15);
+  }
+  
+  p {
+    padding: 10px;
+    text-align: center;
+    margin-top: 40px; /* Ajoute une marge supérieure de 20 pixels pour faire descendre les paragraphes */
+}
+
+footer {
+    display: flex;
+    height: 120px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer a:hover {
+    color: rgb(241, 101, 218);
+    transition: color 0.3s;
+    font-size: large;
+    align-content: space-between;
+    justify-content: center;
+    border: bottom;
+}
+
+footer ul {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.button {
+    display: block;
+    width: 120px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+
+
+
+  form {
+    display: inline-block;
+    text-align: left;
+    padding: 20px;
+  }
+  form label {
+    display: block;
+    margin-top: 10px;
+    padding: 20px; 
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  input[type="submit"] {
+    padding: 10px 20px;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #3e8e41;
+  }

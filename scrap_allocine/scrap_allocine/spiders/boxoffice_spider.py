@@ -6,10 +6,13 @@ from scrapy.settings import Settings
 
 # Set the CSV file name and column order
 CUSTOM_SETTINGS = {
-    'CSV_OUTPUT_FILE': 'boxoffice_tous_4.csv',
-    'CSV_FIELDS_TO_EXPORT': ['titre','semaine_1', 'boxoffice_1', 'boxoffice_2'  ],  
-    'MONGODB_COLLECTION': 'boxoffice_tous_bis',
-    }
+    'CSV_OUTPUT_FILE': 'boxoffice.csv',
+    'CSV_FIELDS_TO_EXPORT': ['titre','fin_semaine_1', 'boxoffice_1', 'boxoffice_2', 'film_id' ],  
+    'ITEM_PIPELINES': {
+            'scrap_allocine.pipelines.BoxOfficePipeline': 100,
+            'scrap_allocine.pipelines.ProcessPipeline': None, # Mettez None pour désactiver la pipeline
+            'scrap_allocine.pipelines.CsvPipeline': 301,
+        }}
 
 class BoxofficeSpider(CrawlSpider):
     name = "boxoffice_spider"
@@ -22,7 +25,6 @@ class BoxofficeSpider(CrawlSpider):
     # URL de la première page
     base_url = 'https://www.allocine.fr/films'
     num_pages = 8000
-    
 
     def start_requests(self):
         # Générer les URL de pagination
@@ -50,27 +52,27 @@ class BoxofficeSpider(CrawlSpider):
         # Construire l'URL du box office
         box_office_url = f"https://www.allocine.fr/film/fichefilm-{film_id}/box-office/"
         # Suivre le lien du box office pour accéder à la page du box office
-        yield scrapy.Request(box_office_url, callback=self.parse_box_office, meta={'titre': titre})
+        yield scrapy.Request(box_office_url, callback=self.parse_box_office, meta={'titre': titre, 'film_id': film_id})
 
     def parse_box_office(self, response):
-        # Extract the box office fr of the first week
-        # box_office = response.css("td[data-heading='Entrées']::text").get()
-
         semaine_selector = response.css("td[data-heading='Semaine']")
         semaines = semaine_selector.css("::text").getall()
-        semaine_1 = semaines[1]
+        fin_semaine_1 = semaines[1] if len(semaines) > 1 else None
 
         # Extract the first two lines of the "Entrées" column
         entrees_selector = response.css("td[data-heading='Entrées']")
-        boxoffice_1 = entrees_selector[0].css("::text").get().strip()
-        boxoffice_2 = entrees_selector[1].css("::text").get().strip()
+        boxoffice_1 = entrees_selector[0].css("::text").get().strip() if entrees_selector else None
+        boxoffice_2 = entrees_selector[1].css("::text").get().strip() if len(entrees_selector) > 1 else None
 
         allocine_movies_items = AllocineBoxofficeItem()
         allocine_movies_items['titre'] = response.meta['titre']
-        allocine_movies_items['semaine_1'] = semaine_1
+        allocine_movies_items['fin_semaine_1'] = fin_semaine_1
         allocine_movies_items['boxoffice_1'] = boxoffice_1
         allocine_movies_items['boxoffice_2'] = boxoffice_2
 
+        allocine_movies_items['film_id'] = response.meta['film_id']
+
         yield allocine_movies_items
+
     
 
