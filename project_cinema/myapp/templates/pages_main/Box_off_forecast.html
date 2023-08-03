@@ -1,16 +1,21 @@
+
 {% extends 'myapp/base.html' %}
 {% load static %}
-
-
 
 {% block content %}
 
 
-  <div class="page-container">
-    <h2>Welcome to the BOX OFFICE FORECAST</h2>
-  <p>This is the homepage of your application.</p>
-  <p>Feel free to customize this template based on your project's requirements.</p>
-  </div>
+<h1>Box Office Forecast</h1>
+
+{% for film in films %}
+    <div>
+        <h2>{{ film.titre }}</h2>
+        <p>Date: {{ film.date }}</p>
+      
+        <!-- Ajoutez d'autres informations que vous souhaitez afficher -->
+    </div>
+    <hr> <!-- Ajoutez une ligne horizontale pour séparer les films -->
+{% endfor %}
   
 
 {% endblock %}
