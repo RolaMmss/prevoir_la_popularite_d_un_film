@@ -16,9 +16,6 @@ import matplotlib.pyplot as plt
 from django.core.files.storage import FileSystemStorage
 
 import io
-import urllib.parse
-
-
 from django.db.models import Count
 from wordcloud import WordCloud
 
@@ -56,43 +53,17 @@ def box_office(request):
 
 
 def dashboard(request):
-    # Query the database to get the data
+
     films = Film.objects.all()
-
-    # Create a Pandas DataFrame from the queryset
     df = pd.DataFrame(list(films.values()))
-
-    # Group by 'type_film' and count occurrences
     type_film_counts = df['type_film'].value_counts()
 
-    # Prepare data for the bar plot
-    x = type_film_counts.index
-    y = type_film_counts.values
-
-    # Create the bar plot using Matplotlib
-    plt.figure(figsize=(8, 5))
-    plt.bar(x, y)
-    plt.xlabel('Type of Film')
-    plt.ylabel('Count')
-    plt.title('Film Types Distribution')
-    plt.xticks(rotation=45)
-
-    # Save the bar plot to a file (optional)
-    plot_path = 'film_types_distribution.png'
-    plt.savefig(os.path.join(settings.MEDIA_ROOT, plot_path))
-    plt.close()
-
-    # Prepare data for the Pie Chart
     type_film_labels = type_film_counts.index
     type_film_values = type_film_counts.values
-
-    # Create the Pie Chart using Matplotlib
     plt.figure(figsize=(8, 5))
     plt.pie(type_film_values, labels=type_film_labels, autopct='%1.1f%%', startangle=140)
     plt.axis('equal')
     plt.title('Film Types Distribution - Pie Chart')
-
-    # Save the Pie Chart to a file (optional)
     pie_chart_path = 'film_types_distribution_pie_chart.png'
     plt.savefig(os.path.join(settings.MEDIA_ROOT, pie_chart_path))
     plt.close()
@@ -100,8 +71,6 @@ def dashboard(request):
     # Prepare data for the WordCloud
     actor_counts = Acteurs_films.objects.values('acteurs').annotate(count=Count('acteurs')).order_by('-count')
     wordcloud_data = {actor['acteurs']: actor['count'] for actor in actor_counts}
-
-    # Create a WordCloud object
     wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(wordcloud_data)
 
     # Plot the WordCloud and save it to a BytesIO buffer
@@ -117,14 +86,10 @@ def dashboard(request):
     fs = FileSystemStorage(location=settings.MEDIA_ROOT)
     filename = fs.save('actor_distribution.png', buffer)
 
-    # Get the URLs of the saved images
-    bar_plot_url = fs.url(plot_path)
     pie_chart_url = fs.url(pie_chart_path)
     wordcloud_url = fs.url(filename)
 
-    # Pass the image URLs to the template for rendering
     context = {
-        'bar_plot_url': bar_plot_url,
         'pie_chart_url': pie_chart_url,
         'wordcloud_url': wordcloud_url,
     }

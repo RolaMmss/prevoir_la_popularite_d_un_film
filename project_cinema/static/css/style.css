@@ -76,8 +76,6 @@ nav ul {
 
 
 
-
-
 .grph1{
     display: flex;
     justify-content: space-between;
@@ -109,10 +107,6 @@ nav ul {
     object-fit: cover;
 }
 
-/* figure {
-    width: 100%;
-    object-fit: cover;
-} */
 
 nav ul li a {
     color: rgb(241, 79, 15);
@@ -189,7 +183,11 @@ footer {
     height: 90px;
     justify-content: space-between;
     align-items: center;
+    background-color:rgb(241, 196, 15) ;
+   
 }
+
+
 
 footer a:hover {
     color: rgb(241, 101, 218);
