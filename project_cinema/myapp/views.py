@@ -6,14 +6,11 @@ from . import forms
 from .models import Film
 from datetime import datetime
 from django.forms import Form, DateField as FormDateField
-
 from myapp.forms import UserCreateForm
-
 import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib
-matplotlib.use('Agg')
 from django.conf import settings
+import os
 
 
 def dashboard(request):
@@ -44,13 +41,8 @@ def box_office(request):
     if selected_date_str:
         selected_date = datetime.strptime(selected_date_str, '%d/%m/%Y').date()
         films = Film.objects.filter(date=selected_date)
-
     return render(request, 'pages_main/Box_off_forecast.html', {'films': films, 'distinct_dates': distinct_dates, 'selected_date': selected_date_str})
 
-
-
-from pathlib import Path
-import os
 
 
 def dashboard(request):
