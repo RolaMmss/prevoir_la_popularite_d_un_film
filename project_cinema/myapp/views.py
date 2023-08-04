@@ -12,14 +12,21 @@ from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from . import forms
-from .models import Film
+from .models import Film, Acteurs_films
 from datetime import datetime
 from django.forms import Form, DateField as FormDateField
 from myapp.forms import UserCreateForm
 import pandas as pd
-import matplotlib.pyplot as plt
 from django.conf import settings
 import os
+import matplotlib
+matplotlib.use('Agg')  
+import matplotlib.pyplot as plt
+from django.core.files.storage import FileSystemStorage
+
+import io
+from django.db.models import Count
+from wordcloud import WordCloud
 
 >>>>>>> 5c56ef9437575d9a6390df50010d7c400244dae7
 
@@ -116,31 +123,43 @@ def box_office(request):
 
 
 def dashboard(request):
-    # Query the database to get the data
     films = Film.objects.all()
-
-    # Create a Pandas DataFrame from the queryset
     df = pd.DataFrame(list(films.values()))
-
-    # Group by 'type_film' and count occurrences
     type_film_counts = df['type_film'].value_counts()
 
-    # Prepare data for the bar plot
-    x = type_film_counts.index
-    y = type_film_counts.values
+    type_film_labels = type_film_counts.index
+    type_film_values = type_film_counts.values
+    plt.figure(figsize=(8, 5))
+    plt.pie(type_film_values, labels=type_film_labels, autopct='%1.1f%%', startangle=140)
+    plt.axis('equal')
+    plt.title('Film Types Distribution - Pie Chart')
+    pie_chart_path = 'film_types_distribution_pie_chart.png'
+    plt.savefig(os.path.join(settings.MEDIA_ROOT, pie_chart_path))
+    plt.close()
 
-    # Create the bar plot using Matplotlib
-    plt.bar(x, y)
-    plt.xlabel('Type of Film')
-    plt.ylabel('Count')
-    plt.title('Film Types Distribution')
-    plt.xticks(rotation=45)
+    # Prepare data for the WordCloud
+    actor_counts = Acteurs_films.objects.values('acteurs').annotate(count=Count('acteurs')).order_by('-count')
+    wordcloud_data = {actor['acteurs']: actor['count'] for actor in actor_counts}
+    wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(wordcloud_data)
 
-    # Save the plot to a file (optional)
-    plot_path = 'media/film_types_distribution.png'
-    plt.savefig(os.path.join(settings.MEDIA_ROOT, plot_path))
+    # Plot the WordCloud and save it to a BytesIO buffer
+    buffer = io.BytesIO()
+    plt.figure(figsize=(8, 5))
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis('off')
+    plt.title('Actor Distribution - WordCloud')
+    plt.savefig(buffer, format='png')
+    plt.close()
 
-    # Pass the plot URL to the template for rendering
-    context = {'plot_url': os.path.join(settings.MEDIA_URL, plot_path)}
+    # Save the WordCloud image to the 'media' directory using FileSystemStorage
+    fs = FileSystemStorage(location=settings.MEDIA_ROOT)
+    filename = fs.save('actor_distribution.png', buffer)
+
+    pie_chart_url = fs.url(pie_chart_path)
+    wordcloud_url = fs.url(filename)
+
+    context = {
+        'pie_chart_url': pie_chart_url,
+        'wordcloud_url': wordcloud_url,
+    }
     return render(request, 'pages_main/dashboard.html', context)
->>>>>>> 5c56ef9437575d9a6390df50010d7c400244dae7
