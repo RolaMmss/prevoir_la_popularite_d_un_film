@@ -202,6 +202,7 @@ class AzureSQLPipeline:
                 annee_production VARCHAR(500),
                 nombre_article VARCHAR(500),
                 description VARCHAR(2000),
+                genre VARCHAR (1000),
                 film_id_allocine VARCHAR(10),
                 image VARCHAR(1000)
             );
@@ -237,11 +238,11 @@ class AzureSQLPipeline:
         if self.spider_name == 'films_spider':
             try:
                 query = '''
-                INSERT INTO films (titre, date, duree, realisateur, distributeur, nationalites, langue_d_origine, type_film, annee_production, nombre_article, description, film_id_allocine, image)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                INSERT INTO films (titre, date, duree, genre, realisateur, distributeur, nationalites, langue_d_origine, type_film, annee_production, nombre_article, description, film_id_allocine, image)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
                 '''
                 self.cursor.execute(query, (
-                    item['titre'], item['date'], item['duree'], item['realisateur'], item['distributeur'],
+                    item['titre'], item['date'], item['duree'], item['genre'], item['realisateur'], item['distributeur'],
                     item['nationalites'], item['langue_d_origine'], item['type_film'],
                     item['annee_production'], 
                     item['nombre_article'], item['description'], item['film_id_allocine'], item['image']
