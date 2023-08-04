@@ -29,6 +29,19 @@ body > * {
     width: 100%; /* Ajoutez cette ligne pour occuper toute la largeur */
 }
 
+.form-control {
+    width: 1000px; /* Ajustez la valeur selon vos besoins */
+  }
+
+.container_signup{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 80vh; /* Cela assure que le conteneur occupe au moins la hauteur de la fenêtre */
+    margin: 0; /* Supprime les marges par défaut du body */
+    width: 100;
+}
 /* Appliquer une largeur maximale et une largeur de 95% à tous les éléments enfants de page-container */
 .page-container > * {
     max-width: 2000px;
@@ -74,7 +87,7 @@ nav ul {
     left: 90%;
 }
 
-img {
+.id3 {
     width: 100%;
     object-fit: cover;
 }
@@ -125,7 +138,7 @@ table {
   }
 
 h1 {
-    color: #d01c73;
+    color: rgb(241, 196, 15);
     font-size: 2em;
     font-family: Helvetica, Arial, sans-serif;
     font-weight: 600;
@@ -147,9 +160,16 @@ h2 {
     margin-top: 40px; /* Ajoute une marge supérieure de 20 pixels pour faire descendre les paragraphes */
 }
 
+.text-center.container{
+
+    min-height: 75vh;
+
+}
+
+
 footer {
     display: flex;
-    height: 120px;
+    height: 90px;
     justify-content: space-between;
     align-items: center;
 }
