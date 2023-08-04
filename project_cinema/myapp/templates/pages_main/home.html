@@ -1,18 +1,25 @@
 {% extends 'myapp/base.html' %}
 {% load static %}
 
+
+
+
 {% block content %}
-
-
-  <div class="page-container">
-    <h2>Welcome to the Homepage</h2>
-  <p>This is the homepage of your application.</p>
-  <p>Feel free to customize this template based on your project's requirements.</p>
-  <figure class="resized-figure">
-    <img class ="id3" src="{% static 'myapp/logo_slogan.png' %}">
-
-  </figure> 
-  </div>
+<div class="page-container" style="background-image: url('{% static 'myapp/im4.jpeg' %}');">
   
+  <h2>Welcome to CINÉ PREDICT</h2>
+
+  <p class="p acceuil">CINÉ PREDICT allows cinema managers to optimize their schedules and maximize revenue. </p> 
+    <br> 
+    <p class="p acceuil">Get started by navigating and let CINÉ PREDICT take the guesswork out of your cinema's programming decisions!</p>
+    
+  </p>
+
+     <!-- Ajoutez des images de films populaires -->
+     <div class="movie-images">
+      <img class="thumbnail-img" src="https://fr.web.img6.acsta.net/c_310_420/pictures/23/06/07/14/33/5787419.jpg" alt="Bande-annonce Indiana Jones et le Cadran de la Destinée" width="200" height="300">
+      <img class="thumbnail-img middle-img" src="https://fr.web.img4.acsta.net/c_310_420/pictures/23/06/16/09/11/1574235.jpg" alt="Bande-annonce Mission: Impossible – Dead Reckoning Partie 1" width="270" height="360">
+      <img class="thumbnail-img" src="https://fr.web.img2.acsta.net/c_310_420/pictures/23/05/25/09/11/4629362.jpg" alt="Bande-annonce Rendez-vous à Tokyo" width="200" height="300">
+    </div>
 
 {% endblock %}

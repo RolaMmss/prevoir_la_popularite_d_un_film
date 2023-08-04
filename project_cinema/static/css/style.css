@@ -10,7 +10,6 @@ body > * {
 }
 
 
-
 .resized-figure img {
     display: block;
     margin: 0 auto;
@@ -27,37 +26,57 @@ body > * {
     min-height: 80vh; /* Cela assure que le conteneur occupe au moins la hauteur de la fenêtre */
     margin: 0; /* Supprime les marges par défaut du body */
     width: 100%; /* Ajoutez cette ligne pour occuper toute la largeur */
+    position: relative;
 }
+
+
+
 
 .form-control {
     width: 1000px; /* Ajustez la valeur selon vos besoins */
   }
 
 .container_signup{
-
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 80vh; /* Cela assure que le conteneur occupe au moins la hauteur de la fenêtre */
+    min-height: 70vh !important; /* Cela assure que le conteneur occupe au moins la hauteur de la fenêtre */
     margin: 0; /* Supprime les marges par défaut du body */
     width: 100;
 }
+
+.container_model{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 72vh; /* Cela assure que le conteneur occupe au moins la hauteur de la fenêtre */
+    margin: 0; /* Supprime les marges par défaut du body */
+    width: 100;
+}
+
 /* Appliquer une largeur maximale et une largeur de 95% à tous les éléments enfants de page-container */
 .page-container > * {
     max-width: 2000px;
     width: 100%;
 }
 
-/* Styles pour la barre de navigation */
 .navbar-expand-lg.bg-light {
     display: flex;
     height: 75px;
     justify-content: space-between;
     align-items: center;
-    background-color:rgb(241, 196, 15) !important;
+    background-color: rgb(241, 196, 15) !important;
     padding: 10px;
     margin: auto;
+
+    /* Coins arrondis */
+    border-radius: 15px;
+
+    /* Effet 3D */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
 }
+
 
 nav figure {
     width: 100px; 
@@ -122,22 +141,13 @@ nav ul li a:hover {
     transition: color 0.3s;
 }
 
-/*header {
-    display: grid;
-    grid-template-columns: 2fr 2fr;
-    align-items: center;
-    gap: 50px;
- } */
- 
+
   
 .right-section {
     /* float: right;  */
     margin-left: 400px;
 }
 
-/* header figure {
-    width: 500px;
-} */
 
 table {
     border-collapse: collapse;
@@ -159,17 +169,87 @@ h1 {
 
 h2 {
     /* Centre le titre horizontalement */
+    font-family: "Montserrat", sans-serif;
+
     text-align: center;
     margin-top: 50px;
     /* Met en couleur jaune */
     color: rgb(241, 196, 15);
   }
   
-  p {
+  .p.acceuil {
+
     padding: 10px;
     text-align: center;
-    margin-top: 40px; /* Ajoute une marge supérieure de 20 pixels pour faire descendre les paragraphes */
+    margin-top: 40px;
+    color: rgb(8, 2, 2);
+    font-family: "Times New Roman", sans-serif;
+
+    font-size: 20px; /* Taille de police ajustée */
+    line-height: 0.1; /* Espacement entre les lignes */
+    font-weight: 300; /* Épaisseur de police normale */
+
+    letter-spacing: 1px; /* Espacement entre les lettres */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ombre portée douce pour un effet 3D */
 }
+
+
+.movie-images {
+    /* Centrer horizontalement et verticalement le contenu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .thumbnail-img {
+    /* Ajoutez un espacement entre les images si nécessaire */
+    margin: 10px;
+    /* Ajoutez un effet de transition pour un mouvement fluide */
+    transition: transform 1s;
+  }
+  
+  /* Animation pour faire bouger les images */
+  @keyframes rotateImages {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Appliquer l'animation à toutes les images de la classe .thumbnail-img */
+  .movie-images img {
+    /* Ajoutez un espacement entre les images si nécessaire */
+    margin: 25px;
+    /* Ajoutez un effet de transition pour un mouvement fluide */
+    transition: transform 1s;
+  }
+  
+  /* Appliquer l'animation d'agrandissement à l'image du milieu avec la classe .middle-img */
+  .middle-img {
+    /* Ajoutez un effet d'animation d'agrandissement */
+    animation: enlargeImage 4s infinite alternate;
+  }
+  
+  /* Animation pour agrandir l'image */
+  @keyframes enlargeImage {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.2);
+    }
+  }
+
+
+
+
+
+
+
+
+
 
 .text-center.container{
 
@@ -177,13 +257,18 @@ h2 {
 
 }
 
+.bg-light.text-center.py-3{
+    background-color:rgb(241, 196, 15) !important;
+
+
+}
 
 footer {
     display: flex;
-    height: 90px;
+    height: 75px;
     justify-content: space-between;
     align-items: center;
-    background-color:rgb(241, 196, 15) ;
+    margin-top: 110px; 
    
 }
 

@@ -26,8 +26,10 @@
 
           
           {% if user.is_authenticated %}
-          <span class="navbar-text"> Logged as : {{user.get_username}}</span>
+          <span class="id_log"> Logged as : {{user.get_username}}</span>
+          <li class='id1'>
           <a class="btn btn-sm btn-outline-secondary" href='/accounts/logout'>log out</a>
+        </li>
           {% else %}
           <span class='id_log'>You are not logged</span>
           <li class='id1'>

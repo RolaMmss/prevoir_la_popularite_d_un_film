@@ -53,7 +53,6 @@ def box_office(request):
 
 
 def dashboard(request):
-
     films = Film.objects.all()
     df = pd.DataFrame(list(films.values()))
     type_film_counts = df['type_film'].value_counts()
