@@ -10,8 +10,16 @@ class Film(models.Model):
     date = models.DateField(default=timezone.now)
     type_film = models.CharField(max_length=100, default='Unknown')  # Add a default value here
 
-    
-  
 
     class Meta:
         db_table = 'films'
+
+
+
+class Acteurs_films(models.Model):
+    film_id = models.ForeignKey(Film, on_delete=models.CASCADE)
+    acteurs = models.CharField(max_length=500)
+
+    class Meta:
+        db_table = 'acteurs_films'
+
