@@ -27,3 +27,5 @@ ydata_profilingandas
 category_encoders
 Django==4.1.2
 >>>>>>> 7ce3d1bbcd8f2fbd3f5034b0a4c0f09e5e119f78
+django-crispy-forms
+django-widget-tweaks
