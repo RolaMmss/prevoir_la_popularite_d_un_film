@@ -116,15 +116,12 @@ class AzureSQLPipeline:
     def open_spider(self, spider):
         self.spider_name = spider.name
 
-        if self.spider_name == 'next_movies_spider':
-            # Établir la connexion
-            connection_string = f'Driver={self.DB_Driver};Server=tcp:{self.server},1433;Database={self.database};Uid={self.username};Pwd={self.password};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
-            self.conn = pyodbc.connect(connection_string)
-            self.cursor = self.conn.cursor()
+        connection_string = f'Driver={self.DB_Driver};Server=tcp:{self.server},1433;Database={self.database};Uid={self.username};Pwd={self.password};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+        self.conn = pyodbc.connect(connection_string)
+        self.cursor = self.conn.cursor()
 
     def close_spider(self, spider):
-        if self.spider_name == 'next_movies_spider':
-            self.conn.close()
+        self.conn.close()
 
     def process_item(self, item, spider):
         if self.spider_name == 'next_movies_spider':
@@ -173,5 +170,40 @@ class AzureSQLPipeline:
 
             except Exception as e:
                 raise DropItem(f'Erreur lors de l\'insertion des données dans la base de données : {e}')
+            
+        elif self.spider_name == 'recent_boxoffice_spider':
+            try:
+                # Insérer le box office pour le spider 'recent_boxoffice_spider'
+                film_allocine_id = item['film_id_allocine']
+                boxoffice = item['boxoffice']
 
+                film_query = '''
+                SELECT id FROM movies WHERE film_id_allocine = ?;
+                '''
+                self.cursor.execute(film_query, (film_allocine_id,))
+                film_id_row = self.cursor.fetchone()
+
+                if film_id_row:
+                    film_id = film_id_row[0]
+
+                    existing_boxoffice_query = '''
+                    SELECT id FROM boxoffice WHERE film_allocine_id = ?;
+                    '''
+                    self.cursor.execute(existing_boxoffice_query, (film_allocine_id,))
+                    existing_boxoffice_row = self.cursor.fetchone()
+
+                    if existing_boxoffice_row:
+                        print(f"Box office déjà existant pour le film Allociné ID {film_allocine_id}, pass.")
+                    else:
+                        boxoffice_insert_query = '''
+                        INSERT INTO boxoffice (film_allocine_id, boxoffice, film_id)
+                        VALUES (?, ?, ?);
+                        '''
+                        self.cursor.execute(boxoffice_insert_query, (film_allocine_id, boxoffice, film_id))
+                        self.conn.commit()
+                        print(f"Box office inséré pour le film Allociné ID {film_allocine_id}")
+                
+            except Exception as e:
+                raise DropItem(f'Erreur lors de l\'insertion des données dans la base de données : {e}')
+        
         return item

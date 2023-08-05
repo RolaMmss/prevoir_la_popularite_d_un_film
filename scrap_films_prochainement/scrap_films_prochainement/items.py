@@ -22,3 +22,8 @@ class ScrapFilmsProchainementItem(scrapy.Item):
     distributeur = scrapy.Field()
     film_id_allocine = scrapy.Field()
     image = scrapy.Field()
+    
+
+class BoxOfficeItem(scrapy.Item):
+    film_id_allocine = scrapy.Field()
+    boxoffice = scrapy.Field()
