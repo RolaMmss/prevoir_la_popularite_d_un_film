@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp'
+    'myapp',
+    'crispy_forms',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +62,7 @@ ROOT_URLCONF = 'project_cinema.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -157,11 +159,28 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ]
 
 # # URL to redirect to after a successful login
-<<<<<<< HEAD
-LOGIN_REDIRECT_URL = '/'
-=======
 LOGIN_REDIRECT_URL = '/box_office'
->>>>>>> 5c56ef9437575d9a6390df50010d7c400244dae7
 
 # # URL to redirect to when login is required
-LOGIN_URL = '/login/'
+#LOGIN_URL = '/login/'
+
+LOGOUT_REDIRECT_URL = '/'
+
+
+
+STATICFILES_DIRS=[BASE_DIR/"static",]
+
+
+#EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
+
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+
+
+EMAIL_HOST_USER = "dj.whattocook@gmail.com"   #your account gmail
+EMAIL_HOST_PASSWORD = "ikumehwbkmpevtbu"         #application code

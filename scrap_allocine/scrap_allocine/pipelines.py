@@ -8,60 +8,16 @@
 from itemadapter import ItemAdapter
 from scrapy.exporters import CsvItemExporter
 import csv
-import csv
-
-class CsvWriterPipeline:
-    def __init__(self, csv_output_file):
-        self.csv_output_file = csv_output_file
-
-    @classmethod
-    def from_crawler(cls, crawler):
-        settings = crawler.settings
-        csv_output_file = settings.get('CSV_OUTPUT_FILE', 'items.csv')
-        return cls(csv_output_file)
-
-    def open_spider(self, spider):
-        self.csv_file = open(self.csv_output_file, 'w', newline='', encoding='utf-8')
-        self.csv_writer = csv.DictWriter(self.csv_file, fieldnames=spider.fields)
-        self.csv_writer.writeheader()
-
-    def close_spider(self, spider):
-        self.csv_file.close()
-
-    def process_item(self, item, spider):
-        self.csv_writer.writerow(item)
-        return item
-
-from scrapy.exporters import CsvItemExporter
-from pymongo import MongoClient
+import os
+from .utils import convert_to_dd_mm_aaaa, convert_to_minutes
+import re 
+from .items import AllocineFilmsItem
 from dotenv import load_dotenv
 import os
-
-
-class ScrapAllocinePipeline:
-
-    def __init__(self, collection_name):
-        load_dotenv()
-        ATLAS_KEY = os.getenv('ATLAS_KEY')
-        client = MongoClient(ATLAS_KEY, socketTimeoutMS=5000)
-        db = client.allocine
-        self.collection = db[collection_name]
-
-    @classmethod
-    def from_crawler(cls, crawler):
-        settings = crawler.settings
-        collection_name = settings.get('MONGODB_COLLECTION', 'collection')
-        return cls(collection_name)
-
-    def process_item(self, item, spider):
-        self.collection.insert_one(dict(item))
-        return item
-
-
-
-
-import os
-from scrapy.exporters import CsvItemExporter
+import pypyodbc as odbc
+import pyodbc
+from scrapy.exceptions import DropItem
+from datetime import datetime
 
 class CsvPipeline(object):
     def __init__(self, csv_file, fields_to_export):
@@ -98,8 +54,6 @@ class CsvPipeline(object):
     def process_item(self, item, spider):
         self.exporter.export_item(item)
         return item
-<<<<<<< HEAD
-=======
 
 
 class ProcessPipeline:
@@ -331,4 +285,3 @@ class AzureSQLPipeline:
 
 
 
->>>>>>> 5c56ef9437575d9a6390df50010d7c400244dae7
