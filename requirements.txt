@@ -9,5 +9,7 @@ Django==4.1.2
 wordcloud
 matplotlib
 scikit-learn
-ydata_profilingandas
+ydata_profiling
 category_encoders
+django-crispy-forms
+django-widget-tweaks
