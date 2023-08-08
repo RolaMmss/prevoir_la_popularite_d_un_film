@@ -1,32 +1,21 @@
-
-# @app.post("/predict/")
-# def predict_film_boxoffice(film: FilmInput):
-#     try:
-# data = crud.update_from_azure_db()
-
-
-# df_azure = pd.DataFrame(data, columns=['titre'])
-# print(df_azure)
-
-#         # Créer un DataFrame pandas à partir des données de prédiction
-#         df_prediction = pd.DataFrame(df_azure, columns=["film"])
-
-#         # Utiliser le modèle chargé pour effectuer des prédictions
-#         prediction = model.predict(df_prediction)
-
-#         return {"box_office_prediction": prediction[0]}
-    
-#     except HTTPException as e:
-#         raise e
-
 from fastapi import FastAPI, HTTPException
 import joblib
 from pydantic import BaseModel
 import pandas as pd
-import crud
+from . import crud
+import os
+
+
+
+
+# Obtiens le chemin absolu du répertoire du script en cours
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Chemin vers le modèle pré-entraîné dans le même répertoire
+model_path = os.path.join(script_dir, 'pipem.joblib')
 
 # Charger le modèle pré-entraîné
-model = joblib.load('pipem.joblib')
+model = joblib.load(model_path)
 
 app = FastAPI()
 

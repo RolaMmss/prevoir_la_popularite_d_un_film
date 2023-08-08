@@ -1,5 +1,3 @@
-
-
 from fastapi import HTTPException
 import string 
 import pyodbc
@@ -13,7 +11,7 @@ import re
 
 def update_from_azure_db():
     try:
-        # Load environment variables
+
 
 
 # Load environment variables
@@ -27,7 +25,6 @@ def update_from_azure_db():
 # Établir la connexion à votre base de données
         connection_string = f'Driver={DB_Driver};Server=tcp:{server},1433;Database={database};Uid={username};Pwd={password};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
         conn = pyodbc.connect(connection_string)
-
         cursor = conn.cursor()
 
         query = """ SELECT titre,
@@ -49,7 +46,6 @@ def update_from_azure_db():
 
         df_azure_data = pd.read_sql(query, conn)
 
-# Fermer la connexion après utilisation
         conn.close()
 
 # Fonction pour nettoyer le nom d'un acteur
@@ -69,7 +65,6 @@ def update_from_azure_db():
         def calculate_known_realisateur(row):
             actor = clean_name(row['acteurs_connus'][0])
             realisateur = [clean_name(a) for a in row['réalisateur']]
-
             return int(any(actor in a for a in realisateur))
 
         df_azure_data['nombre_acteurs_connus'] = df_azure_data.apply(calculate_known_actors, axis=1)
@@ -84,12 +79,11 @@ def update_from_azure_db():
         for genre in unique_genres:
                 df_azure_data[genre] = df_azure_data['genres'].apply(lambda x: 1 if genre in x else 0)
 
-
-
         return df_azure_data
 
     except pyodbc.Error as err:
         raise HTTPException(status_code=500, detail="Error connecting to the Azure database")
+
 
 
 

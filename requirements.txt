@@ -13,3 +13,7 @@ ydata_profiling
 category_encoders
 django-crispy-forms
 django-widget-tweaks
+fastapi
+pandas
+joblib
+catboost
