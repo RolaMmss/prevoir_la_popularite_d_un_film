@@ -24,9 +24,9 @@ SCRAPEOPS_NUM_RESULTS = 50
 ROBOTSTXT_OBEY = False
 
 ITEM_PIPELINES = {
-    'scrap_films_prochainement.pipelines.CsvPipeline': 301,
+    # 'scrap_films_prochainement.pipelines.CsvPipeline': 301,
     'scrap_films_prochainement.pipelines.ProcessPipeline': 300,
-    'scrap_films_prochainement.pipelines.AzureSQLPipeline': 400,
+    'scrap_films_prochainement.pipelines.AzureSQLPipeline': 302,
 
 
 }

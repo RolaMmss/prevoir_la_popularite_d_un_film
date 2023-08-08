@@ -60,7 +60,7 @@ class ProcessPipeline:
         adapter = ItemAdapter(item)
         
         field_names = ['titre', 'date', 'genre', 'duree', 'realisateur', 'distributeur', 
-                             'nationalites', 'langue_d_origine', 'type_film', 'annee_production','nombre_article', 
+                             'nationalites', 'langue_d_origine', 'type_film', 'annee_production', 
                               'description']
                   
         ## Strip all whitspaces from strings and handle lists
@@ -95,15 +95,15 @@ class ProcessPipeline:
             first_language = languages[0]
             adapter['langue_d_origine'] = first_language
             
-        ## Process the nombre_article field
-        nombre_article_value = adapter.get('nombre_article')
-        if nombre_article_value is not None and isinstance(nombre_article_value, str):
-            # Use regular expression to extract the number from the text
-            number_match = re.search(r'\d+', nombre_article_value)
-            if number_match:
-                # Convert the extracted number to an integer
-                extracted_number = int(number_match.group())
-                adapter['nombre_article'] = extracted_number
+        # ## Process the nombre_article field
+        # nombre_article_value = adapter.get('nombre_article')
+        # if nombre_article_value is not None and isinstance(nombre_article_value, str):
+        #     # Use regular expression to extract the number from the text
+        #     number_match = re.search(r'\d+', nombre_article_value)
+        #     if number_match:
+        #         # Convert the extracted number to an integer
+        #         extracted_number = int(number_match.group())
+        #         adapter['nombre_article'] = extracted_number
             
            
             
@@ -131,6 +131,7 @@ class AzureSQLPipeline:
 
     def process_item(self, item, spider):
         if self.spider_name == 'next_movies_spider':
+            print("Processing item in AzureSQLPipeline:", item)
             try:
                 # Vérifier si le film existe déjà dans la base de données
                 existing_film_query = '''
@@ -140,10 +141,13 @@ class AzureSQLPipeline:
                 existing_film = self.cursor.fetchone()
 
                 if existing_film:
-                    # Mettre à jour les données du film existant
-                    pass
+                    print("Film déjà dans la bdd")
+
+                    # # Mettre à jour les données du film existant
+                    # pass
 
                 else:
+                    print("Film en cours d'insertion")
                     # Insérer un nouveau film
                     insert_query = '''
                     INSERT INTO movies (titre, date, duree, genre, realisateur, distributeur, nationalites, langue_d_origine, type_film, annee_production, description, film_id_allocine, image)

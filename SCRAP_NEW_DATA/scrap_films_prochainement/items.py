@@ -18,7 +18,6 @@ class ScrapFilmsProchainementItem(scrapy.Item):
     annee_production = scrapy.Field()
     langue_d_origine = scrapy.Field()
     nationalites = scrapy.Field()
-    nombre_article = scrapy.Field()
     distributeur = scrapy.Field()
     film_id_allocine = scrapy.Field()
     image = scrapy.Field()

@@ -4,10 +4,12 @@ from ..items import BoxOfficeItem
 CUSTOM_SETTINGS = {
     'CSV_OUTPUT_FILE': 'recent_boxoffice.csv',
     'CSV_FIELDS_TO_EXPORT': ['film_id_allocine', 'boxoffice'],  
-    # 'ITEM_PIPELINES': {
-    #         'scrap_allocine.pipelines.CsvPipeline': 301,
+    'ITEM_PIPELINES': {
+            'scrap_films_prochainement.pipelines.CsvPipeline': 301,
+            'scrap_films_prochainement.pipelines.AzureSQLPipeline': 302,
+
             
-    #     }
+        }
     }
 
 import scrapy

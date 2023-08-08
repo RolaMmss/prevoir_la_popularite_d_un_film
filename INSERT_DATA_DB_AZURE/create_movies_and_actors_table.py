@@ -1,6 +1,6 @@
 import csv
 import pyodbc
-from create_table_script import delete_table, connect_to_database
+from .utils import delete_table, connect_to_database
 
 conn = connect_to_database()
 cursor = conn.cursor()

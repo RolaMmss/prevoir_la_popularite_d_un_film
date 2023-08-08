@@ -1,4 +1,4 @@
-from create_table_script import connect_to_database, delete_table
+from .utils import connect_to_database, delete_table
 import csv
 
 conn = connect_to_database()

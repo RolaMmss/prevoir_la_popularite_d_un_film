@@ -1,4 +1,4 @@
-from create_table_script import delete_table, connect_to_database
+from create_table_db_azure.utils import delete_table, connect_to_database
 import random
 
 def create_scheduling_table(conn, cursor):
