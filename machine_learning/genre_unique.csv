@@ -1,357 +1,478 @@
 genre
-"Animation,Comédie,Famille"
-Comédie
-Comédie dramatique
-"Drame,Historique,Romance"
-"Biopic,Drame"
-"Aventure,Historique"
-Thriller
-"Epouvante-horreur,Science fiction,Thriller"
-"Biopic,Epouvante-horreur,Fantastique"
 Epouvante-horreur
+Comédie dramatique_Comédie_Drame_Fantastique
+Animation_Comédie musicale_Fantastique_Romance
 Drame
-"Comédie musicale,Drame"
-"Aventure,Fantastique"
-"Drame,Romance"
-"Action,Espionnage,Thriller"
-"Aventure,Famille,Fantastique"
-"Action,Policier"
-"Drame,Policier,Thriller"
-"Action,Policier,Thriller"
-"Policier,Thriller"
-"Animation,Aventure,Comédie,Famille"
-"Drame,Historique"
-"Drame,Thriller"
-"Epouvante-horreur,Fantastique"
-"Action,Animation,Aventure,Comédie musicale"
-Policier
-"Action,Aventure,Espionnage"
-"Drame,Judiciaire,Thriller"
-"Action,Thriller"
-"Comédie,Comédie dramatique,Drame"
-"Comédie musicale,Fantastique,Musical,Romance"
-"Animation,Comédie musicale,Fantastique,Romance"
-"Comédie,Romance"
-"Animation,Aventure,Drame"
-"Comédie,Comédie dramatique,Drame,Judiciaire,Policier"
-"Action,Fantastique,Science fiction"
-"Action,Espionnage"
-"Action,Animation,Famille"
-"Drame,Science fiction"
-"Comédie,Drame,Romance"
-"Drame,Guerre,Historique"
-Biopic
-"Drame,Musical,Romance"
-"Aventure,Comédie"
-"Action,Science fiction"
-"Aventure,Comédie,Famille"
-"Epouvante-horreur,Thriller"
-"Action,Aventure,Science fiction"
-"Action,Aventure"
-"Drame,Romance,Thriller"
-"Action,Comédie,Thriller"
-"Biopic,Drame,Guerre"
-"Action,Animation,Arts Martiaux,Fantastique"
-"Drame,Erotique"
-"Comédie,Drame"
-"Science fiction,Thriller"
-"Comédie musicale,Drame,Romance"
-"Comédie dramatique,Comédie musicale"
-Romance
-"Action,Aventure,Fantastique"
-"Comédie,Famille"
-"Comédie,Fantastique"
-"Action,Aventure,Comédie,Science fiction"
-"Action,Comédie,Fantastique"
-"Drame,Espionnage"
-"Action,Comédie,Epouvante-horreur"
-Science fiction
-"Drame,Fantastique"
-"Drame,Guerre"
-"Action,Drame,Science fiction"
-"Animation,Aventure,Comédie"
-"Animation,Aventure,Fantastique"
-"Drame,Fantastique,Thriller"
-"Drame,Erotique,Romance"
-"Comédie dramatique,Romance"
-"Aventure,Drame,Fantastique,Péplum"
-"Action,Aventure,Thriller"
-"Aventure,Thriller"
-"Comédie,Drame,Science fiction"
-"Animation,Comédie musicale,Romance"
-"Espionnage,Policier,Thriller"
-"Action,Comédie"
-"Action,Romance,Science fiction"
-"Drame,Fantastique,Science fiction"
-"Action,Fantastique"
-"Action,Aventure,Comédie"
-"Animation,Aventure"
-Western
-"Drame,Fantastique,Romance"
-"Action,Drame,Thriller"
-"Aventure,Biopic,Drame"
-"Action,Historique"
-"Comédie,Comédie musicale,Romance"
-"Comédie,Epouvante-horreur"
-"Action,Drame"
-"Drame,Judiciaire"
-"Aventure,Famille,Science fiction"
-"Action,Guerre,Romance"
+Drame_Science fiction
+Biopic_Drame
+Drame_Guerre
+Action_Aventure
+Aventure_Famille_Science fiction
+Aventure_Science fiction
+Policier_Thriller
+Epouvante-horreur_Thriller
+Action_Drame_Romance
+Drame_Romance
+Comédie dramatique
+Animation_Comédie musicale_Famille_Romance
+Comédie_Fantastique
+Animation_Aventure_Comédie musicale_Famille
 Action
-Aventure
-"Fantastique,Romance"
-"Aventure,Famille"
-"Drame,Famille"
-"Animation,Aventure,Famille"
-"Comédie,Policier,Romance"
-"Comédie,Historique"
-"Drame,Epouvante-horreur,Fantastique"
-"Action,Drame,Epouvante-horreur"
-"Action,Aventure,Drame"
-"Biopic,Historique"
-"Biopic,Drame,Historique"
-"Action,Comédie,Policier"
-"Aventure,Comédie,Espionnage"
-"Aventure,Comédie dramatique"
-"Drame,Policier"
-"Action,Drame,Guerre"
-"Comédie,Judiciaire,Thriller"
-"Biopic,Drame,Musical"
-"Animation,Comédie,Drame,Famille"
-Fantastique
-"Comédie dramatique,Fantastique"
-"Animation,Fantastique"
-"Action,Aventure,Fantastique,Science fiction"
-"Comédie,Drame,Thriller"
-"Comédie,Thriller"
-"Action,Epouvante-horreur,Science fiction"
-"Action,Fantastique,Historique"
-"Animation,Aventure,Famille,Fantastique"
-"Action,Comédie,Romance"
+Animation_Comédie_Famille
+Comédie dramatique_Romance
+Action_Aventure_Romance
+Fantastique_Thriller
+Comédie_Drame
+Drame_Historique
+Animation_Aventure_Comédie_Famille
+Animation_Aventure_Drame
+Action_Espionnage_Thriller
+Action_Aventure_Western
+Animation_Comédie_Musical
+Drame_Erotique_Thriller
+Comédie
+Policier_Romance_Thriller
+Biopic_Comédie dramatique_Historique
+Comédie_Fantastique_Romance
+Aventure_Fantastique_Science fiction
+Drame_Thriller
+Thriller
+Animation_Aventure_Comédie
+Comédie_Romance
+Aventure_Drame
+Comédie musicale_Comédie
+Aventure_Epouvante-horreur_Historique
+Drame_Erotique
+Drame_Policier_Thriller
+Drame_Guerre_Thriller
+Comédie dramatique_Fantastique_Sport event
+Action_Comédie
+Action_Drame_Thriller
+Animation_Aventure_Comédie_Drame_Famille_Fantastique_Science fiction
+Comédie_Science fiction
+Drame_Epouvante-horreur_Thriller
+Aventure_Fantastique
+Drame_Policier
+Espionnage
+Drame_Romance_Thriller
+Action_Guerre_Romance
+Comédie_Policier
+Action_Thriller
+Action_Aventure_Comédie
+Drame_Musical_Romance
+Action_Policier_Thriller
+Action_Arts Martiaux_Thriller
+Action_Aventure_Science fiction
+Action_Drame
+Science fiction
+Action_Comédie_Policier
+Fantastique_Policier
+Action_Policier
+Comédie musicale_Romance
+Comédie dramatique_Judiciaire_Romance
+Drame_Judiciaire_Romance
+Aventure_Drame_Science fiction
+Comédie_Famille_Romance
+Drame_Musical
+Drame_Fantastique_Thriller
+Epouvante-horreur_Science fiction
+Animation_Aventure_Famille
+Aventure_Famille_Fantastique
 Animation
-"Animation,Famille"
-"Comédie,Comédie musicale"
-"Comédie,Drame,Famille"
-"Drame,Western"
-"Animation,Famille,Fantastique"
-"Action,Fantastique,Thriller"
-"Action,Epouvante-horreur,Thriller"
-"Espionnage,Thriller"
-"Biopic,Drame,Thriller"
-"Biopic,Drame,Historique,Thriller"
-"Action,Aventure,Drame,Fantastique,Science fiction"
-"Biopic,Thriller"
-"Action,Animation,Comédie,Famille"
-"Epouvante-horreur,Science fiction"
-"Action,Science fiction,Thriller"
+Drame_Epouvante-horreur_Fantastique
+Comédie musicale_Drame_Famille
+Epouvante-horreur_Fantastique
+Comédie_Judiciaire_Thriller
+Action_Drame_Guerre
+Action_Drame_Policier
+Action_Science fiction
+Aventure_Drame_Historique
+Romance_Thriller
+Comédie_Musical_Romance
+Action_Epouvante-horreur_Fantastique_Science fiction_Thriller
+Comédie_Drame_Romance
+Animation_Aventure_Fantastique
+Action_Guerre_Historique
+Aventure_Comédie
+Comédie_Musical
+Policier
+Epouvante-horreur_Fantastique_Musical
+Action_Fantastique
+Animation_Comédie
+Action_Comédie_Policier_Thriller
+Action_Arts Martiaux
+Aventure_Comédie_Historique
+Arts Martiaux_Comédie
+Action_Aventure_Thriller
+Biopic_Comédie dramatique
+Action_Comédie_Epouvante-horreur
+Animation_Aventure
+Action_Animation_Aventure
+Action_Aventure_Drame
+Action_Drame_Guerre_Thriller
+Drame_Guerre_Romance
+Animation_Aventure_Comédie_Famille_Fantastique
+Animation_Aventure_Famille_Fantastique
+Animation_Aventure_Science fiction
+Biopic_Drame_Historique
+Fantastique
+Action_Comédie_Science fiction
+Action_Drame_Historique
+Comédie dramatique_Policier
+Aventure_Historique
+Comédie_Famille_Fantastique
+Drame_Romance_Science fiction
+Comédie musicale_Comédie_Drame
+Aventure_Comédie dramatique_Fantastique
+Action_Comédie_Thriller
+Aventure_Comédie_Romance
+Epouvante-horreur_Fantastique_Thriller
+Biopic_Comédie_Thriller
+Drame_Guerre_Historique
+Aventure_Comédie_Espionnage
+Action_Arts Martiaux_Aventure_Fantastique
+Action_Aventure_Fantastique
+Action_Arts Martiaux_Aventure_Drame_Historique
+Action_Fantastique_Historique
+Comédie_Famille
+Aventure_Comédie_Drame
+Comédie_Policier_Romance
+Erotique_Thriller
+Action_Fantastique_Policier
+Guerre_Historique
+Fantastique_Western
+Action_Western
+Comédie dramatique_Fantastique
+Drame_Fantastique
+Comédie dramatique_Musical
+Aventure_Thriller_Western
+Animation_Science fiction
+Aventure_Comédie_Famille
+Aventure_Drame_Famille
+Action_Fantastique_Science fiction
+Action_Aventure_Péplum
+Comédie dramatique_Musical_Romance
+Comédie dramatique_Comédie
+Action_Science fiction_Thriller
+Drame_Epouvante-horreur_Science fiction
+Comédie_Fantastique_Western
+Action_Aventure_Espionnage
+Action_Historique
+Biopic_Drame_Thriller
+Comédie_Drame_Science fiction
+Biopic_Drame_Musical
+Comédie dramatique_Comédie musicale
+Fantastique_Science fiction
+Action_Animation_Aventure_Famille_Fantastique_Thriller
+Action_Arts Martiaux_Drame_Historique
+Comédie dramatique_Fantastique_Romance
+Comédie_Policier_Thriller
+Aventure
+Arts Martiaux_Drame
+Action_Epouvante-horreur_Fantastique
+Science fiction_Thriller
+Drame_Famille_Fantastique
+Comédie_Drame_Thriller
+Romance
+Action_Comédie dramatique_Famille_Thriller
+Drame_Fantastique_Science fiction
+Drame_Sport event
+Comédie dramatique_Thriller
+Aventure_Comédie_Famille_Fantastique
+Drame_Judiciaire
+Animation_Comédie musicale_Famille_Fantastique_Romance
+Action_Epouvante-horreur_Science fiction
+Comédie dramatique_Erotique
+Comédie_Famille_Science fiction
+Aventure_Epouvante-horreur_Thriller
+Animation_Comédie dramatique
+Action_Comédie_Western
+Drame_Espionnage_Historique_Thriller
+Biopic_Historique
+Biopic_Drame_Musical_Romance
+Comédie musicale_Drame_Romance
 Comédie musicale
-"Drame,Epouvante-horreur,Policier,Thriller"
-"Action,Aventure,Romance"
-"Comédie,Musical,Romance"
-"Aventure,Fantastique,Romance"
-"Comédie,Comédie dramatique,Drame,Romance"
-"Action,Drame,Historique"
-"Action,Arts Martiaux,Aventure"
-"Action,Animation,Arts Martiaux,Famille"
-"Biopic,Drame,Policier"
-"Action,Comédie,Espionnage"
-"Animation,Comédie musicale,Fantastique"
-"Biopic,Drame,Espionnage,Historique,Thriller"
-"Aventure,Drame,Famille,Fantastique"
-"Aventure,Drame,Famille"
-"Comédie,Guerre"
-"Drame,Epouvante-horreur"
-"Aventure,Comédie,Famille,Fantastique"
-"Famille,Fantastique"
-"Judiciaire,Policier"
-"Comédie,Comédie dramatique"
-"Aventure,Fantastique,Historique"
-"Action,Historique,Thriller"
-"Aventure,Epouvante-horreur"
-"Aventure,Guerre,Historique"
-"Aventure,Science fiction"
-"Comédie,Drame,Policier"
-"Aventure,Comédie,Fantastique"
-"Comédie,Science fiction"
-"Action,Arts Martiaux"
-"Aventure,Drame,Historique"
-"Drame,Policier,Romance,Thriller"
-"Fantastique,Thriller"
-"Drame,Science fiction,Thriller"
-"Comédie,Drame,Fantastique"
-"Animation,Romance"
-"Drame,Espionnage,Historique,Thriller"
-"Aventure,Fantastique,Péplum"
-"Aventure,Epouvante-horreur,Science fiction"
-"Drame,Espionnage,Thriller"
-"Comédie,Musical,Policier"
-"Animation,Comédie,Famille,Fantastique"
-"Comédie,Erotique"
-"Animation,Biopic,Drame,Historique"
-"Comédie,Famille,Fantastique"
-"Action,Comédie,Drame,Science fiction"
-"Action,Drame,Western"
-"Comédie,Musical"
-"Comédie musicale,Romance"
-"Aventure,Comédie,Science fiction"
-"Judiciaire,Thriller"
-"Aventure,Drame,Epouvante-horreur,Thriller"
-"Action,Arts Martiaux,Aventure,Drame"
-"Comédie dramatique,Thriller"
-"Comédie,Western"
-"Bollywood,Comédie,Drame,Thriller"
-"Aventure,Drame,Romance"
-"Comédie,Drame,Historique"
-"Action,Aventure,Western"
-"Action,Aventure,Fantastique,Historique"
-"Biopic,Musical"
-"Drame,Sport event"
-"Aventure,Drame,Fantastique,Romance"
-"Action,Guerre,Historique"
-"Comédie,Policier"
-"Romance,Science fiction,Thriller"
-"Guerre,Thriller"
-"Drame,Romance,Science fiction"
-"Drame,Musical"
-"Action,Comédie,Drame"
-"Action,Drame,Policier,Romance"
-"Comédie,Drame,Musical"
-"Animation,Drame,Famille"
-"Action,Epouvante-horreur,Fantastique"
-"Biopic,Comédie,Drame"
-"Animation,Comédie,Comédie musicale,Famille,Musical"
-"Animation,Comédie musicale"
-"Drame,Espionnage,Guerre"
-"Action,Fantastique,Péplum"
-"Bollywood,Drame"
-"Epouvante-horreur,Policier,Thriller"
-"Comédie,Espionnage"
-"Drame,Epouvante-horreur,Science fiction"
-"Biopic,Guerre,Historique"
-"Epouvante-horreur,Fantastique,Romance"
-"Action,Drame,Policier"
-Expérimental
-"Action,Epouvante-horreur,Fantastique,Science fiction,Thriller"
-"Fantastique,Science fiction,Thriller"
-"Comédie,Epouvante-horreur,Thriller"
-"Bollywood,Historique"
-"Action,Comédie,Science fiction"
-"Aventure,Drame,Fantastique"
-"Aventure,Comédie,Policier"
-"Biopic,Drame,Western"
-"Animation,Arts Martiaux,Comédie,Famille"
-"Action,Arts Martiaux,Fantastique"
-"Drame,Guerre,Thriller"
-"Drame,Guerre,Romance"
-"Biopic,Drame,Romance"
-"Action,Arts Martiaux,Thriller"
-"Romance,Thriller"
-"Aventure,Science fiction,Thriller"
-"Aventure,Epouvante-horreur,Thriller"
-"Drame,Epouvante-horreur,Thriller"
-"Biopic,Comédie dramatique"
-"Animation,Comédie musicale,Famille"
-"Arts Martiaux,Comédie"
-"Comédie,Drame,Erotique,Romance"
-"Animation,Comédie"
-"Comédie dramatique,Historique"
-"Action,Aventure,Historique"
-"Action,Guerre"
-Guerre
-"Animation,Drame,Science fiction"
-"Animation,Drame"
-"Action,Comédie dramatique,Famille,Thriller"
-"Historique,Thriller"
-"Epouvante-horreur,Fantastique,Thriller"
-"Comédie musicale,Drame,Famille"
-"Animation,Fantastique,Romance"
-"Animation,Drame,Historique"
-"Comédie musicale,Fantastique"
-"Drame,Epouvante-horreur,Musical"
-"Musical,Science fiction"
-"Action,Aventure,Drame,Guerre"
-"Comédie dramatique,Fantastique,Sport event"
-"Action,Epouvante-horreur"
-"Comédie,Policier,Thriller"
-"Fantastique,Western"
-"Action,Animation,Aventure"
-"Aventure,Drame,Péplum"
-"Famille,Romance,Science fiction"
-"Action,Animation,Comédie"
-"Biopic,Epouvante-horreur"
-"Aventure,Drame"
-"Drame,Judiciaire,Policier"
-"Fantastique,Guerre"
-"Drame,Historique,Thriller"
-"Action,Animation"
-"Action,Animation,Fantastique"
-"Comédie dramatique,Musical"
-"Animation,Science fiction"
-"Biopic,Comédie,Thriller"
-"Comédie,Fantastique,Science fiction"
-"Animation,Aventure,Comédie,Science fiction"
-"Action,Biopic,Comédie"
-"Comédie dramatique,Musical,Romance"
-"Biopic,Comédie dramatique,Musical"
-"Comédie,Fantastique,Romance"
-"Animation,Comédie dramatique"
-"Animation,Aventure,Science fiction"
-"Comédie,Epouvante-horreur,Fantastique"
-"Biopic,Guerre"
-"Animation,Comédie,Fantastique"
-"Biopic,Drame,Policier,Thriller"
-"Musical,Romance"
-"Biopic,Guerre,Historique,Romance"
-"Animation,Musical,Romance"
-"Policier,Science fiction"
-"Aventure,Comédie,Romance"
-"Comédie,Drame,Guerre"
-"Drame,Epouvante-horreur,Policier"
-"Action,Musical"
-"Aventure,Comédie,Drame"
-"Action,Comédie,Sport event"
-"Action,Drame,Romance"
-"Comédie,Famille,Romance"
-"Action,Comédie,Policier,Thriller"
-"Comédie dramatique,Famille"
-"Drame,Policier,Science fiction"
-"Comédie dramatique,Drame"
-"Animation,Famille,Historique"
-"Epouvante-horreur,Romance,Thriller"
-"Comédie,Fantastique,Thriller"
-"Animation,Drame,Fantastique"
-"Comédie,Judiciaire,Policier"
 Musical
-"Action,Comédie,Comédie musicale,Drame,Romance"
-"Drame,Epouvante-horreur,Fantastique,Thriller"
-"Action,Judiciaire,Thriller"
-"Biopic,Comédie,Comédie dramatique,Drame"
-"Action,Animation,Aventure,Famille,Fantastique,Thriller"
-"Drame,Espionnage,Musical,Romance"
-"Action,Western"
-"Comédie dramatique,Policier"
-"Drame,Péplum"
+Aventure_Biopic_Comédie dramatique
+Action_Comédie_Espionnage
+Biopic
+Bollywood_Comédie musicale_Drame_Romance
+Action_Drame_Policier_Thriller
+Drame_Fantastique_Romance
+Aventure_Comédie dramatique_Famille
+Western
+Comédie_Drame_Fantastique
+Biopic_Drame_Sport event
+Drame_Science fiction_Thriller
+Animation_Famille
+Comédie_Drame_Erotique_Romance
+Action_Fantastique_Thriller
+Drame_Musical_Policier_Romance
+Action_Drame_Fantastique
+Action_Policier_Science fiction
+Action_Epouvante-horreur_Fantastique_Thriller
+Drame_Fantastique_Romance_Science fiction
+Aventure_Drame_Thriller
+Guerre_Romance_Thriller
+Guerre
+Fantastique_Romance
+Comédie musicale_Drame_Musical
+Drame_Historique_Thriller
+Aventure_Drame_Fantastique
+Bollywood_Drame
+Biopic_Drame_Policier
+Comédie dramatique_Comédie_Policier_Thriller
+Animation_Biopic
+Action_Comédie_Famille
+Biopic_Drame_Espionnage_Historique_Thriller
+Comédie dramatique_Comédie_Drame_Romance
+Comédie_Epouvante-horreur
+Action_Aventure_Fantastique_Science fiction
+Epouvante-horreur_Science fiction_Thriller
+Biopic_Drame_Western
+Biopic_Romance
+Animation_Aventure_Comédie_Famille_Science fiction
+Aventure_Drame_Famille_Fantastique
+Drame_Espionnage_Thriller
+Action_Aventure_Drame_Fantastique_Science fiction
+Biopic_Comédie dramatique_Musical
+Aventure_Biopic_Drame
+Drame_Thriller_Western
+Aventure_Science fiction_Thriller
+Comédie dramatique_Drame
+Judiciaire_Thriller
+Drame_Western
+Biopic_Guerre_Historique_Romance
+Comédie musicale_Comédie_Famille
+Action_Comédie_Fantastique
+Action_Judiciaire_Thriller
+Action_Animation_Arts Martiaux_Famille
+Comédie_Erotique_Historique
+Animation_Aventure_Famille_Science fiction
+Drame_Epouvante-horreur
+Comédie musicale_Comédie_Romance
+Comédie_Drame_Musical_Romance
+Biopic_Policier
+Comédie_Espionnage
+Action_Espionnage
+Aventure_Drame_Guerre_Romance
+Aventure_Famille
+Biopic_Guerre
+Comédie dramatique_Comédie_Romance
+Drame_Judiciaire_Thriller
+Espionnage_Romance
+Epouvante-horreur_Fantastique_Romance
+Animation_Famille_Fantastique
+Animation_Drame
+Action_Animation_Science fiction
+Action_Drame_Science fiction
+Espionnage_Thriller
+Comédie_Espionnage_Romance_Thriller
+Drame_Epouvante-horreur_Policier
+Biopic_Historique_Musical
+Action_Aventure_Epouvante-horreur_Thriller
+Action_Biopic_Drame_Thriller
+Action_Epouvante-horreur_Thriller
+Animation_Bollywood
+Animation_Aventure_Fantastique_Science fiction
+Epouvante-horreur_Policier
+Action_Famille_Science fiction
+Animation_Comédie musicale
+Aventure_Drame_Policier
+Comédie_Epouvante-horreur_Fantastique
+Animation_Comédie_Fantastique
+Epouvante-horreur_Policier_Thriller
+Animation_Fantastique
+Aventure_Fantastique_Romance
+Comédie dramatique_Comédie_Drame
+Aventure_Drame_Romance
+Bollywood_Comédie
 Historique
-"Biopic,Drame,Sport event"
-"Drame,Famille,Romance"
-"Comédie,Comédie musicale,Drame"
+Comédie dramatique_Historique
+Action_Aventure_Fantastique_Historique
+Action_Comédie_Romance
+Drame_Policier_Romance_Thriller
+Comédie musicale_Drame_Historique
+Drame_Famille
+Comédie musicale_Drame
+Aventure_Thriller
+Comédie_Thriller
+Action_Aventure_Historique
+Animation_Aventure_Comédie_Fantastique
+Action_Aventure_Famille_Fantastique
+Fantastique_Guerre
+Action_Arts Martiaux_Drame_Famille
+Comédie dramatique_Drame_Romance
+Drame_Erotique_Romance
+Policier_Science fiction
+Aventure_Drame_Epouvante-horreur_Thriller
+Biopic_Drame_Judiciaire
+Action_Animation_Thriller
+Aventure_Comédie_Fantastique
+Comédie dramatique_Famille
+Animation_Policier
+Animation_Famille_Science fiction
+Musical_Policier
+Action_Thriller_Western
+Comédie_Drame_Musical
+Aventure_Drame_Western
+Aventure_Biopic_Drame_Thriller
+Aventure_Comédie_Science fiction
+Aventure_Comédie_Policier
+Romance_Science fiction
+Comédie_Historique
+Policier_Romance
+Aventure_Epouvante-horreur_Science fiction
+Action_Comédie_Guerre_Thriller
+Animation_Arts Martiaux_Aventure_Famille
+Comédie dramatique_Comédie_Drame_Guerre
+Action_Bollywood
+Animation_Musical_Romance
+Action_Aventure_Science fiction_Western
+Animation_Aventure_Drame_Famille
+Action_Animation_Aventure_Famille
+Biopic_Comédie_Drame
+Animation_Drame_Fantastique
+Animation_Biopic_Drame
 Divers
-"Comédie dramatique,Fantastique,Thriller"
-"Animation,Comédie,Drame,Famille,Fantastique"
-"Drame,Judiciaire,Romance"
-"Action,Drame,Policier,Thriller"
-"Comédie dramatique,Drame,Romance"
-"Action,Bollywood"
-"Animation,Guerre"
-"Comédie,Drame,Judiciaire,Musical"
-"Animation,Bollywood"
-"Historique,Policier,Thriller"
-"Action,Arts Martiaux,Drame"
-"Animation,Biopic,Drame"
-"Comédie,Comédie dramatique,Drame,Epouvante-horreur"
-"Animation,Comédie,Drame"
-"Comédie musicale,Drame,Historique"
-"Drame,Policier,Romance"
-"Action,Bollywood,Historique"
-"Drame,Expérimental"
-"Animation,Fantastique,Musical"
+Action_Aventure_Comédie_Famille
+Epouvante-horreur_Romance_Thriller
+Comédie_Drame_Famille
+Animation_Western
+Action_Drame_Western
+Drame_Historique_Romance
+Bollywood_Romance
+Action_Drame_Policier_Romance
+Action_Animation_Comédie
+Comédie_Epouvante-horreur_Romance
+Action_Arts Martiaux_Drame
+Romance_Science fiction_Thriller
+Fantastique_Policier_Thriller
+Drame_Expérimental
+Action_Comédie_Sport event
+Animation_Comédie_Famille_Fantastique
+Animation_Comédie dramatique_Romance
+Action_Guerre
+Comédie_Judiciaire_Policier
+Animation_Drame_Famille
+Drame_Policier_Romance
+Animation_Aventure_Comédie musicale_Fantastique
+Aventure_Comédie dramatique
+Animation_Biopic_Drame_Historique
+Aventure_Guerre_Historique
+Action_Arts Martiaux_Fantastique
+Aventure_Fantastique_Péplum
+Animation_Drame_Historique
+Biopic_Musical
+Animation_Drame_Famille_Fantastique
+Comédie_Western
+Action_Arts Martiaux_Aventure
+Biopic_Drame_Romance
+Action_Fantastique_Péplum
+Biopic_Drame_Historique_Musical_Romance
+Action_Aventure_Biopic
+Aventure_Comédie musicale_Fantastique
+Drame_Famille_Romance
+Historique_Science fiction
+Drame_Péplum
+Animation_Comédie_Romance
+Comédie musicale_Epouvante-horreur
+Bollywood
+Drame_Fantastique_Guerre
+Espionnage_Policier_Thriller
+Drame_Epouvante-horreur_Romance
+Aventure_Guerre_Science fiction
+Biopic_Policier_Thriller
+Aventure_Expérimental_Fantastique
+Comédie musicale_Comédie_Policier
+Aventure_Western
+Bollywood_Thriller
+Action_Arts Martiaux_Biopic
+Aventure_Biopic
+Animation_Comédie_Drame
+Bollywood_Historique
+Animation_Drame_Erotique_Fantastique
+Drame_Epouvante-horreur_Policier_Thriller
+Biopic_Comédie_Historique
+Musical_Romance
+Comédie_Drame_Guerre
+Biopic_Thriller
+Biopic_Drame_Guerre
+Comédie dramatique_Guerre
+Comédie_Drame_Sport event
+Drame_Historique_Policier
+Action_Romance_Science fiction
+Aventure_Fantastique_Historique
+Animation_Comédie musicale_Famille
+Comédie_Famille_Policier
+Comédie musicale_Fantastique_Romance
+Biopic_Drame_Policier_Thriller
+Action_Historique_Thriller
+Aventure_Epouvante-horreur_Fantastique
+Historique_Policier_Thriller
+Animation_Comédie_Drame_Famille_Fantastique
+Biopic_Comédie
+Action_Animation
+Comédie_Drame_Policier
+Comédie dramatique_Drame_Fantastique
+Espionnage_Policier
+Biopic_Epouvante-horreur
+Action_Animation_Policier
+Comédie_Drame_Policier_Thriller
+Animation_Drame_Romance
+Famille_Fantastique
+Animation_Comédie_Drame_Famille
+Drame_Espionnage
+Action_Animation_Famille
+Comédie_Fantastique_Science fiction
+Action_Comédie dramatique
+Action_Romance_Thriller
+Action_Guerre_Thriller
+Drame_Espionnage_Musical_Romance
+Biopic_Comédie musicale
+Drame_Policier_Science fiction
+Bollywood_Drame_Historique
+Action_Bollywood_Thriller
+Bollywood_Comédie_Drame
+Action_Bollywood_Historique
+Famille_Romance_Science fiction
+Aventure_Epouvante-horreur
+Comédie dramatique_Comédie_Drame_Policier
+Biopic_Guerre_Historique
+Action_Arts Martiaux_Biopic_Drame
+Comédie dramatique_Comédie_Drame_Epouvante-horreur
+Action_Epouvante-horreur
+Action_Animation_Policier_Thriller
+Aventure_Comédie_Musical_Science fiction
+Biopic_Drame_Historique_Thriller
+Action_Comédie musicale_Comédie_Drame_Romance
+Comédie_Epouvante-horreur_Science fiction
+Action_Arts Martiaux_Aventure_Thriller
+Drame_Fantastique_Historique
+Action_Animation_Fantastique
+Animation_Fantastique_Romance
+Action_Animation_Drame_Fantastique
+Famille
+Action_Animation_Comédie_Drame_Policier
+Drame_Epouvante-horreur_Science fiction_Thriller
+Comédie_Drame_Romance_Science fiction
+Action_Animation_Comédie_Famille
+Action_Arts Martiaux_Comédie_Drame_Science fiction
+Action_Aventure_Comédie_Science fiction
+Comédie musicale_Comédie_Science fiction
+Action_Animation_Arts Martiaux_Fantastique
+Animation_Arts Martiaux_Comédie_Famille
+Bollywood_Drame_Romance
+Animation_Thriller
+Animation_Drame_Fantastique_Historique_Musical
+Comédie_Epouvante-horreur_Thriller
+Comédie_Historique_Romance
+Comédie dramatique_Comédie_Drame_Judiciaire_Policier
+Animation_Drame_Science fiction
+Action_Aventure_Comédie_Fantastique
+Animation_Epouvante-horreur_Expérimental_Fantastique
+Action_Aventure_Drame_Historique
+Musical_Science fiction
+Biopic_Epouvante-horreur_Fantastique
+Action_Animation_Aventure_Fantastique
+Aventure_Famille_Fantastique_Science fiction
