@@ -40,7 +40,7 @@ def convert_to_dd_mm_aaaa(date_str):
             # Set the locale manually for the script
             locale.setlocale(locale.LC_TIME, 'fr_FR.utf8')
             date_obj = datetime.strptime(date_str, '%d %B %Y')
-            formatted_date = date_obj.strftime('%d/%m/%Y')
+            formatted_date = date_obj.strftime('%Y-%m-%d')
             return formatted_date
         except ValueError:
             return None

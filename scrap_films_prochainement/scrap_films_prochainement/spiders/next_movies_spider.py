@@ -8,7 +8,7 @@ from ..utils import convert_to_dd_mm_aaaa
 CUSTOM_SETTINGS = {
     'CSV_OUTPUT_FILE': 'next_movies.csv',
     'CSV_FIELDS_TO_EXPORT': ['titre', 'date', 'genre', 'duree', 'realisateur', 'distributeur', 'acteurs',
-                             'nationalites', 'langue_d_origine', 'type_film', 'annee_production','nombre_article', 
+                             'nationalites', 'langue_d_origine', 'type_film', 'annee_production', 
                              'recompenses', 'description', 'film_id_allocine'],  
 
     }
@@ -80,7 +80,6 @@ class NextMoviesSpider(scrapy.Spider):
         type_film = response.xpath('//span[@class="what light" and contains(text(), "Type de film")]/following-sibling::span[@class="that"]/text()').get()
         langue_d_origine = response.xpath('//span[@class="what light" and contains(text(), "Langues")]/following-sibling::span[@class="that"]/text()').get()
         annee_production = response.xpath('//span[@class="what light" and contains(text(), "Année de production")]/following-sibling::span[@class="that"]/text()').get()
-        nombre_article = response.xpath('(//section[@class="section ovw"]//a[@class="end-section-link "])[2]//text()').get()
         description = response.xpath('//div[@class="content-txt "]//text()').get()
         image_url = response.css('img.thumbnail-img::attr(src)').get()
  
@@ -105,7 +104,6 @@ class NextMoviesSpider(scrapy.Spider):
         items['annee_production'] = annee_production if annee_production else None
         items['langue_d_origine'] = langue_d_origine if langue_d_origine else None
         items['nationalites'] = nationalites if nationalites else None
-        items['nombre_article'] = nombre_article if nombre_article else None
         items['distributeur'] = distributeur if distributeur else None
         items['description'] = description if description else None
 

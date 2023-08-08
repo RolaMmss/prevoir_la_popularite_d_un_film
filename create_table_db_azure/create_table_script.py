@@ -1,7 +1,6 @@
 import pyodbc
 from dotenv import load_dotenv
 import os
-import csv
 
 # Charger les variables d'environnement depuis le fichier .env
 load_dotenv()
@@ -27,30 +26,3 @@ def delete_table(table_name):
     cursor.execute(drop_table_query)
     conn.commit()
     conn.close()
-
-# Fonction pour créer une table et insérer des données à partir d'un fichier CSV
-def create_table_and_insert_data(table_name, columns, create_table_query, csv_file_path):
-    conn = connect_to_database()
-    cursor = conn.cursor()
-
-    # Supprimer la table s'il elle existe déjà
-    delete_table(table_name)
-
-    # Créer la table
-    cursor.execute(create_table_query)
-    conn.commit()
-    
-    print("Début de l'insertion des données...")
-    with open(csv_file_path, 'r', encoding='utf-8') as csvfile:
-        csvreader = csv.DictReader(csvfile)
-        total_rows = sum(1 for _ in csvreader)  # Compter le nombre total de lignes dans le fichier CSV
-        csvfile.seek(0)  # Remettre le curseur au début du fichier CSV
-
-        for i, row in enumerate(csvreader, start=1):
-            values = [row[column] for column in columns]
-            query = f"INSERT INTO {table_name} ({', '.join(columns)}) VALUES ({', '.join(['?'] * len(columns))})"
-            cursor.execute(query, values)
-            conn.commit()
-            print(f"Ligne {i}/{total_rows} insérée : {row['titre']} - {row['date']}")  # Ajoutez d'autres colonnes que vous souhaitez afficher
-
-    print("Insertion des données terminée.")

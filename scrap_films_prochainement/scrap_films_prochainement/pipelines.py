@@ -87,8 +87,14 @@ class ProcessPipeline:
             genres_str = re.sub(r"['\"\[\]]", "", genres_str)
             adapter['genre'] = genres_str
 
-
-
+        langue_d_origine_value = adapter.get('langue_d_origine')
+        if langue_d_origine_value is not None and isinstance(langue_d_origine_value, str):
+            # Split the languages by comma and strip whitespace
+            languages = [lang.strip() for lang in langue_d_origine_value.split(',')]
+            # Get the first language
+            first_language = languages[0]
+            adapter['langue_d_origine'] = first_language
+            
         ## Process the nombre_article field
         nombre_article_value = adapter.get('nombre_article')
         if nombre_article_value is not None and isinstance(nombre_article_value, str):
@@ -128,7 +134,7 @@ class AzureSQLPipeline:
             try:
                 # Vérifier si le film existe déjà dans la base de données
                 existing_film_query = '''
-                SELECT id FROM films WHERE film_id_allocine = ?;
+                SELECT id FROM movies WHERE film_id_allocine = ?;
                 '''
                 self.cursor.execute(existing_film_query, (item['film_id_allocine'],))
                 existing_film = self.cursor.fetchone()
@@ -140,14 +146,13 @@ class AzureSQLPipeline:
                 else:
                     # Insérer un nouveau film
                     insert_query = '''
-                    INSERT INTO films (titre, date, duree, genre, realisateur, distributeur, nationalites, langue_d_origine, type_film, annee_production, nombre_article, description, film_id_allocine, image)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                    INSERT INTO movies (titre, date, duree, genre, realisateur, distributeur, nationalites, langue_d_origine, type_film, annee_production, description, film_id_allocine, image)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
                     '''
                     self.cursor.execute(insert_query, (
                         item['titre'], item['date'], item['duree'], item['genre'], item['realisateur'], item['distributeur'],
                         item['nationalites'], item['langue_d_origine'], item['type_film'],
-                        item['annee_production'], 
-                        item['nombre_article'], item['description'], item['film_id_allocine'], item['image']
+                        item['annee_production'], item['description'], item['film_id_allocine'], item['image']
                     ))
 
                     self.conn.commit()
@@ -156,7 +161,17 @@ class AzureSQLPipeline:
                     # Ajouter les acteurs pour le nouveau film
                     if item['acteurs'] is None:
                         item['acteurs'] = 'Inconnu'  # Set to 'Inconnu' if actors are None
-                                
+                                        # Handle None values or set default values
+                    if item['duree'] is None:
+                        item['duree'] = 0.0
+                    
+                    if item['annee_production'] is None:
+                        item['annee_production'] = 0
+                    
+                    if item['film_id_allocine'] is None:
+                        item['film_id_allocine']= 0
+                    
+           
                     if isinstance(item['acteurs'], str):
                         item['acteurs'] = [item['acteurs']]  # Convert single actor string to a list
 
