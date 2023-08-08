@@ -44,7 +44,7 @@ def update_from_azure_db():
            GROUP BY titre;
             """
 
-        df_azure_data = pd.read_sql(query, conn)
+        df_azure_data = pd.read_sql(query,conn)
 
         conn.close()
 
