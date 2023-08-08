@@ -1,5 +1,5 @@
 genre
-Epouvante-horreur
+Epouvante_horreur
 Comédie dramatique_Comédie_Drame_Fantastique
 Animation_Comédie musicale_Fantastique_Romance
 Drame
@@ -10,7 +10,7 @@ Action_Aventure
 Aventure_Famille_Science fiction
 Aventure_Science fiction
 Policier_Thriller
-Epouvante-horreur_Thriller
+Epouvante_horreur_Thriller
 Action_Drame_Romance
 Drame_Romance
 Comédie dramatique
@@ -41,7 +41,7 @@ Animation_Aventure_Comédie
 Comédie_Romance
 Aventure_Drame
 Comédie musicale_Comédie
-Aventure_Epouvante-horreur_Historique
+Aventure_Epouvante_horreur_Historique
 Drame_Erotique
 Drame_Policier_Thriller
 Drame_Guerre_Thriller
@@ -50,7 +50,7 @@ Action_Comédie
 Action_Drame_Thriller
 Animation_Aventure_Comédie_Drame_Famille_Fantastique_Science fiction
 Comédie_Science fiction
-Drame_Epouvante-horreur_Thriller
+Drame_Epouvante_horreur_Thriller
 Aventure_Fantastique
 Drame_Policier
 Espionnage
@@ -75,13 +75,13 @@ Aventure_Drame_Science fiction
 Comédie_Famille_Romance
 Drame_Musical
 Drame_Fantastique_Thriller
-Epouvante-horreur_Science fiction
+Epouvante_horreur_Science fiction
 Animation_Aventure_Famille
 Aventure_Famille_Fantastique
 Animation
-Drame_Epouvante-horreur_Fantastique
+Drame_Epouvante_horreur_Fantastique
 Comédie musicale_Drame_Famille
-Epouvante-horreur_Fantastique
+Epouvante_horreur_Fantastique
 Comédie_Judiciaire_Thriller
 Action_Drame_Guerre
 Action_Drame_Policier
@@ -89,14 +89,14 @@ Action_Science fiction
 Aventure_Drame_Historique
 Romance_Thriller
 Comédie_Musical_Romance
-Action_Epouvante-horreur_Fantastique_Science fiction_Thriller
+Action_Epouvante_horreur_Fantastique_Science fiction_Thriller
 Comédie_Drame_Romance
 Animation_Aventure_Fantastique
 Action_Guerre_Historique
 Aventure_Comédie
 Comédie_Musical
 Policier
-Epouvante-horreur_Fantastique_Musical
+Epouvante_horreur_Fantastique_Musical
 Action_Fantastique
 Animation_Comédie
 Action_Comédie_Policier_Thriller
@@ -105,7 +105,7 @@ Aventure_Comédie_Historique
 Arts Martiaux_Comédie
 Action_Aventure_Thriller
 Biopic_Comédie dramatique
-Action_Comédie_Epouvante-horreur
+Action_Comédie_Epouvante_horreur
 Animation_Aventure
 Action_Animation_Aventure
 Action_Aventure_Drame
@@ -126,7 +126,7 @@ Comédie musicale_Comédie_Drame
 Aventure_Comédie dramatique_Fantastique
 Action_Comédie_Thriller
 Aventure_Comédie_Romance
-Epouvante-horreur_Fantastique_Thriller
+Epouvante_horreur_Fantastique_Thriller
 Biopic_Comédie_Thriller
 Drame_Guerre_Historique
 Aventure_Comédie_Espionnage
@@ -154,7 +154,7 @@ Action_Aventure_Péplum
 Comédie dramatique_Musical_Romance
 Comédie dramatique_Comédie
 Action_Science fiction_Thriller
-Drame_Epouvante-horreur_Science fiction
+Drame_Epouvante_horreur_Science fiction
 Comédie_Fantastique_Western
 Action_Aventure_Espionnage
 Action_Historique
@@ -169,7 +169,7 @@ Comédie dramatique_Fantastique_Romance
 Comédie_Policier_Thriller
 Aventure
 Arts Martiaux_Drame
-Action_Epouvante-horreur_Fantastique
+Action_Epouvante_horreur_Fantastique
 Science fiction_Thriller
 Drame_Famille_Fantastique
 Comédie_Drame_Thriller
@@ -181,10 +181,10 @@ Comédie dramatique_Thriller
 Aventure_Comédie_Famille_Fantastique
 Drame_Judiciaire
 Animation_Comédie musicale_Famille_Fantastique_Romance
-Action_Epouvante-horreur_Science fiction
+Action_Epouvante_horreur_Science fiction
 Comédie dramatique_Erotique
 Comédie_Famille_Science fiction
-Aventure_Epouvante-horreur_Thriller
+Aventure_Epouvante_horreur_Thriller
 Animation_Comédie dramatique
 Action_Comédie_Western
 Drame_Espionnage_Historique_Thriller
@@ -210,7 +210,7 @@ Action_Fantastique_Thriller
 Drame_Musical_Policier_Romance
 Action_Drame_Fantastique
 Action_Policier_Science fiction
-Action_Epouvante-horreur_Fantastique_Thriller
+Action_Epouvante_horreur_Fantastique_Thriller
 Drame_Fantastique_Romance_Science fiction
 Aventure_Drame_Thriller
 Guerre_Romance_Thriller
@@ -226,9 +226,9 @@ Animation_Biopic
 Action_Comédie_Famille
 Biopic_Drame_Espionnage_Historique_Thriller
 Comédie dramatique_Comédie_Drame_Romance
-Comédie_Epouvante-horreur
+Comédie_Epouvante_horreur
 Action_Aventure_Fantastique_Science fiction
-Epouvante-horreur_Science fiction_Thriller
+Epouvante_horreur_Science fiction_Thriller
 Biopic_Drame_Western
 Biopic_Romance
 Animation_Aventure_Comédie_Famille_Science fiction
@@ -249,7 +249,7 @@ Action_Judiciaire_Thriller
 Action_Animation_Arts Martiaux_Famille
 Comédie_Erotique_Historique
 Animation_Aventure_Famille_Science fiction
-Drame_Epouvante-horreur
+Drame_Epouvante_horreur
 Comédie musicale_Comédie_Romance
 Comédie_Drame_Musical_Romance
 Biopic_Policier
@@ -261,27 +261,27 @@ Biopic_Guerre
 Comédie dramatique_Comédie_Romance
 Drame_Judiciaire_Thriller
 Espionnage_Romance
-Epouvante-horreur_Fantastique_Romance
+Epouvante_horreur_Fantastique_Romance
 Animation_Famille_Fantastique
 Animation_Drame
 Action_Animation_Science fiction
 Action_Drame_Science fiction
 Espionnage_Thriller
 Comédie_Espionnage_Romance_Thriller
-Drame_Epouvante-horreur_Policier
+Drame_Epouvante_horreur_Policier
 Biopic_Historique_Musical
-Action_Aventure_Epouvante-horreur_Thriller
+Action_Aventure_Epouvante_horreur_Thriller
 Action_Biopic_Drame_Thriller
-Action_Epouvante-horreur_Thriller
+Action_Epouvante_horreur_Thriller
 Animation_Bollywood
 Animation_Aventure_Fantastique_Science fiction
-Epouvante-horreur_Policier
+Epouvante_horreur_Policier
 Action_Famille_Science fiction
 Animation_Comédie musicale
 Aventure_Drame_Policier
-Comédie_Epouvante-horreur_Fantastique
+Comédie_Epouvante_horreur_Fantastique
 Animation_Comédie_Fantastique
-Epouvante-horreur_Policier_Thriller
+Epouvante_horreur_Policier_Thriller
 Animation_Fantastique
 Aventure_Fantastique_Romance
 Comédie dramatique_Comédie_Drame
@@ -305,7 +305,7 @@ Action_Arts Martiaux_Drame_Famille
 Comédie dramatique_Drame_Romance
 Drame_Erotique_Romance
 Policier_Science fiction
-Aventure_Drame_Epouvante-horreur_Thriller
+Aventure_Drame_Epouvante_horreur_Thriller
 Biopic_Drame_Judiciaire
 Action_Animation_Thriller
 Aventure_Comédie_Fantastique
@@ -322,7 +322,7 @@ Aventure_Comédie_Policier
 Romance_Science fiction
 Comédie_Historique
 Policier_Romance
-Aventure_Epouvante-horreur_Science fiction
+Aventure_Epouvante_horreur_Science fiction
 Action_Comédie_Guerre_Thriller
 Animation_Arts Martiaux_Aventure_Famille
 Comédie dramatique_Comédie_Drame_Guerre
@@ -336,7 +336,7 @@ Animation_Drame_Fantastique
 Animation_Biopic_Drame
 Divers
 Action_Aventure_Comédie_Famille
-Epouvante-horreur_Romance_Thriller
+Epouvante_horreur_Romance_Thriller
 Comédie_Drame_Famille
 Animation_Western
 Action_Drame_Western
@@ -344,7 +344,7 @@ Drame_Historique_Romance
 Bollywood_Romance
 Action_Drame_Policier_Romance
 Action_Animation_Comédie
-Comédie_Epouvante-horreur_Romance
+Comédie_Epouvante_horreur_Romance
 Action_Arts Martiaux_Drame
 Romance_Science fiction_Thriller
 Fantastique_Policier_Thriller
@@ -376,11 +376,11 @@ Drame_Famille_Romance
 Historique_Science fiction
 Drame_Péplum
 Animation_Comédie_Romance
-Comédie musicale_Epouvante-horreur
+Comédie musicale_Epouvante_horreur
 Bollywood
 Drame_Fantastique_Guerre
 Espionnage_Policier_Thriller
-Drame_Epouvante-horreur_Romance
+Drame_Epouvante_horreur_Romance
 Aventure_Guerre_Science fiction
 Biopic_Policier_Thriller
 Aventure_Expérimental_Fantastique
@@ -392,7 +392,7 @@ Aventure_Biopic
 Animation_Comédie_Drame
 Bollywood_Historique
 Animation_Drame_Erotique_Fantastique
-Drame_Epouvante-horreur_Policier_Thriller
+Drame_Epouvante_horreur_Policier_Thriller
 Biopic_Comédie_Historique
 Musical_Romance
 Comédie_Drame_Guerre
@@ -408,7 +408,7 @@ Comédie_Famille_Policier
 Comédie musicale_Fantastique_Romance
 Biopic_Drame_Policier_Thriller
 Action_Historique_Thriller
-Aventure_Epouvante-horreur_Fantastique
+Aventure_Epouvante_horreur_Fantastique
 Historique_Policier_Thriller
 Animation_Comédie_Drame_Famille_Fantastique
 Biopic_Comédie
@@ -416,7 +416,7 @@ Action_Animation
 Comédie_Drame_Policier
 Comédie dramatique_Drame_Fantastique
 Espionnage_Policier
-Biopic_Epouvante-horreur
+Biopic_Epouvante_horreur
 Action_Animation_Policier
 Comédie_Drame_Policier_Thriller
 Animation_Drame_Romance
@@ -436,17 +436,17 @@ Action_Bollywood_Thriller
 Bollywood_Comédie_Drame
 Action_Bollywood_Historique
 Famille_Romance_Science fiction
-Aventure_Epouvante-horreur
+Aventure_Epouvante_horreur
 Comédie dramatique_Comédie_Drame_Policier
 Biopic_Guerre_Historique
 Action_Arts Martiaux_Biopic_Drame
-Comédie dramatique_Comédie_Drame_Epouvante-horreur
-Action_Epouvante-horreur
+Comédie dramatique_Comédie_Drame_Epouvante_horreur
+Action_Epouvante_horreur
 Action_Animation_Policier_Thriller
 Aventure_Comédie_Musical_Science fiction
 Biopic_Drame_Historique_Thriller
 Action_Comédie musicale_Comédie_Drame_Romance
-Comédie_Epouvante-horreur_Science fiction
+Comédie_Epouvante_horreur_Science fiction
 Action_Arts Martiaux_Aventure_Thriller
 Drame_Fantastique_Historique
 Action_Animation_Fantastique
@@ -454,7 +454,7 @@ Animation_Fantastique_Romance
 Action_Animation_Drame_Fantastique
 Famille
 Action_Animation_Comédie_Drame_Policier
-Drame_Epouvante-horreur_Science fiction_Thriller
+Drame_Epouvante_horreur_Science fiction_Thriller
 Comédie_Drame_Romance_Science fiction
 Action_Animation_Comédie_Famille
 Action_Arts Martiaux_Comédie_Drame_Science fiction
@@ -465,14 +465,14 @@ Animation_Arts Martiaux_Comédie_Famille
 Bollywood_Drame_Romance
 Animation_Thriller
 Animation_Drame_Fantastique_Historique_Musical
-Comédie_Epouvante-horreur_Thriller
+Comédie_Epouvante_horreur_Thriller
 Comédie_Historique_Romance
 Comédie dramatique_Comédie_Drame_Judiciaire_Policier
 Animation_Drame_Science fiction
 Action_Aventure_Comédie_Fantastique
-Animation_Epouvante-horreur_Expérimental_Fantastique
+Animation_Epouvante_horreur_Expérimental_Fantastique
 Action_Aventure_Drame_Historique
 Musical_Science fiction
-Biopic_Epouvante-horreur_Fantastique
+Biopic_Epouvante_horreur_Fantastique
 Action_Animation_Aventure_Fantastique
 Aventure_Famille_Fantastique_Science fiction
