@@ -181,7 +181,7 @@ class AzureSQLPipeline:
 
                     for acteur in item['acteurs']:
                         acteur_query = '''
-                        INSERT INTO acteurs_films (film_id, acteurs)
+                        INSERT INTO actors (film_id, acteurs)
                         VALUES (?, ?);
                         '''
                         self.cursor.execute(acteur_query, (film_id, acteur))

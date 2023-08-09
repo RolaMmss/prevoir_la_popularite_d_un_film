@@ -26,3 +26,4 @@ def delete_table(table_name):
     cursor.execute(drop_table_query)
     conn.commit()
     conn.close()
+
