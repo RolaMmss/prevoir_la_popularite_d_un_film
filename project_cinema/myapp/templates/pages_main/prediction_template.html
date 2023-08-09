@@ -1,0 +1,17 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class='container_model'>
+    <h2>Prédictions de Box Office pour Tous les Films</h2>
+    <ul>
+        {% for prediction in predictions %}
+        <li>
+            <h3>{{ prediction.film.titre }}</h3>
+            <p>Prédiction de box office : {{ prediction.prediction }}</p>
+            <!-- Affichez d'autres détails du film comme l'image ici -->
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

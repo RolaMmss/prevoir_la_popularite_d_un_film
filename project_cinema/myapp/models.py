@@ -23,3 +23,10 @@ class Acteurs_films(models.Model):
     class Meta:
         db_table = 'acteurs_films'
 
+
+class Movies(models.Model):
+    titre = models.CharField(max_length=500)
+
+
+    class Meta:
+        db_table = 'movies'
