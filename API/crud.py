@@ -11,8 +11,7 @@ import re
 
 def update_from_azure_db():
     try:
-
-
+        # Load environment variables
 
 # Load environment variables
         load_dotenv()
@@ -38,15 +37,32 @@ def update_from_azure_db():
            MAX(annee_production) AS annee_production,
            STRING_AGG(acteurs, ',') AS acteurs,
            STRING_AGG(top_acteurs.acteur, ',') AS acteurs_connus
-           FROM films
-           INNER JOIN acteurs_films ON films.id = acteurs_films.film_id
-           INNER JOIN top_acteurs ON acteurs_films.id_acteurs_films = top_acteurs.id
+           FROM movies
+           INNER JOIN actors ON movies.id = actors.film_id
+           INNER JOIN top_acteurs ON actors.id_acteurs_films = top_acteurs.id
            GROUP BY titre;
             """
 
-        df_azure_data = pd.read_sql(query,conn)
+        df_azure_data = pd.read_sql(query, conn)
 
+# Fermer la connexion après utilisationS
         conn.close()
+
+        columns_to_replace_with_zero = ['durée', 'annee_production']
+        
+        columns_to_check = ['durée', 'distributeur', 'réalisateur', 'nationalités', 'langue_d_origine',
+                    'type_film', 'genres', 'annee_production', 'acteurs', 'acteurs_connus']
+
+# Boucle à travers les colonnes spécifiées
+        for column in columns_to_check:
+                if column in columns_to_replace_with_zero:
+                        df_azure_data[column].fillna(0, inplace=True)
+                else:
+                        df_azure_data[column].fillna('inconnu', inplace=True)
+
+
+
+
 
 # Fonction pour nettoyer le nom d'un acteur
         def clean_name(name):
@@ -65,6 +81,7 @@ def update_from_azure_db():
         def calculate_known_realisateur(row):
             actor = clean_name(row['acteurs_connus'][0])
             realisateur = [clean_name(a) for a in row['réalisateur']]
+
             return int(any(actor in a for a in realisateur))
 
         df_azure_data['nombre_acteurs_connus'] = df_azure_data.apply(calculate_known_actors, axis=1)
@@ -79,17 +96,9 @@ def update_from_azure_db():
         for genre in unique_genres:
                 df_azure_data[genre] = df_azure_data['genres'].apply(lambda x: 1 if genre in x else 0)
 
+
+
         return df_azure_data
 
     except pyodbc.Error as err:
-        raise HTTPException(status_code=500, detail="Error connecting to the Azure database")
-
-
-
-
-
-
-  
-
-
- 
+        raise HTTPException(status_code=500, detail=" Nooooooooooooo Error connecting to the Azure database")

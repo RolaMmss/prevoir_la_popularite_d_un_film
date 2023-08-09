@@ -24,6 +24,7 @@ class FilmInput(BaseModel):
 
 
 
+
 @app.post("/predict/")
 def predict_film_boxoffice(film: FilmInput):
     try:
@@ -43,7 +44,7 @@ def predict_film_boxoffice(film: FilmInput):
         # Faire les prédictions avec le modèle chargé
         prediction = model.predict(film_data)
 
-        return {"box_office_prediction": int(prediction)}
+        return {"box_office_prediction": int(abs(prediction))}
     
     except HTTPException as e:
         raise e
