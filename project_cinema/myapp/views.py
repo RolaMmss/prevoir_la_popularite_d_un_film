@@ -3,7 +3,7 @@ from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from . import forms
-from .models import Film, Acteurs_films
+from .models import Film, Acteurs_films, Movies
 from datetime import datetime
 from django.forms import Form, DateField as FormDateField
 from myapp.forms import UserCreateForm
@@ -14,10 +14,10 @@ import matplotlib
 matplotlib.use('Agg')  
 import matplotlib.pyplot as plt
 from django.core.files.storage import FileSystemStorage
-
 import io
 from django.db.models import Count
 from wordcloud import WordCloud
+import requests
 
 
 def dashboard(request):
@@ -34,37 +34,31 @@ class SignupPage(CreateView):
 
 
 
-# def box_office(request):
-#     # Fetch distinct dates from the films table
-#     distinct_dates = Film.objects.order_by('date').values_list('date', flat=True).distinct()
-
-#     # If the form is submitted, get the selected date from the request
-#     selected_date_str = request.GET.get('date_filter')
-
-#     # Initialize the films variable
-#     films = None
-
-#     # If a date is selected, convert it to the correct format and filter films based on the selected date
-#     if selected_date_str:
-#         selected_date = datetime.strptime(selected_date_str, '%d/%m/%Y').date()
-#         films = Film.objects.filter(date=selected_date)
-#     return render(request, 'pages_main/Box_off_forecast.html', {'films': films, 'distinct_dates': distinct_dates, 'selected_date': selected_date_str})
-
 def box_office(request):
-    # Fetch distinct dates from the films table
-    distinct_dates = Film.objects.order_by('date').values_list('date', flat=True).distinct()
+    films = Movies.objects.all()  # Récupérez tous les films de la base de données
+    predictions = []
 
-    # If the form is submitted, get the selected date from the request
-    selected_date_str = request.GET.get('date_filter')
+    # Parcourez la liste des films et effectuez les prédictions pour chaque film
+    for film in films:
+        data = {'titre': film.titre}
 
-    # Initialize the films variable
-    films = None
+        # URL de votre API FastAPI déployée sur Azure
+        api_url = 'http://20.164.88.206/predict/'  # Utilisez l'URL correcte de votre API
 
-    # If a date is selected, convert it to the correct format and filter films based on the selected date
-    if selected_date_str:
-        selected_date = datetime.strptime(selected_date_str, '%d/%m/%Y').date()
-        films = Film.objects.filter(date=selected_date)
-    return render(request, 'pages_main/Box_off_forecast.html', {'films': films, 'distinct_dates': distinct_dates, 'selected_date': selected_date_str})
+        # Appel de l'API FastAPI
+        response = requests.post(api_url, json=data)
+
+        if response.status_code == 200:
+            prediction = response.json().get('box_office_prediction')  # Utilisez la clé correcte du JSON
+            predictions.append({'film': film, 'prediction': prediction})
+        else:
+            # Gérez les erreurs si l'appel à l'API échoue
+            predictions.append({'film': film, 'prediction': 'Erreur'})
+
+    return render(request, 'pages_main/prediction_template.html', {'predictions': predictions})
+
+
+
 
 
 
