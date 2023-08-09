@@ -1,5 +1,3 @@
-
-
 from fastapi import HTTPException
 import string 
 import pyodbc
@@ -15,7 +13,6 @@ def update_from_azure_db():
     try:
         # Load environment variables
 
-
 # Load environment variables
         load_dotenv()
         username = os.getenv('DB_USER')
@@ -27,7 +24,6 @@ def update_from_azure_db():
 # Établir la connexion à votre base de données
         connection_string = f'Driver={DB_Driver};Server=tcp:{server},1433;Database={database};Uid={username};Pwd={password};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
         conn = pyodbc.connect(connection_string)
-
         cursor = conn.cursor()
 
         query = """ SELECT titre,
@@ -41,16 +37,32 @@ def update_from_azure_db():
            MAX(annee_production) AS annee_production,
            STRING_AGG(acteurs, ',') AS acteurs,
            STRING_AGG(top_acteurs.acteur, ',') AS acteurs_connus
-           FROM films
-           INNER JOIN acteurs_films ON films.id = acteurs_films.film_id
-           INNER JOIN top_acteurs ON acteurs_films.id_acteurs_films = top_acteurs.id
+           FROM movies
+           INNER JOIN actors ON movies.id = actors.film_id
+           INNER JOIN top_acteurs ON actors.id_acteurs_films = top_acteurs.id
            GROUP BY titre;
             """
 
         df_azure_data = pd.read_sql(query, conn)
 
-# Fermer la connexion après utilisation
+# Fermer la connexion après utilisationS
         conn.close()
+
+        columns_to_replace_with_zero = ['durée', 'annee_production']
+        
+        columns_to_check = ['durée', 'distributeur', 'réalisateur', 'nationalités', 'langue_d_origine',
+                    'type_film', 'genres', 'annee_production', 'acteurs', 'acteurs_connus']
+
+# Boucle à travers les colonnes spécifiées
+        for column in columns_to_check:
+                if column in columns_to_replace_with_zero:
+                        df_azure_data[column].fillna(0, inplace=True)
+                else:
+                        df_azure_data[column].fillna('inconnu', inplace=True)
+
+
+
+
 
 # Fonction pour nettoyer le nom d'un acteur
         def clean_name(name):
@@ -89,13 +101,4 @@ def update_from_azure_db():
         return df_azure_data
 
     except pyodbc.Error as err:
-        raise HTTPException(status_code=500, detail="Error connecting to the Azure database")
-
-
-
-
-
-  
-
-
- 
+        raise HTTPException(status_code=500, detail=" Nooooooooooooo Error connecting to the Azure database")
