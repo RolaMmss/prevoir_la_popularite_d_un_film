@@ -48,11 +48,11 @@ def box_office(request):
 
         if response.status_code == 200:
             prediction_value = response.json().get('box_office_prediction')
-            prediction_instance = Prediction(film=film, prediction=prediction_value)
+            prediction_instance = Prediction(titre=film, prediction=prediction_value)
             prediction_instance.save()
-            prediction.append({'film': film, 'prediction': prediction_value})
+            prediction.append({'titre': film, 'prediction': prediction_value})
         else:
-            prediction.append({'film': film, 'prediction': 'Erreur'})
+            prediction.append({'titre': film, 'prediction': 'Erreur'})
 
     return render(request, 'pages_main/prediction_template.html', {'prediction': prediction})
 

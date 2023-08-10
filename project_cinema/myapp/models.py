@@ -30,8 +30,11 @@ class Movies(models.Model):
 
 
 class Prediction(models.Model):
-    film = models.ForeignKey(Movies, on_delete=models.CASCADE)
+    film_id = models.ForeignKey(Movies, on_delete=models.CASCADE)
     prediction = models.FloatField()
+    titre = models.CharField(max_length=500)
+
+
 
     class Meta:
         db_table = 'prediction'
