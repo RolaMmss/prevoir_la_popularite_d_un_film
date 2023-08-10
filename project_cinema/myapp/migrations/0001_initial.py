@@ -39,9 +39,22 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('titre', models.CharField(max_length=500)),
+                ('image', models.URLField()),
             ],
             options={
                 'db_table': 'movies',
+            },
+        ),
+        migrations.CreateModel(
+            name='Prediction',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('prediction', models.FloatField()),
+                ('titre', models.CharField(max_length=500)),
+                ('film', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='myapp.Movies')),
+            ],
+            options={
+                'db_table': 'prediction',
             },
         ),
         migrations.AddField(

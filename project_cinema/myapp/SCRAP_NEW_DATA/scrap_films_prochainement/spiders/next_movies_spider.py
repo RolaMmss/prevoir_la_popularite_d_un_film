@@ -58,20 +58,22 @@ class NextMoviesSpider(scrapy.Spider):
     allowed_domains = ["allocine.fr"]
 
     # URL de la première page
-    base_url = 'https://www.allocine.fr/film/agenda'
-    num_weeks = 2
+    start_urls = 'https://www.allocine.fr/film/agenda'
     
     def start_requests(self):
-        today = datetime.today()
-        current_weekday = today.weekday()  # 0 (lundi) à 6 (dimanche)
-        wednesday = today - timedelta(days=current_weekday - 2)  # Mercredi de cette semaine
+        yield scrapy.Request(self.start_urls, callback=self.parse)
         
-        for week in range(self.num_weeks):
-            week_str = wednesday.strftime('%Y-%m-%d')
-            url = f"{self.base_url}/sem-{week_str}/"
-            yield scrapy.Request(url, callback=self.parse)
+    # def start_requests(self):
+    #     today = datetime.today()
+    #     current_weekday = today.weekday()  # 0 (lundi) à 6 (dimanche)
+    #     wednesday = today - timedelta(days=current_weekday - 2)  # Mercredi de cette semaine
+        
+    #     for week in range(self.num_weeks):
+    #         week_str = wednesday.strftime('%Y-%m-%d')
+    #         url = f"{self.base_url}/sem-{week_str}/"
+    #         yield scrapy.Request(url, callback=self.parse)
             
-            wednesday += timedelta(weeks=1)  # Incrémenter d'une semaine
+    #         wednesday += timedelta(weeks=1)  # Incrémenter d'une semaine
             
     def parse(self, response):
         # Récupérer les titres de films sur la page actuelle
