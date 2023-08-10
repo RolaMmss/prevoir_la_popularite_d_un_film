@@ -341,3 +341,35 @@ footer ul {
   input[type="submit"]:hover {
     background-color: #3e8e41;
   }
+
+
+
+/* Styles for the film table */
+.film-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.film-table th, .film-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Center the text and content within table cells */
+.film-table th, .film-table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.film-title {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the title and image horizontally */
+}
+
+.film-title h3 {
+  margin-right: 10px;
+}
+
+/* Add any additional styling as needed */

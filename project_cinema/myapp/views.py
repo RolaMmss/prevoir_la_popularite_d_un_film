@@ -52,10 +52,12 @@ def box_office(request):
 
         if response.status_code == 200:
             prediction = response.json().get('box_office_prediction')  # Utilisez la clé correcte du JSON
-            predictions.append({'film': film, 'prediction': prediction})
+            # Effectuer la division ici
+            box_office_divided = prediction // 2000
+            predictions.append({'film': film, 'prediction': prediction, 'box_office_divided': box_office_divided})
         else:
             # Gérez les erreurs si l'appel à l'API échoue
-            predictions.append({'film': film, 'prediction': 'Erreur'})
+            predictions.append({'film': film, 'prediction': 'Erreur', 'box_office_divided': 'Erreur'})
         # Trier les prédictions par prédiction en ordre décroissant
     predictions = sorted(predictions, key=itemgetter('prediction'), reverse=True)
     # Sélectionner uniquement les 10 premières prédictions (top 10)
