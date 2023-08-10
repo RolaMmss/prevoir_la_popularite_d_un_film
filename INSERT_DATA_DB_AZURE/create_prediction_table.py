@@ -11,7 +11,8 @@ create_films_table_query = '''
 CREATE TABLE prediction (
     id INT IDENTITY(1,1) PRIMARY KEY,
     titre VARCHAR(500),
-    prediction FLOAT
+    prediction FLOAT,
+    FOREIGN KEY (titre) REFERENCES movies(titre)
 
 );
 '''
