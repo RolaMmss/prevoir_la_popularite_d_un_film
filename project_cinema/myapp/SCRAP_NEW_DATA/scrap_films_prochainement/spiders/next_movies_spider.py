@@ -2,6 +2,8 @@ import scrapy
 # from myapp.SCRAP_NEW_DATA.scrap_films_prochainement.items import ScrapFilmsProchainementItem
 import re 
 from datetime import datetime, timedelta
+import locale
+
 # from utils import convert_to_dd_mm_aaaa
 
 
@@ -146,10 +148,7 @@ class NextMoviesSpider(scrapy.Spider):
 
 
 
-        
-
-    
-
+  
 
 
         

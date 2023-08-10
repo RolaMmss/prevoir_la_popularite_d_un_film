@@ -107,16 +107,34 @@ from django.http import JsonResponse
 #     error_message = request.GET.get('error_message')
 #     return render(request, 'pages_main/home.html', {'success_message': success_message, 'error_message': error_message})
 
-def start_scraping(request):
-    script_dir = os.path.dirname(__file__)  # Chemin du répertoire de la vue
-    scrapy_script_path = os.path.join(script_dir, 'SCRAP_NEW_DATA', 'scrap_films_prochainement', 'spiders', 'next_movies_spider.py')
-    
-    try:
-        subprocess.run(['python', scrapy_script_path], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        response_data = {'status': 'success', 'message': "Le scraping s'est terminé avec succès."}
-    except subprocess.CalledProcessError as e:
-        response_data = {'status': 'error', 'message': f"Erreur lors de l'exécution du scraping : {e.stderr.decode()}"}
-    
-    return JsonResponse(response_data)
+from django.shortcuts import redirect
 
+import os
+import subprocess
+from django.urls import reverse
 
+def scraping_view(request):
+    if request.method == 'POST':
+        # Récupérer le répertoire du fichier views.py (chemin relatif)
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        # Construire le chemin complet vers le répertoire du spider en utilisant le chemin relatif
+        spider_dir = os.path.normpath(os.path.join(current_dir, 'SCRAP_NEW_DATA/scrap_films_prochainement/spiders'))
+        # Exécuter le spider
+        subprocess.run(["scrapy", "crawl", "next_movies_spider"], cwd=spider_dir)
+        # Rediriger l'utilisateur vers la page d'accueil avec un message de succès
+        return redirect(reverse('homepage') + '?scraping_success=true')
+
+    return render(request, 'pages_main/home.html')
+
+def scraping_boxoffice_view(request):
+    if request.method == 'POST':
+        # Récupérer le répertoire du fichier views.py (chemin relatif)
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        # Construire le chemin complet vers le répertoire du spider en utilisant le chemin relatif
+        spider_dir = os.path.normpath(os.path.join(current_dir, 'SCRAP_NEW_DATA/scrap_films_prochainement/spiders'))
+        # Exécuter le spider
+        subprocess.run(["scrapy", "crawl", "recent_boxoffice_spider"], cwd=spider_dir)
+        # Rediriger l'utilisateur vers la page d'accueil avec un message de succès
+        return redirect(reverse('homepage') + '?scraping_success=true')
+
+    return render(request, 'pages_main/home.html')
