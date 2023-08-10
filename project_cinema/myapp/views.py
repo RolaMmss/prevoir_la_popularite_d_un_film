@@ -31,9 +31,10 @@ class SignupPage(CreateView):
 
 
 
+
 def box_office(request):
     films = Movies.objects.all()  # Récupérez tous les films de la base de données
-    prediction = []
+    predictions = []
 
     # Parcourez la liste des films et effectuez les prédictions pour chaque film
     for film in films:
@@ -45,26 +46,16 @@ def box_office(request):
         # Appel de l'API FastAPI
         response = requests.post(api_url, json=data)
 
-
         if response.status_code == 200:
             prediction_value = response.json().get('box_office_prediction')
-            prediction_instance = Prediction(titre=film, prediction=prediction_value)
+            movies_instance = Movies.objects.get(titre=film.titre)  # Obtenez l'objet Movies correspondant
+            prediction_instance = Prediction(film=movies_instance, prediction=prediction_value)
             prediction_instance.save()
-            prediction.append({'titre': film, 'prediction': prediction_value})
+            predictions.append({'film': film, 'prediction': prediction_value})
         else:
-            prediction.append({'titre': film, 'prediction': 'Erreur'})
+            predictions.append({'film': film, 'prediction': 'Erreur'})
 
-    return render(request, 'pages_main/prediction_template.html', {'prediction': prediction})
-
-    #     if response.status_code == 200:
-    #         prediction = response.json().get('box_office_prediction')  # Utilisez la clé correcte du JSON
-    #         predictions.append({'film': film, 'prediction': prediction})
-    #     else:
-    #         predictions.append({'film': film, 'prediction': 'Erreur'})
-
-    # return render(request, 'pages_main/prediction_template.html', {'predictions': predictions})
-
-
+    return render(request, 'pages_main/prediction_template.html', {'predictions': predictions})
 
 
 
