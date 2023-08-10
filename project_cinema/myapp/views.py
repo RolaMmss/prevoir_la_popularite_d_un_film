@@ -20,6 +20,10 @@ from wordcloud import WordCloud
 import requests
 import subprocess
 from operator import itemgetter
+from django.http import JsonResponse
+from django.urls import reverse
+
+
 
 
 def homepage(request):
@@ -33,30 +37,6 @@ class SignupPage(CreateView):
 
 
 
-# def box_office(request):
-#     films = Movies.objects.all()  # Récupérez tous les films de la base de données
-#     predictions = []
-
-#     # Parcourez la liste des films et effectuez les prédictions pour chaque film
-#     for film in films:
-#         data = {'titre': film.titre}
-
-#         # URL de votre API FastAPI déployée sur Azure
-#         api_url = 'http://20.164.88.206/predict/'  # Utilisez l'URL correcte de votre API
-
-#         # Appel de l'API FastAPI
-#         response = requests.post(api_url, json=data)
-
-#         if response.status_code == 200:
-#             prediction_value = response.json().get('box_office_prediction')
-#             movies_instance = Movies.objects.get(titre=film.titre)  # Obtenez l'objet Movies correspondant
-#             prediction_instance = Prediction(film=movies_instance, prediction=prediction_value)
-#             prediction_instance.save()
-#             predictions.append({'film': film, 'prediction': prediction_value})
-#         else:
-#             predictions.append({'film': film, 'prediction': 'Erreur'})
-
-#     return render(request, 'pages_main/prediction_template.html', {'predictions': predictions})
 
 
 
@@ -142,20 +122,6 @@ def dashboard(request):
     return render(request, 'pages_main/dashboard.html', context)
 
 
-import os
-import subprocess
-from django.http import JsonResponse
-
-# def homepage(request):
-#     success_message = request.GET.get('success_message')
-#     error_message = request.GET.get('error_message')
-#     return render(request, 'pages_main/home.html', {'success_message': success_message, 'error_message': error_message})
-
-from django.shortcuts import redirect
-
-import os
-import subprocess
-from django.urls import reverse
 
 def scraping_view(request):
     if request.method == 'POST':
@@ -182,3 +148,7 @@ def scraping_boxoffice_view(request):
         return redirect(reverse('homepage') + '?scraping_success=true')
 
     return render(request, 'pages_main/home.html')
+
+
+def model_overview(request):
+    return render(request, 'pages_main/model_overview.html')
