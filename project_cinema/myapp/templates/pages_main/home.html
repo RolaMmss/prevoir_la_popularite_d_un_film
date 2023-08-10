@@ -1,9 +1,6 @@
 {% extends 'myapp/base.html' %}
 {% load static %}
 
-
-
-
 {% block content %}
 <div class="page-container" style="background-image: url('{% static 'myapp/im4.jpeg' %}');">
   
@@ -21,5 +18,36 @@
       <img class="thumbnail-img middle-img" src="https://fr.web.img4.acsta.net/c_310_420/pictures/23/06/16/09/11/1574235.jpg" alt="Bande-annonce Mission: Impossible – Dead Reckoning Partie 1" width="270" height="360">
       <img class="thumbnail-img" src="https://fr.web.img2.acsta.net/c_310_420/pictures/23/05/25/09/11/4629362.jpg" alt="Bande-annonce Rendez-vous à Tokyo" width="200" height="300">
     </div>
+
+    <p id="scrape-message" style="color: green;"></p>
+    
+    <form id="scrape-form" method="post" action="{% url 'start-scraping' %}">
+      {% csrf_token %}
+      <button type="button" id="scrape-button">Lancer le Scraping</button>
+    </form>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#scrape-button').click(function() {
+        $.ajax({
+            type: 'POST',
+            url: '{% url "start-scraping" %}',
+            success: function(data) {
+                if (data.status === 'success') {
+                    $('#scrape-message').text(data.message).css('color', 'green');
+                } else {
+                    $('#scrape-message').text(data.message).css('color', 'red');
+                }
+            },
+            error: function() {
+                $('#scrape-message').text('Une erreur s\'est produite.').css('color', 'red');
+            }
+        });
+    });
+});
+</script>
 
 {% endblock %}

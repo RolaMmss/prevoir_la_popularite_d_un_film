@@ -18,10 +18,7 @@ import io
 from django.db.models import Count
 from wordcloud import WordCloud
 import requests
-
-
-def dashboard(request):
-    return render(request, 'pages_main/dashboard.html')
+import subprocess
 
 
 def homepage(request):
@@ -56,10 +53,6 @@ def box_office(request):
             predictions.append({'film': film, 'prediction': 'Erreur'})
 
     return render(request, 'pages_main/prediction_template.html', {'predictions': predictions})
-
-
-
-
 
 
 def dashboard(request):
@@ -103,3 +96,27 @@ def dashboard(request):
         'wordcloud_url': wordcloud_url,
     }
     return render(request, 'pages_main/dashboard.html', context)
+
+
+import os
+import subprocess
+from django.http import JsonResponse
+
+# def homepage(request):
+#     success_message = request.GET.get('success_message')
+#     error_message = request.GET.get('error_message')
+#     return render(request, 'pages_main/home.html', {'success_message': success_message, 'error_message': error_message})
+
+def start_scraping(request):
+    script_dir = os.path.dirname(__file__)  # Chemin du répertoire de la vue
+    scrapy_script_path = os.path.join(script_dir, '..', 'SCRAP_NEW_DATA', 'scrap_films_prochainement', 'spiders', 'next_movies_spider.py')
+    
+    try:
+        subprocess.run(['python', scrapy_script_path], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        response_data = {'status': 'success', 'message': "Le scraping s'est terminé avec succès."}
+    except subprocess.CalledProcessError as e:
+        response_data = {'status': 'error', 'message': f"Erreur lors de l'exécution du scraping : {e.stderr.decode()}"}
+    
+    return JsonResponse(response_data)
+
+
