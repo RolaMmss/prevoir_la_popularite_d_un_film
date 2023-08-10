@@ -3,7 +3,7 @@ from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from . import forms
-from .models import Film, Acteurs_films, Movies
+from .models import Film, Acteurs_films, Movies, Prediction
 from datetime import datetime
 from django.forms import Form, DateField as FormDateField
 from myapp.forms import UserCreateForm
@@ -20,9 +20,6 @@ from wordcloud import WordCloud
 import requests
 
 
-def dashboard(request):
-    return render(request, 'pages_main/dashboard.html')
-
 
 def homepage(request):
     return render(request, 'pages_main/home.html')
@@ -36,7 +33,7 @@ class SignupPage(CreateView):
 
 def box_office(request):
     films = Movies.objects.all()  # Récupérez tous les films de la base de données
-    predictions = []
+    prediction = []
 
     # Parcourez la liste des films et effectuez les prédictions pour chaque film
     for film in films:
@@ -48,14 +45,24 @@ def box_office(request):
         # Appel de l'API FastAPI
         response = requests.post(api_url, json=data)
 
-        if response.status_code == 200:
-            prediction = response.json().get('box_office_prediction')  # Utilisez la clé correcte du JSON
-            predictions.append({'film': film, 'prediction': prediction})
-        else:
-            # Gérez les erreurs si l'appel à l'API échoue
-            predictions.append({'film': film, 'prediction': 'Erreur'})
 
-    return render(request, 'pages_main/prediction_template.html', {'predictions': predictions})
+        if response.status_code == 200:
+            prediction_value = response.json().get('box_office_prediction')
+            prediction_instance = Prediction(film=film, prediction=prediction_value)
+            prediction_instance.save()
+            prediction.append({'film': film, 'prediction': prediction_value})
+        else:
+            prediction.append({'film': film, 'prediction': 'Erreur'})
+
+    return render(request, 'pages_main/prediction_template.html', {'prediction': prediction})
+
+    #     if response.status_code == 200:
+    #         prediction = response.json().get('box_office_prediction')  # Utilisez la clé correcte du JSON
+    #         predictions.append({'film': film, 'prediction': prediction})
+    #     else:
+    #         predictions.append({'film': film, 'prediction': 'Erreur'})
+
+    # return render(request, 'pages_main/prediction_template.html', {'predictions': predictions})
 
 
 

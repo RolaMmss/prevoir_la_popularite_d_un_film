@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 
 
@@ -26,8 +25,13 @@ class Acteurs_films(models.Model):
 
 class Movies(models.Model):
     titre = models.CharField(max_length=500)
-
-
-
     class Meta:
         db_table = 'movies'
+
+
+class Prediction(models.Model):
+    film = models.ForeignKey(Movies, on_delete=models.CASCADE)
+    prediction = models.FloatField()
+
+    class Meta:
+        db_table = 'prediction'
