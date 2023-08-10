@@ -1,0 +1,7 @@
+pymongo
+python-dotenv
+Django==4.1.2
+wordcloud
+matplotlib
+pandas
+
