@@ -1,8 +1,44 @@
 import scrapy
-from ..items import ScrapFilmsProchainementItem
+# from myapp.SCRAP_NEW_DATA.scrap_films_prochainement.items import ScrapFilmsProchainementItem
 import re 
 from datetime import datetime, timedelta
-from ..utils import convert_to_dd_mm_aaaa
+import locale
+
+# from utils import convert_to_dd_mm_aaaa
+
+
+def convert_to_dd_mm_aaaa(date_str):
+    if date_str:
+        try:
+            # Set the locale manually for the script
+            locale.setlocale(locale.LC_TIME, 'fr_FR.utf8')
+            date_obj = datetime.strptime(date_str, '%d %B %Y')
+            formatted_date = date_obj.strftime('%Y-%m-%d')
+            return formatted_date
+        except ValueError:
+            return None
+    return None
+
+class ScrapFilmsProchainementItem(scrapy.Item):
+    titre = scrapy.Field()
+    date = scrapy.Field()
+    realisateur = scrapy.Field()
+    duree = scrapy.Field()
+    type_film = scrapy.Field()
+    description = scrapy.Field()
+    genre = scrapy.Field()
+    acteurs = scrapy.Field()
+    annee_production = scrapy.Field()
+    langue_d_origine = scrapy.Field()
+    nationalites = scrapy.Field()
+    distributeur = scrapy.Field()
+    film_id_allocine = scrapy.Field()
+    image = scrapy.Field()
+    
+
+class BoxOfficeItem(scrapy.Item):
+    film_id_allocine = scrapy.Field()
+    boxoffice = scrapy.Field()
 
 # Set the CSV file name and column order
 CUSTOM_SETTINGS = {
@@ -22,20 +58,22 @@ class NextMoviesSpider(scrapy.Spider):
     allowed_domains = ["allocine.fr"]
 
     # URL de la première page
-    base_url = 'https://www.allocine.fr/film/agenda'
-    num_weeks = 2
+    start_urls = 'https://www.allocine.fr/film/agenda'
     
     def start_requests(self):
-        today = datetime.today()
-        current_weekday = today.weekday()  # 0 (lundi) à 6 (dimanche)
-        wednesday = today - timedelta(days=current_weekday - 2)  # Mercredi de cette semaine
+        yield scrapy.Request(self.start_urls, callback=self.parse)
         
-        for week in range(self.num_weeks):
-            week_str = wednesday.strftime('%Y-%m-%d')
-            url = f"{self.base_url}/sem-{week_str}/"
-            yield scrapy.Request(url, callback=self.parse)
+    # def start_requests(self):
+    #     today = datetime.today()
+    #     current_weekday = today.weekday()  # 0 (lundi) à 6 (dimanche)
+    #     wednesday = today - timedelta(days=current_weekday - 2)  # Mercredi de cette semaine
+        
+    #     for week in range(self.num_weeks):
+    #         week_str = wednesday.strftime('%Y-%m-%d')
+    #         url = f"{self.base_url}/sem-{week_str}/"
+    #         yield scrapy.Request(url, callback=self.parse)
             
-            wednesday += timedelta(weeks=1)  # Incrémenter d'une semaine
+    #         wednesday += timedelta(weeks=1)  # Incrémenter d'une semaine
             
     def parse(self, response):
         # Récupérer les titres de films sur la page actuelle
@@ -112,10 +150,7 @@ class NextMoviesSpider(scrapy.Spider):
 
 
 
-        
-
-    
-
+  
 
 
         

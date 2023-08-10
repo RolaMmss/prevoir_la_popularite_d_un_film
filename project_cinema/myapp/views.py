@@ -18,8 +18,8 @@ import io
 from django.db.models import Count
 from wordcloud import WordCloud
 import requests
+import subprocess
 from operator import itemgetter
-
 
 
 def homepage(request):
@@ -140,3 +140,45 @@ def dashboard(request):
         'wordcloud_url': wordcloud_url,
     }
     return render(request, 'pages_main/dashboard.html', context)
+
+
+import os
+import subprocess
+from django.http import JsonResponse
+
+# def homepage(request):
+#     success_message = request.GET.get('success_message')
+#     error_message = request.GET.get('error_message')
+#     return render(request, 'pages_main/home.html', {'success_message': success_message, 'error_message': error_message})
+
+from django.shortcuts import redirect
+
+import os
+import subprocess
+from django.urls import reverse
+
+def scraping_view(request):
+    if request.method == 'POST':
+        # Récupérer le répertoire du fichier views.py (chemin relatif)
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        # Construire le chemin complet vers le répertoire du spider en utilisant le chemin relatif
+        spider_dir = os.path.normpath(os.path.join(current_dir, 'SCRAP_NEW_DATA/scrap_films_prochainement/spiders'))
+        # Exécuter le spider
+        subprocess.run(["scrapy", "crawl", "next_movies_spider"], cwd=spider_dir)
+        # Rediriger l'utilisateur vers la page d'accueil avec un message de succès
+        return redirect(reverse('homepage') + '?scraping_success=true')
+
+    return render(request, 'pages_main/home.html')
+
+def scraping_boxoffice_view(request):
+    if request.method == 'POST':
+        # Récupérer le répertoire du fichier views.py (chemin relatif)
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        # Construire le chemin complet vers le répertoire du spider en utilisant le chemin relatif
+        spider_dir = os.path.normpath(os.path.join(current_dir, 'SCRAP_NEW_DATA/scrap_films_prochainement/spiders'))
+        # Exécuter le spider
+        subprocess.run(["scrapy", "crawl", "recent_boxoffice_spider"], cwd=spider_dir)
+        # Rediriger l'utilisateur vers la page d'accueil avec un message de succès
+        return redirect(reverse('homepage') + '?scraping_success=true')
+
+    return render(request, 'pages_main/home.html')

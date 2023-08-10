@@ -10,6 +10,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('box_office/',views.box_office,name='box_office'),
     path('dashboard/',views.dashboard,name='dashboard'),
+    path('start-scraping/', views.scraping_view, name='scraping_view'),
+    path('start-scraping-bo/', views.scraping_boxoffice_view, name='scraping_boxoffice_view'),
+
 
     path('',views.homepage,name='homepage'),
     path('accounts/', include('django.contrib.auth.urls')),   
