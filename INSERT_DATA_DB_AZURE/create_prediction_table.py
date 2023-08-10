@@ -6,7 +6,8 @@ cursor = conn.cursor()
 delete_table('prediction')
 
 
-# Créer la table "prediction"
+#Créer la table "prediction"
+
 create_films_table_query = '''
 CREATE TABLE prediction (
     id INT IDENTITY(1,1) PRIMARY KEY,
