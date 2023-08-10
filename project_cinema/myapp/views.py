@@ -109,7 +109,7 @@ from django.http import JsonResponse
 
 def start_scraping(request):
     script_dir = os.path.dirname(__file__)  # Chemin du répertoire de la vue
-    scrapy_script_path = os.path.join(script_dir, '..', 'SCRAP_NEW_DATA', 'scrap_films_prochainement', 'spiders', 'next_movies_spider.py')
+    scrapy_script_path = os.path.join(script_dir, 'SCRAP_NEW_DATA', 'scrap_films_prochainement', 'spiders', 'next_movies_spider.py')
     
     try:
         subprocess.run(['python', scrapy_script_path], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
