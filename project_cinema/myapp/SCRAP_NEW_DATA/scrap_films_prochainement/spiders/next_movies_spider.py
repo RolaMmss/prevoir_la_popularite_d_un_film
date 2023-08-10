@@ -1,8 +1,42 @@
 import scrapy
-from myapp.SCRAP_NEW_DATA.scrap_films_prochainement.items import ScrapFilmsProchainementItem
+# from myapp.SCRAP_NEW_DATA.scrap_films_prochainement.items import ScrapFilmsProchainementItem
 import re 
 from datetime import datetime, timedelta
-from utils import convert_to_dd_mm_aaaa
+# from utils import convert_to_dd_mm_aaaa
+
+
+def convert_to_dd_mm_aaaa(date_str):
+    if date_str:
+        try:
+            # Set the locale manually for the script
+            locale.setlocale(locale.LC_TIME, 'fr_FR.utf8')
+            date_obj = datetime.strptime(date_str, '%d %B %Y')
+            formatted_date = date_obj.strftime('%Y-%m-%d')
+            return formatted_date
+        except ValueError:
+            return None
+    return None
+
+class ScrapFilmsProchainementItem(scrapy.Item):
+    titre = scrapy.Field()
+    date = scrapy.Field()
+    realisateur = scrapy.Field()
+    duree = scrapy.Field()
+    type_film = scrapy.Field()
+    description = scrapy.Field()
+    genre = scrapy.Field()
+    acteurs = scrapy.Field()
+    annee_production = scrapy.Field()
+    langue_d_origine = scrapy.Field()
+    nationalites = scrapy.Field()
+    distributeur = scrapy.Field()
+    film_id_allocine = scrapy.Field()
+    image = scrapy.Field()
+    
+
+class BoxOfficeItem(scrapy.Item):
+    film_id_allocine = scrapy.Field()
+    boxoffice = scrapy.Field()
 
 # Set the CSV file name and column order
 CUSTOM_SETTINGS = {
