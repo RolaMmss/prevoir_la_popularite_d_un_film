@@ -3,7 +3,7 @@ from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from . import forms
-from .models import Film, Acteurs_films, Movies
+from .models import Film, Acteurs_films, Movies, Prediction
 from datetime import datetime
 from django.forms import Form, DateField as FormDateField
 from myapp.forms import UserCreateForm
@@ -22,17 +22,42 @@ from operator import itemgetter
 
 
 
-def dashboard(request):
-    return render(request, 'pages_main/dashboard.html')
-
 
 def homepage(request):
     return render(request, 'pages_main/home.html')
+
 
 class SignupPage(CreateView):
     form_class = forms.UserCreateForm
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
+
+
+
+# def box_office(request):
+#     films = Movies.objects.all()  # Récupérez tous les films de la base de données
+#     predictions = []
+
+#     # Parcourez la liste des films et effectuez les prédictions pour chaque film
+#     for film in films:
+#         data = {'titre': film.titre}
+
+#         # URL de votre API FastAPI déployée sur Azure
+#         api_url = 'http://20.164.88.206/predict/'  # Utilisez l'URL correcte de votre API
+
+#         # Appel de l'API FastAPI
+#         response = requests.post(api_url, json=data)
+
+#         if response.status_code == 200:
+#             prediction_value = response.json().get('box_office_prediction')
+#             movies_instance = Movies.objects.get(titre=film.titre)  # Obtenez l'objet Movies correspondant
+#             prediction_instance = Prediction(film=movies_instance, prediction=prediction_value)
+#             prediction_instance.save()
+#             predictions.append({'film': film, 'prediction': prediction_value})
+#         else:
+#             predictions.append({'film': film, 'prediction': 'Erreur'})
+
+#     return render(request, 'pages_main/prediction_template.html', {'predictions': predictions})
 
 
 
@@ -51,10 +76,19 @@ def box_office(request):
         response = requests.post(api_url, json=data)
 
         if response.status_code == 200:
-            prediction = response.json().get('box_office_prediction')  # Utilisez la clé correcte du JSON
-            # Effectuer la division ici
-            box_office_divided = prediction // 2000
-            predictions.append({'film': film, 'prediction': prediction, 'box_office_divided': box_office_divided})
+            prediction_value = response.json().get('box_office_prediction')
+            movies_instance = Movies.objects.get(titre=film.titre)  # Obtenez l'objet Movies correspondant
+            
+            # Vérifiez si un enregistrement avec le même film_id existe déjà dans la table Prediction
+            existing_prediction = Prediction.objects.filter(film_id=movies_instance.id).first()
+            
+            if existing_prediction is None:
+                # Ajoutez une nouvelle prédiction uniquement si elle n'existe pas déjà
+                prediction_instance = Prediction(film_id=movies_instance.id, prediction=prediction_value)
+                prediction_instance.save()
+                
+            box_office_divided = prediction_value // 2000  # Effectuer la division ici
+            predictions.append({'film': film, 'prediction': prediction_value, 'box_office_divided': box_office_divided})
         else:
             # Gérez les erreurs si l'appel à l'API échoue
             predictions.append({'film': film, 'prediction': 'Erreur', 'box_office_divided': 'Erreur'})
@@ -66,9 +100,7 @@ def box_office(request):
 
     return render(request, 'pages_main/prediction_template.html', {'predictions': top_10_predictions})
 
-
-
-
+    return render(request, 'pages_main/prediction_template.html', {'predictions': top_10_predictions})
 
 
 def dashboard(request):
