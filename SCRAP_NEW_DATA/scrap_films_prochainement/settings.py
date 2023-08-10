@@ -6,13 +6,18 @@
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+
 
 BOT_NAME = "scrap_films_prochainement"
 
 SPIDER_MODULES = ["scrap_films_prochainement.spiders"]
 NEWSPIDER_MODULE = "scrap_films_prochainement.spiders"
 
-SCRAPEOPS_API_KEY = 'ac8ce3ef-665c-4a81-8de1-a52ee0d478e8'
+SCRAPEOPS_API_KEY = os.getenv('SCRAPEOPS_API_KEY')
 SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = 'https://headers.scrapeops.io/v1/browser-headers'
 SCRAPEOPS_FAKE_USER_AGENT_ENABLED =True
 SCRAPEOPS_NUM_RESULTS = 50
