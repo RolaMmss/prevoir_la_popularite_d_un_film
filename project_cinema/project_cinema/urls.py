@@ -10,10 +10,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('box_office/',views.box_office,name='box_office'),
     path('dashboard/',views.dashboard,name='dashboard'),
-
     path('',views.homepage,name='homepage'),
     path('accounts/', include('django.contrib.auth.urls')),   
     path('signup/', views.SignupPage.as_view(), name='signup'),
+    path('home_user/',views.home_user,name='home_user'),
 ]
 
 

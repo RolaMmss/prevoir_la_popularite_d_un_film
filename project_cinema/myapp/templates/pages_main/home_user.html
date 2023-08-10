@@ -1,0 +1,56 @@
+
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class='container_model'>
+    <h1>Box Office Forecast</h1>
+    <h2>Box Office Forecast</h2>
+
+    <form method="GET">
+        <label for="date_filter">Choose a date:</label>
+        <select id="date_filter" name="date_filter">
+            <option value="">All Dates</option>
+            {% for date in distinct_dates %}
+                <option value="{{ date }}" {% if date == selected_date %}selected{% endif %}>{{ date }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    {% if selected_date %}
+        <h2>Films for selected date: {{ selected_date }}</h2>
+        {% if films %}
+            <ul>
+                {% for film in films %}
+                    <li>{{ film.titre }} - {{ film.distributeur }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No films available for the selected date.</p>
+        {% endif %}
+    {% endif %}
+
+</div>
+
+{% endblock %}
+
+
+
+{% comment %} {% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class='container'>
+    <h2>Welcome, {{ user.username }}!</h2>
+    <form method="post" action="{% url 'predict_box_office' %}">
+        {% csrf_token %}
+        <label for="date_filter">Select a Date:</label>
+        <input type="date_filter" id="date_filter" name="date_filter">
+        <button type="submit">Predict</button>
+    </form>
+</div>
+{% endblock %} {% endcomment %}
+

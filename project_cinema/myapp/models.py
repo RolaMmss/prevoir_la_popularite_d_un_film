@@ -27,6 +27,6 @@ class Acteurs_films(models.Model):
 class Movies(models.Model):
     titre = models.CharField(max_length=500)
     image = models.URLField(max_length=200)  # Champ pour stocker l'URL de l'image
-    
+    date = models.DateField(default=timezone.now)
     class Meta:
         db_table = 'movies'

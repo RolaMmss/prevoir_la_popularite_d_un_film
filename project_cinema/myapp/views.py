@@ -112,3 +112,21 @@ def dashboard(request):
         'wordcloud_url': wordcloud_url,
     }
     return render(request, 'pages_main/dashboard.html', context)
+
+
+def home_user(request):
+    # Fetch distinct dates from the films table
+    distinct_dates = Movies.objects.order_by('date').values_list('date', flat=True).distinct()
+
+    # If the form is submitted, get the selected date from the request
+    selected_date_str = request.GET.get('date_filter')
+
+    # Initialize the films variable
+    films = None
+
+    # If a date is selected, convert it to the correct format and filter films based on the selected date
+    if selected_date_str:
+        selected_date = datetime.strptime(selected_date_str, '%d/%m/%Y').date()
+        
+        films = Movies.objects.filter(date=selected_date)
+    return render(request, 'pages_main/home_user.html', {'films': films, 'distinct_dates': distinct_dates, 'selected_date': selected_date_str})
