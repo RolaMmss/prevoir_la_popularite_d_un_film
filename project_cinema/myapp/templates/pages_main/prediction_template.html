@@ -9,9 +9,25 @@
         <li>
             <h3>{{ prediction.film.titre }}</h3>
             <p>Prédiction de box office : {{ prediction.prediction }}</p>
+            <img src="{{ prediction.film.image }}" alt="{{ prediction.film.titre }} Image" width="100" height="150">
             <!-- Affichez d'autres détails du film comme l'image ici -->
         </li>
         {% endfor %}
     </ul>
 </div>
-{% endblock %}
+{% endblock %} 
+
+{% comment %} {% extends 'base.html' %}
+
+{% block content %}
+<h2>Box Office Forecast</h2>
+<ul>
+  {% for prediction in predictions %}
+    <li>
+      <img src="{{ prediction.film.image.url }}" alt="{{ prediction.film.titre }} Image" width="100" height="150">
+      <h3>{{ prediction.film.titre }}</h3>
+      <p>Predicted Box Office: ${{ prediction.prediction }}</p>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %} {% endcomment %}

@@ -18,6 +18,8 @@ import io
 from django.db.models import Count
 from wordcloud import WordCloud
 import requests
+from operator import itemgetter
+
 
 
 def dashboard(request):
@@ -54,8 +56,13 @@ def box_office(request):
         else:
             # Gérez les erreurs si l'appel à l'API échoue
             predictions.append({'film': film, 'prediction': 'Erreur'})
+        # Trier les prédictions par prédiction en ordre décroissant
+    predictions = sorted(predictions, key=itemgetter('prediction'), reverse=True)
+    # Sélectionner uniquement les 10 premières prédictions (top 10)
+    top_10_predictions = predictions[:10]
 
-    return render(request, 'pages_main/prediction_template.html', {'predictions': predictions})
+
+    return render(request, 'pages_main/prediction_template.html', {'predictions': top_10_predictions})
 
 
 
