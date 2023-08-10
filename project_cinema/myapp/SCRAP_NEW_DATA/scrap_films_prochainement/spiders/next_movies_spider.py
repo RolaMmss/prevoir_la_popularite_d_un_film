@@ -1,8 +1,8 @@
 import scrapy
-from scrap_films_prochainement.items import ScrapFilmsProchainementItem
+from myapp.SCRAP_NEW_DATA.scrap_films_prochainement.items import ScrapFilmsProchainementItem
 import re 
 from datetime import datetime, timedelta
-from scrap_films_prochainement.utils import convert_to_dd_mm_aaaa
+from utils import convert_to_dd_mm_aaaa
 
 # Set the CSV file name and column order
 CUSTOM_SETTINGS = {
