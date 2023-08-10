@@ -8,6 +8,7 @@ cursor = conn.cursor()
 delete_table('actors')
 delete_table('boxoffice')
 delete_table('scheduling')
+delete_table('prediction')
 delete_table('movies')
 
 # Créer la table "films"
