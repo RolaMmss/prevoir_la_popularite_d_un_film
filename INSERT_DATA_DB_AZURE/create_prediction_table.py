@@ -10,9 +10,10 @@ delete_table('prediction')
 create_films_table_query = '''
 CREATE TABLE prediction (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    titre_id VARCHAR(500),
+    titre VARCHAR(500),
     prediction FLOAT,
-    FOREIGN KEY (titre_id) REFERENCES movies(titre)
+    film_id INT,
+    FOREIGN KEY (film_id) REFERENCES movies(id)
 
 );
 '''
