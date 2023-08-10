@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils import timezone
 
 
 class Film(models.Model):
@@ -12,8 +12,6 @@ class Film(models.Model):
 
     class Meta:
         db_table = 'dataset_model_ML'
-        db_table = 'dataset_model_ML'
-
 
 
 class Acteurs_films(models.Model):

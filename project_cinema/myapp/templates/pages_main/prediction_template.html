@@ -4,6 +4,11 @@
 {% block content %}
 <div class='container_model'>
     <h2>Top Ten Films</h2>
+    <form method="GET">
+        <label for="date_filter">Choose a Wednesday:</label>
+        <input type="date" id="date_filter" name="date_filter">
+        <button type="submit">Predict</button>
+    </form>
     <table class="film-table">
         <thead>
             <tr>
