@@ -3,7 +3,7 @@ from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from . import forms
-from .models import Film, Acteurs_films, Movies, Prediction
+from .models import Film, Acteurs_films, Movies, Prediction, Boxoffice
 from datetime import datetime
 from django.forms import Form, DateField as FormDateField
 from myapp.forms import UserCreateForm
@@ -20,11 +20,11 @@ from wordcloud import WordCloud
 import requests
 import subprocess
 from operator import itemgetter
-from django.http import JsonResponse
 from django.urls import reverse
-
-
-
+from django.db.models import Sum
+from django.db.models.functions import TruncWeek
+from django.utils import timezone
+import datetime
 
 def homepage(request):
     return render(request, 'pages_main/home.html')
@@ -80,9 +80,9 @@ def box_office(request):
 
 
 def dashboard(request):
-    films = Film.objects.all()
+    films = Movies.objects.all()
     df = pd.DataFrame(list(films.values()))
-    type_film_counts = df['type_film'].value_counts()
+    type_film_counts = df['genre'].value_counts()
 
     type_film_labels = type_film_counts.index
     type_film_values = type_film_counts.values
@@ -100,27 +100,74 @@ def dashboard(request):
     wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(wordcloud_data)
 
     # Plot the WordCloud and save it to a BytesIO buffer
-    buffer = io.BytesIO()
     plt.figure(figsize=(8, 5))
     plt.imshow(wordcloud, interpolation='bilinear')
     plt.axis('off')
     plt.title('Actor Distribution - WordCloud')
-    plt.savefig(buffer, format='png')
+
+    # Save the WordCloud image with a fixed filename
+    wordcloud_filename = 'actor_distribution.png'
+    plt.savefig(os.path.join(settings.MEDIA_ROOT, wordcloud_filename), format='png')
     plt.close()
 
-    # Save the WordCloud image to the 'media' directory using FileSystemStorage
+    start_year = 2023  # Replace this with the desired year
+    start_date = timezone.datetime(start_year, 7, 1)
+    
+    # Fetch movie data for the histogram
+    movie_ids = Film.objects.values_list('id', flat=True)
+    
+    # Fetch box office data
+    box_office_data = Boxoffice.objects.filter(film__id__in=movie_ids, film__date__gte=start_date)
+    prediction_data = Prediction.objects.filter(film__id__in=movie_ids, film__date__gte=start_date)
+    
+    # Group and calculate the sum of box office and prediction per week
+    box_office_sum_by_week = box_office_data.annotate(week=TruncWeek('film__date')).values('week').annotate(total_box_office=Sum('boxoffice'))
+    prediction_sum_by_week = prediction_data.annotate(week=TruncWeek('film__date')).values('week').annotate(total_prediction=Sum('prediction'))
+    
+    # Convert the querysets to pandas dataframes
+    box_office_df = pd.DataFrame(list(box_office_sum_by_week))
+    prediction_df = pd.DataFrame(list(prediction_sum_by_week))
+    
+    # Merge dataframes on the week field
+    merged_df = pd.merge(box_office_df, prediction_df, on='week', how='outer')
+    merged_df = merged_df.fillna(0)  # Fill NaN with zeros
+    
+   # Convert 'week' column from datetime.date to datetime.datetime
+    merged_df['week'] = merged_df['week'].apply(lambda x: datetime.datetime.combine(x, datetime.datetime.min.time()))
+    bar_width = 0.2  # Width of each bar
+    # Plot the bar chart
+    plt.figure(figsize=(10, 6))
+    plt.bar(merged_df['week'] - datetime.timedelta(days=0.2), merged_df['total_box_office'], width=bar_width, label='Actual Box Office', alpha=0.7)
+    plt.bar(merged_df['week'] + datetime.timedelta(days=0.2), merged_df['total_prediction'], width=bar_width, label='Predicted Box Office', alpha=0.7)
+    plt.xlabel('Week')
+    plt.ylabel('Box Office Sum')
+    plt.title('Box Office Sum per Week')
+    plt.xticks(rotation=45)
+    plt.legend()
+
+    
+    
+    # Save the bar chart image
+    bar_chart_path = 'box_office_by_week.png'
+    plt.tight_layout()
+    plt.savefig(os.path.join(settings.MEDIA_ROOT, bar_chart_path))
+    plt.close()
+
+
+    # Save images to the 'media' directory using FileSystemStorage
     fs = FileSystemStorage(location=settings.MEDIA_ROOT)
-    filename = fs.save('actor_distribution.png', buffer)
 
     pie_chart_url = fs.url(pie_chart_path)
-    wordcloud_url = fs.url(filename)
-
+    wordcloud_url = fs.url(wordcloud_filename)
+    histogram_url = fs.url(bar_chart_path)
     context = {
         'pie_chart_url': pie_chart_url,
         'wordcloud_url': wordcloud_url,
+        'histogram_url': histogram_url,
     }
-    return render(request, 'pages_main/dashboard.html', context)
 
+
+    return render(request, 'pages_main/dashboard.html', context)
 
 
 def scraping_view(request):

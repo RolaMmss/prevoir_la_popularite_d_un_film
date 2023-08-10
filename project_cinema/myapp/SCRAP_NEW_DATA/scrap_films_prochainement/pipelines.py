@@ -74,7 +74,7 @@ class ProcessPipeline:
         duree_value = adapter.get('duree')
         adapter['duree'] = convert_to_minutes(duree_value)
         
-        ## Process the genre field
+        # ## Process the genre field
         genre_value = adapter.get('genre')
         if genre_value is not None and isinstance(genre_value, str):
             # Split the genres by comma and strip whitespace
@@ -86,6 +86,10 @@ class ProcessPipeline:
             # Remove quotes and brackets
             genres_str = re.sub(r"['\"\[\]]", "", genres_str)
             adapter['genre'] = genres_str
+            # Keep only the first genre
+        if genres_str:
+            first_genre = genres_str.split('_')[0]
+            adapter['genre'] = first_genre
 
         langue_d_origine_value = adapter.get('langue_d_origine')
         if langue_d_origine_value is not None and isinstance(langue_d_origine_value, str):
