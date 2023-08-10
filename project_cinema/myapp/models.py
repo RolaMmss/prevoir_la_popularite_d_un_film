@@ -25,6 +25,7 @@ class Acteurs_films(models.Model):
 
 class Movies(models.Model):
     titre = models.CharField(max_length=500)
+    image = models.URLField(max_length=200) 
 
     class Meta:
         db_table = 'movies'
