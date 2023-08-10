@@ -20,11 +20,13 @@ from wordcloud import WordCloud
 import requests
 import subprocess
 from operator import itemgetter
+
 from django.urls import reverse
 from django.db.models import Sum
 from django.db.models.functions import TruncWeek
 from django.utils import timezone
 import datetime
+
 
 def homepage(request):
     return render(request, 'pages_main/home.html')
@@ -37,11 +39,42 @@ class SignupPage(CreateView):
 
 
 
+# def box_office(request):
+#     films = Movies.objects.all()  # Récupérez tous les films de la base de données
+#     predictions = []
+
+#     # Parcourez la liste des films et effectuez les prédictions pour chaque film
+#     for film in films:
+#         data = {'titre': film.titre}
+
+#         # URL de votre API FastAPI déployée sur Azure
+#         api_url = 'http://20.164.88.206/predict/'  # Utilisez l'URL correcte de votre API
+
+#         # Appel de l'API FastAPI
+#         response = requests.post(api_url, json=data)
+
+#         if response.status_code == 200:
+#             prediction_value = response.json().get('box_office_prediction')
+#             movies_instance = Movies.objects.get(titre=film.titre)  # Obtenez l'objet Movies correspondant
+#             prediction_instance = Prediction(film=movies_instance, prediction=prediction_value)
+#             prediction_instance.save()
+#             predictions.append({'film': film, 'prediction': prediction_value})
+#         else:
+#             predictions.append({'film': film, 'prediction': 'Erreur'})
+
+#     return render(request, 'pages_main/prediction_template.html', {'predictions': predictions})
 
 
 
 def box_office(request):
-    films = Movies.objects.all()  # Récupérez tous les films de la base de données
+    selected_date = request.GET.get('date_filter')
+
+    if selected_date:
+        selected_date = datetime.strptime(selected_date, '%b. %d, %Y').date()  # Convert the selected date to a datetime object
+        films = Movies.objects.filter(release_date=selected_date)
+    else:
+        films = Movies.objects.all()  # Récupérez tous les films de la base de données
+        
     predictions = []
 
     # Parcourez la liste des films et effectuez les prédictions pour chaque film
@@ -69,12 +102,13 @@ def box_office(request):
             box_office_divided = prediction_value // 2000  # Effectuer la division ici
             predictions.append({'film': film, 'prediction': prediction_value, 'box_office_divided': box_office_divided})
         else:
+            # Gérez les erreurs si l'appel à l'API échoue
             predictions.append({'film': film, 'prediction': 'Erreur', 'box_office_divided': 'Erreur'})
-
-    # Trier les prédictions par prédiction en ordre décroissant
+        # Trier les prédictions par prédiction en ordre décroissant
     predictions = sorted(predictions, key=itemgetter('prediction'), reverse=True)
     # Sélectionner uniquement les 10 premières prédictions (top 10)
     top_10_predictions = predictions[:10]
+
 
     return render(request, 'pages_main/prediction_template.html', {'predictions': top_10_predictions})
 
@@ -165,8 +199,7 @@ def dashboard(request):
         'wordcloud_url': wordcloud_url,
         'histogram_url': histogram_url,
     }
-
-
+    
     return render(request, 'pages_main/dashboard.html', context)
 
 
