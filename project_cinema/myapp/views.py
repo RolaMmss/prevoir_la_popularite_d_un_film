@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from . import forms
 from .models import Film, Acteurs_films, Movies, Prediction, Boxoffice
-from datetime import datetime
 from django.forms import Form, DateField as FormDateField
 from myapp.forms import UserCreateForm
 import pandas as pd
@@ -25,7 +24,7 @@ from django.urls import reverse
 from django.db.models import Sum
 from django.db.models.functions import TruncWeek
 from django.utils import timezone
-import datetime
+# import datetime
 from datetime import timedelta, date
 from datetime import datetime
 
@@ -39,32 +38,6 @@ class SignupPage(CreateView):
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
 
-
-
-# def box_office(request):
-#     films = Movies.objects.all()  # Récupérez tous les films de la base de données
-#     predictions = []
-
-#     # Parcourez la liste des films et effectuez les prédictions pour chaque film
-#     for film in films:
-#         data = {'titre': film.titre}
-
-#         # URL de votre API FastAPI déployée sur Azure
-#         api_url = 'http://20.164.88.206/predict/'  # Utilisez l'URL correcte de votre API
-
-#         # Appel de l'API FastAPI
-#         response = requests.post(api_url, json=data)
-
-#         if response.status_code == 200:
-#             prediction_value = response.json().get('box_office_prediction')
-#             movies_instance = Movies.objects.get(titre=film.titre)  # Obtenez l'objet Movies correspondant
-#             prediction_instance = Prediction(film=movies_instance, prediction=prediction_value)
-#             prediction_instance.save()
-#             predictions.append({'film': film, 'prediction': prediction_value})
-#         else:
-#             predictions.append({'film': film, 'prediction': 'Erreur'})
-
-#     return render(request, 'pages_main/prediction_template.html', {'predictions': predictions})
 
 
 
@@ -169,12 +142,12 @@ def dashboard(request):
     merged_df = merged_df.fillna(0)  # Fill NaN with zeros
     
    # Convert 'week' column from datetime.date to datetime.datetime
-    merged_df['week'] = merged_df['week'].apply(lambda x: datetime.datetime.combine(x, datetime.datetime.min.time()))
+    merged_df['week'] = merged_df['week'].apply(lambda x: datetime.combine(x, datetime.min.time()))
     bar_width = 0.2  # Width of each bar
     # Plot the bar chart
     plt.figure(figsize=(10, 6))
-    plt.bar(merged_df['week'] - datetime.timedelta(days=0.2), merged_df['total_box_office'], width=bar_width, label='Actual Box Office', alpha=0.7)
-    plt.bar(merged_df['week'] + datetime.timedelta(days=0.2), merged_df['total_prediction'], width=bar_width, label='Predicted Box Office', alpha=0.7)
+    plt.bar(merged_df['week'] - timedelta(days=0.2), merged_df['total_box_office'], width=bar_width, label='Actual Box Office', alpha=0.7)
+    plt.bar(merged_df['week'] + timedelta(days=0.2), merged_df['total_prediction'], width=bar_width, label='Predicted Box Office', alpha=0.7)
     plt.xlabel('Week')
     plt.ylabel('Box Office Sum')
     plt.title('Box Office Sum per Week')

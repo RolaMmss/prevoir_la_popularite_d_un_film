@@ -22,11 +22,6 @@
     {% if selected_date %}
         <div class='container_model'>
             <h2>Top Ten Films</h2>
-            {% comment %} <form method="GET">
-                <label for="date_filter">Choose a Wednesday:</label>
-                <input type="date" id="date_filter" name="date_filter">
-                <button type="submit">Predict</button>
-            </form> {% endcomment %}
             <table class="film-table">
                 <thead>
                     <tr>
@@ -40,8 +35,10 @@
                     <tr>
                         <td>
                             <div class="film-title">
-                                <h3>{{ prediction.film.titre }}</h3>
                                 <img src="{{ prediction.film.image }}" alt="{{ prediction.film.titre }} Image" width="100" height="150">
+                            </div>
+                            <div class="film-title">
+                                <h3>{{ prediction.film.titre }}</h3>
                             </div>
                         </td>
                         <td>{{ prediction.prediction }}</td>
@@ -51,45 +48,10 @@
                 </tbody>
             </table>
         </div>
-        {% comment %} <h2>Films for selected date: {{ selected_date }}</h2>
-        {% if films %}
-            <ul>
-                {% for film in films %}
-                    <li>{{ film.titre }} - {{ film.distributeur }}</li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No films available for the selected date.</p>
-        {% endif %}
-        
-        {% if top_10_predictions %} {% endcomment %}
-            {% comment %} <h2>Top Ten Predicted Films</h2>
-            <table class="film-table">
-                <thead>
-                    <tr>
-                        <th>Films</th>
-                        <th>Number of entries in France</th>
-                        <th>Number of entries in my cinema</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for prediction in top_10_predictions %}
-                        <tr>
-                            <td>
-                                <div class="film-title">
-                                    <h3>{{ prediction.film.titre }}</h3>
-                                    <img src="{{ prediction.film.image }}" alt="{{ prediction.film.titre }} Image" width="100" height="150">
-                                </div>
-                            </td>
-                            <td>{{ prediction.prediction }}</td>
-                            <td>{{ prediction.box_office_divided }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% comment %} {% endif %} {% endcomment %}
     {% endif %}
-      <!-- Élément dynamique pour le statut du scraping -->
+
+</div>
+
   <p id="scrape-message" style="color: black;"></p>
 
   <!-- Formulaire pour scraper les prochains films -->
