@@ -1,0 +1,110 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class='container_model'>
+    <h2>Top Ten Films</h2>
+    <form method="GET">
+        <label for="date_filter">Choose a Wednesday:</label>
+        <input type="date" id="date_filter" name="date_filter">
+        <button type="submit">Predict</button>
+    </form>
+    <table class="film-table">
+        <thead>
+            <tr>
+                <th>Films</th>
+                <th>Number of entries in France</th>
+                <th>Number of entries in my cinema</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prediction in predictions %}
+            <tr>
+                <td>
+                    <div class="film-title">
+                        <h3>{{ prediction.film.titre }}</h3>
+                        <img src="{{ prediction.film.image }}" alt="{{ prediction.film.titre }} Image" width="100" height="150">
+                    </div>
+                </td>
+                <td>{{ prediction.prediction }}</td>
+                <td>{{ prediction.box_office_divided }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+
+
+{% comment %} {% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class='container_model'>
+    <h2>Top Ten Films</h2>
+    <h2>Top Ten Films</h2>
+    <table class="film-table">
+        <thead>
+            <tr>
+                <th>Films</th>
+                <th>Number of entries in France</th>
+                <th>Number of entries in my cinema</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prediction in predictions %}
+            <tr>
+                <td>
+                    <div class="film-title">
+                        <h3>{{ prediction.film.titre }}</h3>
+                        <img src="{{ prediction.film.image }}" alt="{{ prediction.film.titre }} Image" width="100" height="150">
+                    </div>
+                </td>
+                <td>{{ prediction.prediction }}</td>
+                <td>{{ prediction.box_office_divided }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+
+
+{% comment %} {% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class='container_model'>
+    <h2>Top Ten Films</h2>
+    <ul>
+        {% for prediction in predictions %}
+        <li>
+            <div class="film-info">
+                <h3>{{ prediction.film.titre }}</h3>
+                <p>Number of entries in France : {{ prediction.prediction }}</p>
+                <p>Number of entries in my cinema : {{ prediction.box_office_divided }}</p>
+            </div>
+            <div class="film-image">
+                <img src="{{ prediction.film.image }}" alt="{{ prediction.film.titre }} Image" width="100" height="150">
+            </div>
+            <div class="film-info">
+                <h3>{{ prediction.film.titre }}</h3>
+                <p>Number of entries in France : {{ prediction.prediction }}</p>
+                <p>Number of entries in my cinema : {{ prediction.box_office_divided }}</p>
+            </div>
+            <div class="film-image">
+                <img src="{{ prediction.film.image }}" alt="{{ prediction.film.titre }} Image" width="100" height="150">
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}  {% endcomment %}
+
+
+
+
+
+

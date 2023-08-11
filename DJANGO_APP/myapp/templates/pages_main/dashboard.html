@@ -1,0 +1,30 @@
+
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+
+
+
+{% block content %}
+  
+<div class='container_model'>
+    <h1>Dashboard</h1>
+
+    <div style="display: flex; justify-content: space-between;">
+        <div style="width: 48%;">
+            <h2>Film Types Distribution</h2>
+            <img src="{{ pie_chart_url }}" alt="Film Types Distribution - Pie Chart">
+        </div>
+
+        <div style="width: 48%;">
+            <h2>Actor Distribution - WordCloud</h2>
+            <img src="{{ wordcloud_url }}" alt="Actor Distribution - WordCloud">
+        </div>
+    </div>
+    <div style="width: 48%;">
+        <h2> Actual boxoffice vs Predicted boxoffice</h2>
+        <img src="{{ histogram_url }}" alt="Actual boxoffice vs Predicted boxoffice">
+    </div>
+</div>
+
+{% endblock %}

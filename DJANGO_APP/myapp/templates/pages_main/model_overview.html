@@ -1,0 +1,35 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+    <h1>Modèle de Prédiction - CatBoost</h1>
+    <p>Notre modèle de prédiction utilise l'algorithme CatBoost pour estimer les recettes au box-office des films à venir. Voici comment fonctionne notre modèle :</p>
+    
+    <h2>Caractéristiques Utilisées :</h2>
+    <ul>
+        <li>Genre du Film</li>
+        <li>Durée du Film</li>
+        <li>Distributeur</li>
+        <li>Nationalités</li>
+        <li>Langue d'Origine</li>
+        <li>Type de Film</li>
+        <li>Année de Production</li>
+        <li>Nombre d'Acteurs Connus</li>
+        <li>Réalisateur Connu</li>
+    </ul>
+    
+    <p>Le nombre d'acteurs connus a été obtenu en utilisant une liste d'acteurs célèbres récupérée à partir du site Allociné. Cette liste a été comparée aux acteurs présents dans chaque film pour déterminer le nombre d'acteurs connus.</p>
+    
+    <p>La caractéristique "Réalisateur Connu" indique si un réalisateur est connu ou non parmi les réalisateurs de chaque film.</p>
+    
+    <h2>Objectif de Prédiction :</h2>
+    <p>Notre objectif est de prédire la recette au box-office (box office) pour les nouveaux films à venir. Nous utilisons le modèle CatBoost pour estimer les revenus potentiels des films qui sortiront prochainement.</p>
+    
+    <h2>Performance du Modèle :</h2>
+    <p>Le modèle CatBoost parvient à prédire avec succès environ 33% de la variation des recettes réelles au box-office des films à venir. Cette performance a été mesurée à l'aide de la métrique R2, propre aux modèles de régression linéaire.</p>
+    
+    <p>Nous continuons à améliorer notre modèle en ajustant les paramètres et en ajoutant de nouvelles fonctionnalités pour augmenter sa précision.</p>
+</div>
+{% endblock %}
