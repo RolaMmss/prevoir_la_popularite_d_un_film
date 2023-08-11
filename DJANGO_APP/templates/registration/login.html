@@ -1,0 +1,65 @@
+{% extends "myapp/base.html" %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+{% block content %}
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+
+    <!-- <a href="{% url 'login' %}">Log In</a> -->
+    
+    {% endif %}
+{% endif %}
+
+
+<div class="text-center container">    
+  <div class="movie-images">
+    <img class="mb-15" src="{% static 'myapp/clap.png' %}" alt="" width="60" height="60">
+  </div>
+  <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+  <form method="post" action="{% url 'login' %}"> 
+    {% csrf_token %}      
+      
+    <div class="form-floating">
+      {{form.username|add_class:"form-control"}}
+      <label for="{{form.username.id_for_label}}" class="form-label" > User Name</label>
+    </div>
+    
+    <div class="form-floating">
+      {{form.password|add_class:"form-control"}}
+      <label for="{{form.password.id_for_label}}" class="form-label">Password</label>
+    </div>
+  
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+  </form>
+
+  <p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
+  <p class="mt-5 mb-3 text-muted">&copy; 2022–2023</p>
+</div>
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
