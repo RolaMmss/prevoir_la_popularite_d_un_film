@@ -1,78 +1,42 @@
-# FROM python:3.9
-
-# WORKDIR /app
-
-# ENV PYTHONUNBUFFERED 1
-
-
-# COPY ./requirements.txt /app/requirements.txt
-
-
-# # Exécute les commandes pour mettre à jour et installer unixodbc-dev
-# RUN apt-get update && apt-get install -y unixodbc-dev
-
-
-# RUN pip install django-crispy-forms  django-widget-tweaks pyodbc
-
-
-# RUN apt-get update && \
-#       apt-get -y install sudo
-
-# # Copier les fichiers shell
-# COPY ./Driver_ODBC_Azure.sh /app/Driver_ODBC_Azure.sh
-# COPY ./install_dependencies.sh /app/install_dependencies.sh
-
-# # Rendez les fichiers shell exécutables et exécutez-les
-# RUN chmod +x /app/Driver_ODBC_Azure.sh && \
-#     chmod +x /app/install_dependencies.sh && \
-#     /bin/bash /app/Driver_ODBC_Azure.sh && \
-#     /bin/bash /app/install_dependencies.sh
-
-# # Exposer le port sur lequel FastAPI écoute
-# EXPOSE 80
-
-# COPY . .
-
-# CMD ["python", "manage.py", "runserver", "0.0.0.0:80"]
-
-
-
-FROM python:3.11-slim
-RUN pip install django-crispy-forms django-widget-tweaks django-pyodbc-azure
-RUN apt-get update && apt-get install -y unixodbc-dev
-
-
-
-#Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        build-essential \
-        python3-dev \
-        libpq-dev \
-        curl \
-        gnupg \ 
-        && apt-get -y autoremove \
-        && apt-get clean
-
-#Add Microsoft repository for msodbcsql18
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-    && curl https://packages.microsoft.com/ubuntu/21.10/prod > /etc/apt/sources.list.d/mssql-release.list
-
-#Install msodbcsql18
-#RUN apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql18
-
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+FROM python:3.9
 
 WORKDIR /app
 
-COPY requirements.txt /app
+ENV PYTHONUNBUFFERED 1
 
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
 
-COPY . /app
+COPY ./requirements.txt /app/requirements.txt
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:80" ]
+
+# Exécute les commandes pour mettre à jour et installer unixodbc-dev
+RUN apt-get update && apt-get install -y unixodbc-dev
+
+
+RUN pip install django-crispy-forms  django-widget-tweaks pyodbc
+
+
+RUN apt-get update && \
+      apt-get -y install sudo
+
+# Copier les fichiers shell
+COPY ./Driver_ODBC_Azure.sh /app/Driver_ODBC_Azure.sh
+COPY ./install_dependencies.sh /app/install_dependencies.sh
+
+# Rendez les fichiers shell exécutables et exécutez-les
+RUN chmod +x /app/Driver_ODBC_Azure.sh && \
+    chmod +x /app/install_dependencies.sh && \
+    /bin/bash /app/Driver_ODBC_Azure.sh && \
+    /bin/bash /app/install_dependencies.sh
+
+# Exposer le port sur lequel FastAPI écoute
+EXPOSE 80
+
+COPY . .
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:80"]
+
+
+
 
 
 # docker run -p 8000:8000 --rm  -v C:\Users\impej\Documents\BRIEF\ML_recap\cine_prediction:/app impejonathan/django-cine-prediction

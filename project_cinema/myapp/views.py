@@ -26,6 +26,8 @@ from django.db.models import Sum
 from django.db.models.functions import TruncWeek
 from django.utils import timezone
 import datetime
+from datetime import timedelta, date
+from datetime import datetime
 
 
 def homepage(request):
@@ -232,3 +234,46 @@ def scraping_boxoffice_view(request):
 
 def model_overview(request):
     return render(request, 'pages_main/model_overview.html')
+
+
+def home_user(request):
+    # Obtenez la date d'aujourd'hui
+    today = date.today()
+    # # Fetch distinct dates from the films table
+    # distinct_dates = Movies.objects.order_by('-date').values_list('date', flat=True).distinct()
+    # Fetch distinct dates from the films table starting from today
+    distinct_dates = Movies.objects.filter(date__gte=today).order_by('date').values_list('date', flat=True).distinct()
+    # If the form is submitted, get the selected date from the request
+    selected_date_str = request.GET.get('date')
+
+    # Initialize the films and predictions variables
+    films = None
+    top_10_predictions = []
+
+    # If a date is selected, convert it to the correct format and filter films based on the selected date
+    if selected_date_str:
+        selected_date = datetime.strptime(selected_date_str, '%Y-%m-%d').date()
+
+#Get films for the selected date
+        films = Movies.objects.filter(date=selected_date)
+
+        # Predict box office for each film and store predictions in a list
+        predictions = []
+        for film in films:
+            data = {'titre': film.titre}
+            # URL de votre API FastAPI déployée sur Azure
+            api_url = 'http://20.164.88.206/predict/'  # Utilisez l'URL correcte de votre API
+#Appel de l'API FastAPI
+            response = requests.post(api_url, json=data)
+
+            if response.status_code == 200:
+                prediction_value = response.json().get('box_office_prediction')
+                box_office_divided = prediction_value // 2000  # Effectuer la division ici
+                predictions.append({'film': film, 'prediction': prediction_value, 'box_office_divided': box_office_divided})
+            else:
+                # Gérez les erreurs si l'appel à l'API échoue
+                predictions.append({'film': film, 'prediction': 'Erreur', 'box_office_divided': 'Erreur'})
+
+        # Trier les prédictions par prédiction en ordre décroissant
+        top_10_predictions = sorted(predictions, key=lambda x: x['prediction'], reverse=True)[:10]
+    return render(request, 'pages_main/home_user.html', {'films': films, 'distinct_dates': distinct_dates, 'selected_date': selected_date_str, 'predictions': top_10_predictions})

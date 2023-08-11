@@ -19,35 +19,7 @@
       <img class="thumbnail-img" src="https://fr.web.img2.acsta.net/c_310_420/pictures/23/05/25/09/11/4629362.jpg" alt="Bande-annonce Rendez-vous à Tokyo" width="200" height="300">
     </div>
 
-  <!-- Élément dynamique pour le statut du scraping -->
-  <p id="scrape-message" style="color: black;"></p>
 
-  <!-- Formulaire pour scraper les prochains films -->
-  <form id="scrape-form" method="post" action="{% url 'scraping_view' %}">
-    {% csrf_token %}
-    <button type="submit">Lancer le scraping des films à venir</button>
-  </form>
-
-    <!-- Formulaire pour scraper le boxoffice -->
-    <form id="box-office-form" method="post" action="{% url 'scraping_boxoffice_view' %}">
-      {% csrf_token %}
-      <button type="submit">Récupérer les Box-Offices de la 1ère semaine</button>
-    </form>
-</div>
-
-<!-- Script JavaScript pour mettre à jour le statut du scraping -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('#scrape-form').submit(function() {
-        $('#scrape-message').text("Scraping en cours...").css('color', 'blue');
-    });
-
-    $('#box-office-form').click(function() {
-        $('#scrape-message').text("Scraping des box-offices en cours...").css('color', 'blue');
-    });
-});
-</script>
 </div>
 
 
