@@ -69,8 +69,8 @@ Le projet sera accessible à l'adresse http://localhost:8000/.
 ## Aperçu de l'application web 
 
 ![Home page](Screenshots_web_app/homepage.png "Home page")
-![Boxoffice Forecast](Screenshots_web_app/homepage.png "Boxoffice Forecast")
-![Dashboard](Screenshots_web_app/homepage.png "Dashboard")
+![Boxoffice Forecast](Screenshots_web_app/boxoffice_forecast.png "Boxoffice Forecast")
+![Dashboard](Screenshots_web_app/dashboard.png "Dashboard")
 
 
 ## Documentation utiles
