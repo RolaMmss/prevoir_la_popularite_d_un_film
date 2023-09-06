@@ -3,7 +3,7 @@ Développer un modèle de machine learning afin d'aider un gérant de salle de c
 
 ## Contexte du projet
 Un gérant de salle de cinéma souhaite développer un outil d'aide à la décision pour définir les films à projeter dans sa salle de cinéma.  Actuellement, il définit la programmation en se tenant au courant des dernières nouveautés, en assistant à des festivals (Cannes, Deauville, etc.). C'est un travail très chronophage. L'outil, qui doit prédire les films qui généreront le plus d'entrées en première semaine, vise à optimiser la programmation et maximiser les revenus. 
-Le gérant estime qu'il peut capter environ 1/3000 des spectateurs nationaux. L'objectif principal est de maximiser les revenus, tandis que la diversification des genres et des styles de films est une considération secondaire.
+Le gérant estime qu'il peut capter environ 1/2000 des spectateurs nationaux. L'objectif principal est de maximiser les revenus, tandis que la diversification des genres et des styles de films est une considération secondaire.
 
 ## Arborescence du projet : 
 Chaque dossier ci-dessous contient son propre README avec les explications spécifiques.
